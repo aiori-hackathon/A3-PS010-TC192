@@ -121,6 +121,7 @@ export const api = {
   // Benchmark
   runBenchmark: () => request<BenchmarkResult>('/benchmark/run'),
   getBenchmarkDataset: () => request<any>('/benchmark/dataset'),
+  getTemplateCsvUrl: () => `${API_BASE}/benchmark/template-csv`,
   uploadBenchmarkCsv: async (file: File): Promise<BenchmarkResult> => {
     const formData = new FormData();
     formData.append('file', file);

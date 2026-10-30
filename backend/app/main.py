@@ -32,17 +32,25 @@ app = FastAPI(
 )
 
 # CORS configuration for frontend
+allowed_origins_list = [
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+    "http://localhost:8000",
+    "http://127.0.0.1:8000",
+]
+if settings.ALLOWED_ORIGINS:
+    for custom_origin in settings.ALLOWED_ORIGINS.split(","):
+        cleaned = custom_origin.strip()
+        if cleaned and cleaned not in allowed_origins_list:
+            allowed_origins_list.append(cleaned)
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:5173",
-        "http://127.0.0.1:5173",
-        "http://localhost:3000",
-        "http://127.0.0.1:3000",
-        "http://localhost:8000",
-        "http://127.0.0.1:8000",
-    ],
-    allow_origin_regex=r"^https?://(localhost|127\.0\.0\.1)(:\d+)?$",
+    allow_origins=allowed_origins_list,
+    # Allow Vercel deployment domains (*.vercel.app) and local development
+    allow_origin_regex=r"^https?://([a-zA-Z0-9-]+\.)?vercel\.app(:\d+)?$|^https?://(localhost|127\.0\.0\.1)(:\d+)?$",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

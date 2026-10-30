@@ -58,7 +58,7 @@ export const BenchmarkPage: React.FC = () => {
   };
 
   const handleDownloadTemplate = () => {
-    window.open('/api/v1/benchmark/template-csv', '_blank');
+    window.open(api.getTemplateCsvUrl(), '_blank');
   };
 
   return (

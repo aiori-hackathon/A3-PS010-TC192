@@ -21,7 +21,15 @@ class Settings:
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60 * 24 * 7  # 7 days
     
     # Database
-    DATABASE_URL: str = os.getenv("DATABASE_URL", "sqlite:///./netevidence.db")
+    # On Vercel serverless runtime, working directory is read-only; /tmp is the writable scratch space.
+    # In local development, ./netevidence.db is preserved.
+    # If an external PostgreSQL or cloud database URL is provided in DATABASE_URL, it connects to it.
+    _is_vercel: bool = bool(os.getenv("VERCEL"))
+    _default_db_url: str = "sqlite:////tmp/netevidence.db" if _is_vercel else "sqlite:///./netevidence.db"
+    DATABASE_URL: str = os.getenv("DATABASE_URL", _default_db_url)
+    
+    # CORS
+    ALLOWED_ORIGINS: str = os.getenv("ALLOWED_ORIGINS", "")
     
     # External APIs & Timeouts
     RIPE_STAT_BASE_URL: str = "https://stat.ripe.net/data"
