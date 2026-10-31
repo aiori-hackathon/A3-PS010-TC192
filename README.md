@@ -1,8 +1,13 @@
 # NetEvidence AI — Evidence-Based IP Network-Type Classification
 
-[![Python](https://img.shields.io/badge/Backend-FastAPI%20%7C%20Python%203.13-3776AB.svg?logo=python)](https://fastapi.tiangolo.com)
+[![Live Working Model](https://img.shields.io/badge/Live%20Working%20Model-netevidence--ai.onrender.com-success?style=for-the-badge&logo=render)](https://netevidence-ai.onrender.com/login)
+[![Python](https://img.shields.io/badge/Backend-FastAPI%20%7C%20Python%203.11-3776AB.svg?logo=python)](https://fastapi.tiangolo.com)
 [![Frontend](https://img.shields.io/badge/Frontend-React%20%7C%20Vite%20%7C%20TailwindCSS-61DAFB.svg?logo=react)](https://vitejs.dev)
 [![Database](https://img.shields.io/badge/Database-SQLite%20(Audit%20Ledger)-003B57.svg?logo=sqlite)](https://sqlite.org)
+
+> 🚀 **Live Working Model URL:** [https://netevidence-ai.onrender.com/login](https://netevidence-ai.onrender.com/login)  
+> 🔑 **Pre-Seeded Evaluator Account:** `demo@netevidence.ai` &nbsp;|&nbsp; **Password:** `Password123!`  
+> 📖 **Interactive Swagger API Docs:** [https://netevidence-ai.onrender.com/docs](https://netevidence-ai.onrender.com/docs)
 
 > **NetEvidence AI** is an explainable cybersecurity intelligence application that determines the likely network type of an IP address (`Residential`, `Mobile`, `Enterprise / Campus`, `Hosting / Datacenter`, or `Unknown / Insufficient Evidence`) by fusing evidence from Autonomous System Registrations (ASN), BGP routing tables, Reverse DNS (PTR), and open WHOIS intelligence.
 
@@ -15,6 +20,9 @@
 - **Team Code:** A3-PS010-TC192
 - **Problem Statement:** PS-010 — Evidence-Based IP Network-Type Classification
 - **Institution:** Guru Nanak Institutions Technical Campus (Autonomous) (GNITC)
+- **Live Deployment URL:** [https://netevidence-ai.onrender.com/login](https://netevidence-ai.onrender.com/login)
+- **Live API Documentation:** [https://netevidence-ai.onrender.com/docs](https://netevidence-ai.onrender.com/docs)
+- **Live Health Check:** [https://netevidence-ai.onrender.com/api/health](https://netevidence-ai.onrender.com/api/health)
 - **Architecture:** Explainable Multi-Source Rule-Fusion Engine with Auditable Activity Ledger
 
 ---
@@ -169,8 +177,11 @@ backend/app/tests/test_ip_validator.py ...... [PASSED]
 ## 7. Demo Checklist for Evaluators
 
 1. **Sign In:**
-   - Navigate to [http://localhost:5173/login](http://localhost:5173/login)
-   - Credentials: `demo@netevidence.ai` / `Password123!`
+   - **Live Cloud Application (Recommended):** [https://netevidence-ai.onrender.com/login](https://netevidence-ai.onrender.com/login)
+   - **Local Development (Optional):** [http://localhost:5173/login](http://localhost:5173/login)
+   - **Pre-Seeded Credentials:**
+     - **Email:** `demo@netevidence.ai`
+     - **Password:** `Password123!`
 2. **Dashboard Overview:**
    - Review the verified statistics: Total Analyses, Live vs. Demo breakdown, High Quality Ratio (displays `N/A` for fresh accounts), and Detected Conflicts.
 3. **Analyze an IP:**
