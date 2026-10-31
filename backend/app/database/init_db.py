@@ -9,6 +9,7 @@ from app.models.user import User
 from app.models.analysis import AnalysisRecord, SavedReport
 from app.models.audit import AuditEvent
 from app.services.classifier import NetworkClassifier
+from app.services.adapters.demo_adapter import DEMO_CASES
 
 classifier_instance = NetworkClassifier()
 
