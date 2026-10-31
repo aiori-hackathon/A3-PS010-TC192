@@ -51,8 +51,8 @@ if settings.ALLOWED_ORIGINS:
 app.add_middleware(
     CORSMiddleware,
     allow_origins=allowed_origins_list,
-    # Allow Vercel deployment domains (*.vercel.app) and local development
-    allow_origin_regex=r"^https?://([a-zA-Z0-9-]+\.)?vercel\.app(:\d+)?$|^https?://(localhost|127\.0\.0\.1)(:\d+)?$",
+    # Allow Vercel (*.vercel.app), Render (*.onrender.com), and local development
+    allow_origin_regex=r"^https?://([a-zA-Z0-9-]+\.)?(vercel\.app|onrender\.com)(:\d+)?$|^https?://(localhost|127\.0\.0\.1)(:\d+)?$",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
