@@ -2,9 +2,11 @@
 NetEvidence AI - Backend Entrypoint
 Evidence-Based IP Network-Type Classification Platform
 """
-from fastapi import FastAPI, Request, status
+from fastapi import FastAPI, Request, status, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, FileResponse
+from fastapi.staticfiles import StaticFiles
+from pathlib import Path
 import time
 
 from app.core.config import settings
@@ -93,8 +95,18 @@ app.include_router(audit.router, prefix=api_v1_prefix)
 app.include_router(benchmark.router, prefix=api_v1_prefix)
 app.include_router(dashboard.router, prefix=api_v1_prefix)
 
-@app.get("/")
-def root():
+@app.get("/api/health")
+def health_check():
+    return {
+        "status": "healthy",
+        "timestamp": time.time(),
+        "database": "SQLite (Connected)",
+        "classifier_version": settings.CLASSIFIER_VERSION
+    }
+
+@app.get("/api/info")
+@app.get("/api")
+def api_info():
     return {
         "project": settings.PROJECT_NAME,
         "team": settings.TEAM_NAME,
@@ -105,11 +117,64 @@ def root():
         "api_documentation": "/docs"
     }
 
-@app.get("/api/health")
-def health_check():
-    return {
-        "status": "healthy",
-        "timestamp": time.time(),
-        "database": "SQLite (Connected)",
-        "classifier_version": settings.CLASSIFIER_VERSION
-    }
+# Serve frontend React SPA from static assets
+static_dir = Path(__file__).resolve().parent / "static"
+
+if static_dir.exists() and (static_dir / "index.html").exists():
+    assets_dir = static_dir / "assets"
+    if assets_dir.exists():
+        app.mount("/assets", StaticFiles(directory=str(assets_dir)), name="assets")
+
+    @app.get("/favicon.svg", include_in_schema=False)
+    async def favicon():
+        fav = static_dir / "favicon.svg"
+        if fav.exists():
+            return FileResponse(fav)
+        raise HTTPException(status_code=404)
+
+    @app.get("/icons.svg", include_in_schema=False)
+    async def icons():
+        ic = static_dir / "icons.svg"
+        if ic.exists():
+            return FileResponse(ic)
+        raise HTTPException(status_code=404)
+
+    @app.get("/", include_in_schema=False)
+    async def root_or_frontend(request: Request):
+        accept = request.headers.get("accept", "")
+        # Browsers navigating to root send 'text/html' in Accept header -> serve React SPA
+        if "text/html" in accept:
+            return FileResponse(static_dir / "index.html")
+        # API clients, tests, or monitors -> return JSON project metadata
+        return {
+            "project": settings.PROJECT_NAME,
+            "team": settings.TEAM_NAME,
+            "team_code": settings.TEAM_CODE,
+            "institution": settings.INSTITUTION,
+            "version": settings.VERSION,
+            "status": "Online",
+            "api_documentation": "/docs"
+        }
+
+    @app.get("/{full_path:path}", include_in_schema=False)
+    async def serve_spa_frontend(full_path: str):
+        # Do not intercept API, docs, or schema routes
+        if full_path.startswith(("api", "docs", "redoc", "openapi.json")):
+            raise HTTPException(status_code=404, detail="API endpoint not found")
+
+        target = static_dir / full_path
+        if full_path and target.is_file():
+            return FileResponse(target)
+        return FileResponse(static_dir / "index.html")
+else:
+    @app.get("/")
+    def root():
+        return {
+            "project": settings.PROJECT_NAME,
+            "team": settings.TEAM_NAME,
+            "team_code": settings.TEAM_CODE,
+            "institution": settings.INSTITUTION,
+            "version": settings.VERSION,
+            "status": "Online",
+            "api_documentation": "/docs"
+        }
