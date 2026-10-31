@@ -23,6 +23,7 @@
 - **Live Deployment URL:** [https://netevidence-ai.onrender.com/login](https://netevidence-ai.onrender.com/login)
 - **Live API Documentation:** [https://netevidence-ai.onrender.com/docs](https://netevidence-ai.onrender.com/docs)
 - **Live Health Check:** [https://netevidence-ai.onrender.com/api/health](https://netevidence-ai.onrender.com/api/health)
+- **Project Report (PDF):** [NetEvidence-AI-Project-Report.pdf](NetEvidence-AI-Project-Report.pdf)
 - **Architecture:** Explainable Multi-Source Rule-Fusion Engine with Auditable Activity Ledger
 
 ---
