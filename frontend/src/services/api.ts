@@ -8,7 +8,9 @@ import {
   AuditEvent
 } from '../types';
 
-const API_BASE = import.meta.env.VITE_API_URL || '/api/v1';
+const API_BASE =
+  import.meta.env.VITE_API_URL ||
+  (import.meta.env.DEV ? '/api/v1' : 'https://a3-ps-010-tc-192-4fs1.vercel.app/api/v1');
 
 function getAuthHeaders(): HeadersInit {
   const token = localStorage.getItem('netevidence_token');
