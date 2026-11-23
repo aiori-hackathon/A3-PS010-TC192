@@ -161,6 +161,21 @@ export const BenchmarkPage: React.FC = () => {
             Strictly avoids data leakage. Measures classifier accuracy, per-class F1, and records unforced abstentions (Unknown / Insufficient).
           </div>
         </div>
+
+        {/* Reference Corpus Provenance & Scope Disclosure */}
+        <div className="mt-4 pt-3.5 border-t border-slate-100 dark:border-slate-800 text-[11px] text-slate-500 dark:text-slate-400 space-y-1.5">
+          <div className="flex items-center gap-1.5 font-bold text-slate-700 dark:text-slate-300">
+            <ShieldAlert className="w-3.5 h-3.5 text-blue-500" />
+            <span>Dataset Provenance & Benchmark Scope Disclosure</span>
+          </div>
+          <p className="leading-relaxed">
+            The built-in Reference Corpus contains <strong>20 curated benchmark targets</strong> representing verified ground-truth instances across 5 distinct network categories:
+            Residential (Comcast, Jio, Airtel, Free SAS), Mobile (Verizon Wireless, T-Mobile, Vodafone), Enterprise / Campus (MIT, Stanford, CERN), Hosting / Datacenter (AWS EC2, Hetzner, DigitalOcean), and Bogon / Insufficient control addresses.
+          </p>
+          <p className="text-[10px] text-slate-400 italic">
+            * Note: The reference corpus is designed as an evaluation standard for technical evaluation. Real-world internet traffic exhibits wider variance; evaluators can test custom telemetry by uploading proprietary labeled CSVs via the button above.
+          </p>
+        </div>
       </div>
 
       {/* Live Benchmark Results */}

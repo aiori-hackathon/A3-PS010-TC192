@@ -23,7 +23,9 @@ import {
   Radio,
   Fingerprint,
   Zap,
-  Globe
+  Globe,
+  Info,
+  ShieldAlert
 } from 'lucide-react';
 import { api } from '../services/api';
 import { AnalysisResponse } from '../types';
@@ -268,13 +270,13 @@ export const ReportPage: React.FC = () => {
 
         {/* 3 Core Metric Highlights */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 my-6">
-          {/* Confidence Score */}
+          {/* Classifier Confidence Score */}
           <div className="p-4 rounded-2xl bg-slate-50/80 dark:bg-slate-900/60 border border-slate-200/80 dark:border-slate-800/80 print:bg-slate-50 relative overflow-hidden">
             <div className="flex items-center justify-between mb-1.5">
               <span className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 font-mono">
-                Confidence Score
+                Classifier Confidence
               </span>
-              <Tooltip content="Calculated from signal consensus, source family independence, and conflict penalties. A higher score means stronger multi-source agreement." />
+              <Tooltip content="Heuristic rule-fusion score (0-100) reflecting multi-source consensus and conflict penalties. Not a statistical probability." />
             </div>
             <div className="flex items-baseline gap-2">
               <span className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white font-mono">
@@ -306,6 +308,9 @@ export const ReportPage: React.FC = () => {
                 style={{ width: `${report.confidence_score}%` }}
               />
             </div>
+            <p className="text-[10px] text-slate-400 dark:text-slate-500 mt-2 font-mono leading-tight">
+              Rule-fusion score; not a calibrated probability.
+            </p>
           </div>
 
           {/* Evidence Quality */}
@@ -314,16 +319,18 @@ export const ReportPage: React.FC = () => {
               <span className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 font-mono">
                 Evidence Quality
               </span>
-              <Tooltip content="Independent of confidence. Measures evidence depth, number of unique source families, freshness, and absence of sensor errors." />
+              <Tooltip content="Independent of confidence score. Assesses evidence breadth across distinct source families, freshness, and absence of sensor errors. Strong evidence can produce high or low confidence depending on signal agreement." />
             </div>
             <div className="flex items-baseline gap-2">
               <span className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white font-mono">
                 {report.evidence_quality}
               </span>
+              <span className="text-[10px] font-mono font-bold uppercase text-slate-400 ml-auto px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800">
+                {report.evidence.filter((e) => e.status !== 'error').length} signals
+              </span>
             </div>
             <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-2 font-mono">
-              {report.evidence.filter((e) => e.status !== 'error').length} usable signals across{' '}
-              {new Set(report.evidence.map((e) => e.source)).size} sensors
+              Spans {new Set(report.evidence.map((e) => e.source)).size} sensor sources ({report.evidence.filter((e) => e.status === 'error').length} errors)
             </p>
           </div>
 
@@ -446,6 +453,73 @@ export const ReportPage: React.FC = () => {
           >
             {report.explanation}
           </Markdown>
+        </div>
+      </div>
+
+      {/* Methodology Scope & Operational Limitations */}
+      <div className="cyber-card p-6 sm:p-7 relative print:break-inside-avoid border-slate-200 dark:border-slate-800">
+        <div className="flex items-center gap-2 mb-4">
+          <span className="p-2 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-600 dark:text-amber-400">
+            <ShieldAlert className="w-5 h-5" />
+          </span>
+          <div>
+            <h3 className="font-extrabold text-slate-900 dark:text-white text-base">
+              Methodology Scope & Operational Limitations
+            </h3>
+            <p className="text-xs text-slate-500 dark:text-slate-400">
+              Heuristic bounds, dynamic address reallocation, and recommended forensic verification steps.
+            </p>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 text-xs">
+          <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200/70 dark:border-slate-700/60 space-y-1">
+            <span className="font-bold text-slate-800 dark:text-slate-200 flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
+              Dynamic IP Reassignment (DHCP)
+            </span>
+            <p className="text-slate-600 dark:text-slate-400 leading-relaxed text-[11px]">
+              Residential and mobile subscriber addresses rotate over variable DHCP lease periods. This classification reflects multi-source routing telemetry captured at query time.
+            </p>
+          </div>
+
+          <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200/70 dark:border-slate-700/60 space-y-1">
+            <span className="font-bold text-slate-800 dark:text-slate-200 flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
+              Stale or Unconfigured Reverse DNS (PTR)
+            </span>
+            <p className="text-slate-600 dark:text-slate-400 leading-relaxed text-[11px]">
+              Reverse DNS depends on network operator record maintenance. Missing PTR entries lower evidence completeness scores but do not falsify authoritative BGP announcements.
+            </p>
+          </div>
+
+          <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200/70 dark:border-slate-700/60 space-y-1">
+            <span className="font-bold text-slate-800 dark:text-slate-200 flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
+              Shared CDNs & Anycast Clouds
+            </span>
+            <p className="text-slate-600 dark:text-slate-400 leading-relaxed text-[11px]">
+              Datacenter-hosted edge proxies (e.g. Cloudflare, Fastly, AWS CloudFront) terminate client requests globally, presenting datacenter infrastructure for content delivery.
+            </p>
+          </div>
+
+          <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200/70 dark:border-slate-700/60 space-y-1">
+            <span className="font-bold text-slate-800 dark:text-slate-200 flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
+              Carrier-Grade NAT (CGNAT) Aggregation
+            </span>
+            <p className="text-slate-600 dark:text-slate-400 leading-relaxed text-[11px]">
+              Cellular and rural broadband carriers route thousands of subscribers through shared IPv4 NAT gateways (RFC 6598), aggregating multiple mobile handsets behind single addresses.
+            </p>
+          </div>
+        </div>
+
+        {/* Verification guidance */}
+        <div className="mt-4 p-3 rounded-xl bg-blue-50/70 dark:bg-blue-950/20 border border-blue-200/60 dark:border-blue-800/40 text-[11px] text-blue-900 dark:text-blue-300 flex items-start gap-2.5">
+          <Info className="w-4 h-4 text-blue-600 dark:text-blue-400 shrink-0 mt-0.5" />
+          <p className="leading-relaxed">
+            <strong className="font-semibold">Recommended Forensic Verification:</strong> For high-stakes incident response, corroborate this classification using active traceroute TTL hops, historical WHOIS registration changes, and internal network telemetry logs.
+          </p>
         </div>
       </div>
 

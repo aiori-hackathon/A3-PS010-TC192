@@ -34,12 +34,13 @@ def register(user_in: UserCreate, db: Session = Depends(get_db)):
     db.commit()
     db.refresh(user)
 
+    import json
     # Log audit event
     audit = AuditEvent(
         user_id=user.id,
         action="USER_REGISTRATION",
         status="SUCCESS",
-        details_json=f'{{"email": "{user.email}", "full_name": "{user.full_name}"}}'
+        details_json=json.dumps({"email": user.email, "full_name": user.full_name})
     )
     db.add(audit)
     db.commit()

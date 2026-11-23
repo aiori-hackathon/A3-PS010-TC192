@@ -9,7 +9,9 @@ import {
   Clock,
   Cpu,
   Layers,
-  Database
+  Database,
+  ChevronDown,
+  ChevronUp
 } from 'lucide-react';
 
 interface EvidenceTableProps {
@@ -19,6 +21,12 @@ interface EvidenceTableProps {
 export const EvidenceTable: React.FC<EvidenceTableProps> = ({ evidence }) => {
   const [filterStatus, setFilterStatus] = useState<string>('all');
   const [selectedItem, setSelectedItem] = useState<EvidenceItem | null>(null);
+  const [expandedIds, setExpandedIds] = useState<Record<string, boolean>>({});
+
+  const toggleExpand = (id: string, e: React.MouseEvent) => {
+    e.stopPropagation();
+    setExpandedIds((prev) => ({ ...prev, [id]: !prev[id] }));
+  };
 
   const filtered = evidence.filter((item) => {
     if (filterStatus === 'all') return true;
@@ -160,84 +168,162 @@ export const EvidenceTable: React.FC<EvidenceTableProps> = ({ evidence }) => {
                 );
               }
 
+              const isExpanded = !!expandedIds[item.id];
+
               return (
-                <tr
-                  key={item.id}
-                  onClick={() => setSelectedItem(item)}
-                  className="hover:bg-slate-50/80 dark:hover:bg-slate-800/40 transition-colors cursor-pointer"
-                >
-                  <td className="py-3 px-3 whitespace-nowrap">
-                    {impactBadge}
-                    <div className="font-mono text-[9px] text-slate-400 mt-1">ID: {item.id}</div>
-                  </td>
+                <React.Fragment key={item.id}>
+                  <tr
+                    onClick={() => setSelectedItem(item)}
+                    className="hover:bg-slate-50/80 dark:hover:bg-slate-800/40 transition-colors cursor-pointer group"
+                  >
+                    <td className="py-3 px-3 whitespace-nowrap">
+                      <div className="flex items-center gap-2">
+                        <button
+                          type="button"
+                          onClick={(e) => toggleExpand(item.id, e)}
+                          className="p-1 rounded hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 transition-colors"
+                          title={isExpanded ? 'Collapse row telemetry' : 'Expand row telemetry'}
+                        >
+                          {isExpanded ? (
+                            <ChevronUp className="w-3.5 h-3.5" />
+                          ) : (
+                            <ChevronDown className="w-3.5 h-3.5" />
+                          )}
+                        </button>
+                        <div>
+                          {impactBadge}
+                          <div className="font-mono text-[9px] text-slate-400 mt-0.5">ID: {item.id}</div>
+                        </div>
+                      </div>
+                    </td>
 
-                  <td className="py-3 px-3">
-                    <div className="font-semibold text-slate-900 dark:text-slate-100 flex items-center gap-1.5">
-                      <span>{item.source}</span>
-                    </div>
-                    <span className="inline-block uppercase text-[10px] font-bold px-1.5 py-0.2 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300 mt-1">
-                      {item.category}
-                    </span>
-                    {item.reference_url && (
-                      <a
-                        href={item.reference_url}
-                        target="_blank"
-                        rel="noreferrer"
-                        onClick={(e) => e.stopPropagation()}
-                        className="text-[10px] text-blue-500 hover:underline flex items-center gap-0.5 mt-0.5"
-                      >
-                        Provider Endpoint <ExternalLink className="w-2.5 h-2.5" />
-                      </a>
-                    )}
-                  </td>
-
-                  <td className="py-3 px-3 max-w-xs break-words">
-                    <span className="font-mono text-[10px] text-slate-400 block uppercase font-bold">{item.key}</span>
-                    <span className="font-mono text-xs font-bold text-slate-900 dark:text-slate-100">
-                      {String(item.value)}
-                    </span>
-                    {item.error_details && (
-                      <span className="block text-[11px] text-rose-500 mt-0.5">{item.error_details}</span>
-                    )}
-                  </td>
-
-                  <td className="py-3 px-3 max-w-sm">
-                    <div
-                      className={`text-xs ${
-                        item.score_impact > 0
-                          ? 'text-emerald-700 dark:text-emerald-300 font-semibold'
-                          : item.score_impact < 0
-                          ? 'text-rose-700 dark:text-rose-300 font-semibold'
-                          : 'text-slate-600 dark:text-slate-300'
-                      }`}
-                    >
-                      {item.contribution}
-                    </div>
-                    {item.impact_category && (
-                      <span className="inline-block text-[10px] font-semibold text-slate-400 mt-0.5">
-                        Target Category: {item.impact_category}
+                    <td className="py-3 px-3">
+                      <div className="font-semibold text-slate-900 dark:text-slate-100 flex items-center gap-1.5">
+                        <span>{item.source}</span>
+                      </div>
+                      <span className="inline-block uppercase text-[10px] font-bold px-1.5 py-0.2 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300 mt-1">
+                        {item.category}
                       </span>
-                    )}
-                  </td>
+                      {item.reference_url && (
+                        <a
+                          href={item.reference_url}
+                          target="_blank"
+                          rel="noreferrer"
+                          onClick={(e) => e.stopPropagation()}
+                          className="text-[10px] text-blue-500 hover:underline flex items-center gap-0.5 mt-0.5"
+                        >
+                          Provider Endpoint <ExternalLink className="w-2.5 h-2.5" />
+                        </a>
+                      )}
+                    </td>
 
-                  <td className="py-3 px-3 whitespace-nowrap text-slate-500 dark:text-slate-400">
-                    <div className="flex items-center gap-1">
-                      {isSimulated ? (
-                        <span className="px-2 py-0.5 rounded text-[10px] font-extrabold bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/30">
-                          SIMULATED
-                        </span>
-                      ) : (
-                        <span className="px-2 py-0.5 rounded text-[10px] font-extrabold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30">
-                          LIVE SENSOR
+                    <td className="py-3 px-3 max-w-xs break-words">
+                      <span className="font-mono text-[10px] text-slate-400 block uppercase font-bold">{item.key}</span>
+                      <span className="font-mono text-xs font-bold text-slate-900 dark:text-slate-100">
+                        {String(item.value)}
+                      </span>
+                      {item.error_details && (
+                        <span className="block text-[11px] text-rose-500 mt-0.5">{item.error_details}</span>
+                      )}
+                    </td>
+
+                    <td className="py-3 px-3 max-w-sm">
+                      <div
+                        className={`text-xs ${
+                          item.score_impact > 0
+                            ? 'text-emerald-700 dark:text-emerald-300 font-semibold'
+                            : item.score_impact < 0
+                            ? 'text-rose-700 dark:text-rose-300 font-semibold'
+                            : 'text-slate-600 dark:text-slate-300'
+                        }`}
+                      >
+                        {item.contribution}
+                      </div>
+                      {item.impact_category && (
+                        <span className="inline-block text-[10px] font-semibold text-slate-400 mt-0.5">
+                          Target Category: {item.impact_category}
                         </span>
                       )}
-                    </div>
-                    <span className="block text-[10px] text-slate-400 mt-1 flex items-center gap-1">
-                      <Clock className="w-3 h-3" />
-                      {new Date(item.collected_at).toLocaleTimeString()}
-                    </span>
-                  </td>
-                </tr>
+                    </td>
+
+                    <td className="py-3 px-3 whitespace-nowrap text-slate-500 dark:text-slate-400">
+                      <div className="flex items-center gap-1">
+                        {isSimulated ? (
+                          <span className="px-2 py-0.5 rounded text-[10px] font-extrabold bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/30">
+                            SIMULATED
+                          </span>
+                        ) : (
+                          <span className="px-2 py-0.5 rounded text-[10px] font-extrabold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30">
+                            LIVE SENSOR
+                          </span>
+                        )}
+                      </div>
+                      <span className="block text-[10px] text-slate-400 mt-1 flex items-center gap-1">
+                        <Clock className="w-3 h-3" />
+                        {new Date(item.collected_at).toLocaleTimeString()}
+                      </span>
+                    </td>
+                  </tr>
+
+                  {/* Inline Collapsible Telemetry Row */}
+                  {isExpanded && (
+                    <tr className="bg-slate-50/90 dark:bg-slate-800/40 border-b border-slate-200 dark:border-slate-800 animate-in fade-in duration-150">
+                      <td colSpan={5} className="py-3 px-4">
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 text-[11px] p-3.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm">
+                          <div>
+                            <span className="text-slate-400 font-mono uppercase text-[10px] font-bold block mb-1">
+                              Raw Sensor Observation:
+                            </span>
+                            <code className="font-mono text-xs text-blue-600 dark:text-blue-400 font-bold break-all block p-1.5 rounded bg-slate-50 dark:bg-slate-800/80 border border-slate-200/60 dark:border-slate-700/60">
+                              {item.key}: {String(item.value)}
+                            </code>
+                          </div>
+                          <div>
+                            <span className="text-slate-400 font-mono uppercase text-[10px] font-bold block mb-1">
+                              Score Weight & Rule Rationale:
+                            </span>
+                            <p className="font-medium text-slate-700 dark:text-slate-300">
+                              Score Delta:{' '}
+                              <strong
+                                className={
+                                  item.score_impact > 0
+                                    ? 'text-emerald-600 dark:text-emerald-400'
+                                    : item.score_impact < 0
+                                    ? 'text-rose-600 dark:text-rose-400'
+                                    : 'text-slate-500'
+                                }
+                              >
+                                {item.score_impact > 0 ? `+${item.score_impact}` : item.score_impact}
+                              </strong>{' '}
+                              ({item.impact_category || 'Contextual Neutral'})
+                            </p>
+                            <p className="text-[10px] text-slate-500 mt-1 italic">{item.contribution}</p>
+                          </div>
+                          <div>
+                            <span className="text-slate-400 font-mono uppercase text-[10px] font-bold block mb-1">
+                              Provenance & Endpoint:
+                            </span>
+                            <span className="text-slate-500 font-mono text-[10px] block">
+                              ISO: {new Date(item.collected_at).toISOString()}
+                            </span>
+                            {item.reference_url ? (
+                              <a
+                                href={item.reference_url}
+                                target="_blank"
+                                rel="noreferrer"
+                                className="text-blue-500 hover:underline inline-flex items-center gap-1 mt-1 font-semibold text-[10px]"
+                              >
+                                View Authority Endpoint <ExternalLink className="w-2.5 h-2.5" />
+                              </a>
+                            ) : (
+                              <span className="text-slate-400 text-[10px] italic">Local kernel / RFC resolution</span>
+                            )}
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  )}
+                </React.Fragment>
               );
             })}
           </tbody>

@@ -27,12 +27,18 @@ def execute_benchmark(
     """
     result = runner.run_benchmark()
 
+    import json
     # Log audit event
     audit = AuditEvent(
         user_id=current_user.id,
         action="BENCHMARK_EXECUTED",
         status="SUCCESS",
-        details_json=f'{{"accuracy": {result.overall_accuracy}, "samples": {result.total_samples}, "macro_f1": {result.macro_f1}, "abstention_rate": {result.unknown_abstention_rate}}}'
+        details_json=json.dumps({
+            "accuracy": result.overall_accuracy,
+            "samples": result.total_samples,
+            "macro_f1": result.macro_f1,
+            "abstention_rate": result.unknown_abstention_rate
+        })
     )
     db.add(audit)
     db.commit()
@@ -74,7 +80,11 @@ async def evaluate_uploaded_csv(
         user_id=current_user.id,
         action="CUSTOM_BENCHMARK_EVALUATED",
         status="SUCCESS",
-        details_json=f'{{"filename": "{file.filename}", "accuracy": {result.overall_accuracy}, "samples": {result.total_samples}}}'
+        details_json=json.dumps({
+            "filename": file.filename,
+            "accuracy": result.overall_accuracy,
+            "samples": result.total_samples
+        })
     )
     db.add(audit)
     db.commit()
