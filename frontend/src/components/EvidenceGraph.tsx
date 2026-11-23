@@ -157,8 +157,8 @@ export const EvidenceGraph: React.FC<EvidenceGraphProps> = ({ graphData, ipAddre
 
   return (
     <div
-      className={`bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm transition-all ${
-        isFullscreen ? 'fixed inset-4 z-50 overflow-auto bg-slate-950 p-8 shadow-2xl' : ''
+      className={`cyber-card p-6 sm:p-7 transition-all ${
+        isFullscreen ? 'fixed inset-4 z-50 overflow-auto bg-[#070D1E] p-8 shadow-2xl border-cyan-500/40' : ''
       }`}
     >
       {/* Header bar */}

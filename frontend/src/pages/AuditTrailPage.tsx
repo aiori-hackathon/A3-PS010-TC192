@@ -67,7 +67,7 @@ export const AuditTrailPage: React.FC = () => {
       </div>
 
       {/* Events Table */}
-      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-sm overflow-hidden">
+      <div className="cyber-card overflow-hidden">
         {isLoading ? (
           <div className="py-20 text-center text-xs text-slate-400">Loading audit records...</div>
         ) : events.length > 0 ? (

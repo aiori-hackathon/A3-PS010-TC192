@@ -117,7 +117,7 @@ export const GlossaryPage: React.FC = () => {
         {filtered.map((item) => (
           <div
             key={item.term}
-            className="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-3"
+            className="p-5 rounded-2xl cyber-card space-y-3 hover:border-cyan-500/40 hover:shadow-glow-cyan"
           >
             <div className="flex items-center justify-between">
               <h3 className="font-extrabold text-slate-900 dark:text-slate-100 text-base">

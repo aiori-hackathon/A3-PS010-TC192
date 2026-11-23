@@ -23,7 +23,7 @@ export const SettingsPage: React.FC = () => {
       </div>
 
       {/* User & Project Info */}
-      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-sm space-y-4">
+      <div className="cyber-card p-6 space-y-4">
         <h3 className="font-bold text-slate-900 dark:text-slate-100 text-sm flex items-center gap-2">
           <Cpu className="w-4 h-4 text-blue-600" />
           Project Identity & System Info
@@ -53,7 +53,7 @@ export const SettingsPage: React.FC = () => {
       </div>
 
       {/* Sensor Configuration */}
-      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-sm space-y-4">
+      <div className="cyber-card p-6 space-y-4">
         <h3 className="font-bold text-slate-900 dark:text-slate-100 text-sm flex items-center gap-2">
           <Server className="w-4 h-4 text-teal-600" />
           Live Evidence Source Adapters

@@ -65,7 +65,7 @@ export const EvidenceExplorerPage: React.FC = () => {
       </div>
 
       {/* Scenario Selector Bar */}
-      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-5 shadow-sm">
+      <div className="cyber-card p-5 sm:p-6">
         <div className="flex items-center justify-between pb-3 mb-3 border-b border-slate-100 dark:border-slate-800">
           <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">
             Select Reference Scenario (Evaluator Suite):

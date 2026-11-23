@@ -35,8 +35,8 @@ export const EvidenceTable: React.FC<EvidenceTableProps> = ({ evidence }) => {
   const missingCount = evidence.filter((i) => i.status === 'missing' || i.status === 'error').length;
 
   return (
-    <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-slate-100 dark:border-slate-800">
+    <div className="cyber-card p-6 sm:p-7">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-slate-100 dark:border-slate-800/80">
         <div>
           <div className="flex items-center gap-2">
             <Database className="w-5 h-5 text-blue-600 dark:text-blue-400" />

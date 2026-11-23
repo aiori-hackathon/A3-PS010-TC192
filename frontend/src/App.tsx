@@ -50,12 +50,23 @@ const ProtectedLayout: React.FC<{ children: React.ReactNode }> = ({ children }) 
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex transition-colors">
+    <div className="min-h-screen bg-[#F8FAFC] dark:bg-[#070C18] flex transition-colors relative selection:bg-cyan-500/30 selection:text-cyan-800 dark:selection:text-cyan-200">
+      {/* Background Cyber Grid */}
+      <div className="fixed inset-0 cyber-grid opacity-30 pointer-events-none" />
+      
       <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
-      <div className="flex-1 lg:pl-72 flex flex-col min-w-0">
+      <div className="flex-1 lg:pl-72 flex flex-col min-w-0 relative z-10">
         <Navbar onToggleSidebar={() => setSidebarOpen(!sidebarOpen)} title={getPageTitle(location.pathname)} />
         <main className="flex-1 p-4 sm:p-6 lg:p-8 overflow-y-auto">
           {children}
+          
+          {/* Subtle Cyber Footer */}
+          <footer className="mt-12 pt-6 border-t border-slate-200/80 dark:border-slate-800/80 text-center text-xs text-slate-500 dark:text-slate-400 font-mono flex flex-col sm:flex-row items-center justify-between gap-2">
+            <span>NetEvidence AI — Evidence-Based IP Classification</span>
+            <span className="text-[11px] text-cyan-600 dark:text-cyan-400 font-bold">
+              AIORI Hackathon 3 • Team Evolve (A3-PS010-TC192) • GNITC
+            </span>
+          </footer>
         </main>
       </div>
     </div>
