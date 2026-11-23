@@ -27,9 +27,11 @@ import {
   Tooltip as RechartsTooltip,
 } from 'recharts';
 import { api } from '../services/api';
+import { useTheme } from '../context/ThemeContext';
 import { DashboardStats } from '../types';
 
 export const Dashboard: React.FC = () => {
+  const { theme } = useTheme();
   const [stats, setStats] = useState<DashboardStats | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [quickIp, setQuickIp] = useState<string>('');
@@ -69,50 +71,50 @@ export const Dashboard: React.FC = () => {
   return (
     <div className="space-y-7 animate-in fade-in duration-300">
       {/* Hero Command Center Banner */}
-      <div className="relative rounded-3xl bg-gradient-to-br from-[#0B1530] via-[#0E1A38] to-[#070D1E] text-white p-6 sm:p-9 border border-cyan-500/20 shadow-2xl shadow-cyan-950/20 overflow-hidden">
+      <div className="relative rounded-3xl bg-gradient-to-br from-blue-50/90 via-indigo-50/60 to-cyan-50/40 dark:from-[#0B1530] dark:via-[#0E1A38] dark:to-[#070D1E] text-slate-900 dark:text-white p-6 sm:p-9 border border-blue-200/80 dark:border-cyan-500/20 shadow-xl shadow-blue-500/5 dark:shadow-cyan-950/20 overflow-hidden transition-colors">
         {/* Cyber grid overlay */}
-        <div className="absolute inset-0 cyber-grid opacity-40 pointer-events-none" />
+        <div className="absolute inset-0 cyber-grid opacity-30 dark:opacity-40 pointer-events-none" />
         
         {/* Ambient glow orbs */}
-        <div className="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-cyan-500/15 blur-3xl pointer-events-none" />
-        <div className="absolute -bottom-20 right-1/3 w-80 h-80 rounded-full bg-blue-600/15 blur-3xl pointer-events-none" />
+        <div className="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-cyan-500/10 dark:bg-cyan-500/15 blur-3xl pointer-events-none" />
+        <div className="absolute -bottom-20 right-1/3 w-80 h-80 rounded-full bg-blue-600/10 dark:bg-blue-600/15 blur-3xl pointer-events-none" />
 
         <div className="relative z-10 max-w-3xl">
           {/* Top Pill Badges */}
           <div className="flex flex-wrap items-center gap-2 mb-3.5">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-cyan-500/10 text-cyan-300 border border-cyan-500/30 text-[11px] font-mono font-bold tracking-wider uppercase">
-              <Cpu className="w-3.5 h-3.5 text-cyan-400 animate-pulse" /> PS-010 Rule-Fusion Engine
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-100/80 dark:bg-cyan-500/10 text-blue-700 dark:text-cyan-300 border border-blue-300/60 dark:border-cyan-500/30 text-[11px] font-mono font-bold tracking-wider uppercase">
+              <Cpu className="w-3.5 h-3.5 text-blue-600 dark:text-cyan-400 animate-pulse" /> PS-010 Rule-Fusion Engine
             </div>
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-300 border border-emerald-500/30 text-[11px] font-mono font-semibold">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" /> Live RIPEstat BGP
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-100/80 dark:bg-emerald-500/10 text-emerald-800 dark:text-emerald-300 border border-emerald-300/60 dark:border-emerald-500/30 text-[11px] font-mono font-semibold">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 dark:bg-emerald-400 animate-ping" /> Live RIPEstat BGP
             </div>
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-500/10 text-blue-300 border border-blue-500/30 text-[11px] font-mono font-semibold">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-100/80 dark:bg-blue-500/10 text-indigo-700 dark:text-blue-300 border border-indigo-300/60 dark:border-blue-500/30 text-[11px] font-mono font-semibold">
               Zero RFC Leakage Guard
             </div>
           </div>
 
-          <h2 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-white leading-tight">
-            Welcome back, <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-indigo-300 bg-clip-text text-transparent">{stats?.user_name || 'Cybersecurity Analyst'}</span>
+          <h2 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-tight">
+            Welcome back, <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-cyan-600 dark:from-cyan-400 dark:via-blue-400 dark:to-indigo-300 bg-clip-text text-transparent">{stats?.user_name || 'Cybersecurity Analyst'}</span>
           </h2>
-          <p className="mt-2.5 text-xs sm:text-sm text-slate-300 leading-relaxed max-w-2xl">
+          <p className="mt-2.5 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed max-w-2xl">
             Classify any IPv4 or IPv6 network type with explainable multi-source evidence. Fuses Autonomous Systems, BGP routing announcements, and Reverse DNS heuristics into auditable intelligence.
           </p>
 
           {/* Inline Quick IP Search Bar */}
           <form onSubmit={handleQuickAnalyze} className="mt-6 flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 max-w-xl">
             <div className="relative flex-1">
-              <Search className="w-4 h-4 text-cyan-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+              <Search className="w-4 h-4 text-blue-500 dark:text-cyan-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
               <input
                 type="text"
                 value={quickIp}
                 onChange={(e) => setQuickIp(e.target.value)}
                 placeholder="Enter IP (e.g. 8.8.8.8, 73.168.45.112)..."
-                className="w-full pl-10 pr-4 py-3 rounded-2xl bg-slate-900/90 border border-cyan-500/30 text-white placeholder-slate-400 text-xs sm:text-sm font-mono focus:outline-none focus:ring-2 focus:ring-cyan-400/50 focus:border-cyan-400 shadow-inner"
+                className="w-full pl-10 pr-4 py-3 rounded-2xl bg-white dark:bg-slate-900/90 border border-slate-300 dark:border-cyan-500/30 text-slate-900 dark:text-white placeholder-slate-400 text-xs sm:text-sm font-mono focus:outline-none focus:ring-2 focus:ring-blue-500/40 dark:focus:ring-cyan-400/50 focus:border-blue-500 dark:focus:border-cyan-400 shadow-sm dark:shadow-inner"
               />
             </div>
             <button
               type="submit"
-              className="px-6 py-3 rounded-2xl font-bold text-xs uppercase tracking-wider bg-gradient-to-r from-cyan-500 via-blue-600 to-indigo-600 hover:from-cyan-400 hover:to-blue-500 text-white shadow-lg shadow-cyan-500/25 flex items-center justify-center gap-2 transition-all transform hover:-translate-y-0.5 active:translate-y-0 shrink-0"
+              className="px-6 py-3 rounded-2xl font-bold text-xs uppercase tracking-wider bg-gradient-to-r from-blue-600 via-indigo-600 to-cyan-600 hover:from-blue-500 hover:to-indigo-500 text-white shadow-lg shadow-blue-500/25 flex items-center justify-center gap-2 transition-all transform hover:-translate-y-0.5 active:translate-y-0 shrink-0"
             >
               <Zap className="w-4 h-4 text-cyan-200" />
               Analyze Target
@@ -121,22 +123,22 @@ export const Dashboard: React.FC = () => {
 
           {/* Quick Scenario Pills */}
           <div className="mt-4 flex flex-wrap items-center gap-2 text-xs">
-            <span className="text-[11px] text-slate-400 font-medium">Quick presets:</span>
+            <span className="text-[11px] text-slate-500 dark:text-slate-400 font-medium">Quick presets:</span>
             <button
               onClick={() => handlePresetClick('73.168.45.112')}
-              className="px-2.5 py-1 rounded-lg bg-slate-800/80 hover:bg-slate-700/80 text-cyan-300 border border-slate-700/60 font-mono text-[11px] transition-colors"
+              className="px-2.5 py-1 rounded-lg bg-white/90 dark:bg-slate-800/80 hover:bg-white dark:hover:bg-slate-700/80 text-blue-700 dark:text-cyan-300 border border-slate-200 dark:border-slate-700/60 font-mono text-[11px] transition-colors shadow-xs"
             >
               Residential (73.168.45.112)
             </button>
             <button
               onClick={() => handlePresetClick('54.214.12.89')}
-              className="px-2.5 py-1 rounded-lg bg-slate-800/80 hover:bg-slate-700/80 text-blue-300 border border-slate-700/60 font-mono text-[11px] transition-colors"
+              className="px-2.5 py-1 rounded-lg bg-white/90 dark:bg-slate-800/80 hover:bg-white dark:hover:bg-slate-700/80 text-indigo-700 dark:text-blue-300 border border-slate-200 dark:border-slate-700/60 font-mono text-[11px] transition-colors shadow-xs"
             >
               Cloud VPS (54.214.12.89)
             </button>
             <button
               onClick={() => handlePresetClick('198.54.117.44')}
-              className="px-2.5 py-1 rounded-lg bg-slate-800/80 hover:bg-slate-700/80 text-amber-300 border border-slate-700/60 font-mono text-[11px] transition-colors"
+              className="px-2.5 py-1 rounded-lg bg-white/90 dark:bg-slate-800/80 hover:bg-white dark:hover:bg-slate-700/80 text-amber-700 dark:text-amber-300 border border-slate-200 dark:border-slate-700/60 font-mono text-[11px] transition-colors shadow-xs"
             >
               Conflict (198.54.117.44)
             </button>
@@ -266,12 +268,12 @@ export const Dashboard: React.FC = () => {
                   </Pie>
                   <RechartsTooltip
                     contentStyle={{
-                      backgroundColor: '#070D1E',
-                      borderColor: '#1E293B',
+                      backgroundColor: theme === 'dark' ? '#0F172A' : '#FFFFFF',
+                      borderColor: theme === 'dark' ? '#1E293B' : '#E2E8F0',
                       borderRadius: '12px',
-                      color: '#F8FAFC',
+                      color: theme === 'dark' ? '#F8FAFC' : '#0F172A',
                       fontSize: '12px',
-                      boxShadow: '0 8px 24px rgba(0,0,0,0.5)',
+                      boxShadow: theme === 'dark' ? '0 8px 24px rgba(0,0,0,0.5)' : '0 4px 12px rgba(0,0,0,0.08)',
                       fontFamily: 'JetBrains Mono, monospace'
                     }}
                   />

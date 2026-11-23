@@ -311,19 +311,19 @@ export const AnalyzePage: React.FC = () => {
 
         {/* 5-Stage Processing Indicator */}
         {isProcessing && (
-          <div className="mt-8 p-6 rounded-3xl bg-[#070D1E]/90 border border-cyan-500/30 shadow-xl shadow-cyan-950/20 animate-in fade-in">
+          <div className="mt-8 p-6 rounded-3xl bg-white dark:bg-[#070D1E]/90 border border-blue-200 dark:border-cyan-500/30 shadow-xl shadow-blue-500/5 dark:shadow-cyan-950/20 animate-in fade-in">
             <div className="flex items-center justify-between mb-5">
-              <h4 className="font-extrabold text-xs text-white uppercase tracking-wider flex items-center gap-2 font-mono">
-                <Cpu className="w-4 h-4 text-cyan-400 animate-spin" />
+              <h4 className="font-extrabold text-xs text-slate-900 dark:text-white uppercase tracking-wider flex items-center gap-2 font-mono">
+                <Cpu className="w-4 h-4 text-cyan-500 animate-spin" />
                 Live Rule-Fusion Processing Pipeline
               </h4>
-              <span className="text-[11px] font-mono text-cyan-400">
+              <span className="text-[11px] font-mono text-cyan-600 dark:text-cyan-400 font-bold">
                 Stage {currentStage} of 5
               </span>
             </div>
 
             {/* Glowing progress bar */}
-            <div className="w-full bg-slate-800 h-2 rounded-full mb-5 overflow-hidden">
+            <div className="w-full bg-slate-100 dark:bg-slate-800 h-2 rounded-full mb-5 overflow-hidden">
               <div
                 className="bg-gradient-to-r from-cyan-500 via-blue-500 to-indigo-500 h-full transition-all duration-300 rounded-full"
                 style={{ width: `${(currentStage / 5) * 100}%` }}
@@ -341,10 +341,10 @@ export const AnalyzePage: React.FC = () => {
                     key={stage.id}
                     className={`p-3 rounded-2xl border transition-all flex items-center justify-between gap-3 text-xs ${
                       isCurrent
-                        ? 'bg-cyan-950/30 border-cyan-500/50 shadow-md shadow-cyan-500/10'
+                        ? 'bg-cyan-50/80 dark:bg-cyan-950/30 border-cyan-500/50 shadow-md shadow-cyan-500/10'
                         : isCompleted
-                        ? 'bg-slate-900/40 border-slate-800/80'
-                        : 'bg-slate-900/20 border-slate-800/40 opacity-50'
+                        ? 'bg-slate-50 dark:bg-slate-900/40 border-slate-200 dark:border-slate-800/80'
+                        : 'bg-slate-50/50 dark:bg-slate-900/20 border-slate-200/50 dark:border-slate-800/40 opacity-50'
                     }`}
                   >
                     <div className="flex items-center gap-3">
@@ -354,7 +354,7 @@ export const AnalyzePage: React.FC = () => {
                             ? 'bg-emerald-500 text-white'
                             : isCurrent
                             ? 'bg-cyan-500 text-white animate-pulse'
-                            : 'bg-slate-800 text-slate-500'
+                            : 'bg-slate-200 dark:bg-slate-800 text-slate-500 dark:text-slate-400'
                         }`}
                       >
                         {isCompleted ? <Check className="w-4 h-4" /> : stage.id}
@@ -364,22 +364,22 @@ export const AnalyzePage: React.FC = () => {
                         <span
                           className={`font-bold ${
                             isCurrent
-                              ? 'text-cyan-300'
+                              ? 'text-cyan-700 dark:text-cyan-300'
                               : isCompleted
-                              ? 'text-white'
-                              : 'text-slate-400'
+                              ? 'text-slate-900 dark:text-white'
+                              : 'text-slate-400 dark:text-slate-500'
                           }`}
                         >
                           {stage.title}
                         </span>
-                        <p className="text-[11px] text-slate-400 mt-0.5 hidden sm:block">
+                        <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5 hidden sm:block">
                           {stage.desc}
                         </p>
                       </div>
                     </div>
 
                     {isCurrent && (
-                      <span className="text-[11px] font-mono font-bold text-cyan-400 animate-pulse shrink-0">
+                      <span className="text-[11px] font-mono font-bold text-cyan-600 dark:text-cyan-400 animate-pulse shrink-0">
                         Analyzing...
                       </span>
                     )}

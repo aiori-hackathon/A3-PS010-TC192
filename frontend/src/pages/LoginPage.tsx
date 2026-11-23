@@ -39,7 +39,7 @@ export const LoginPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#070C18] flex flex-col justify-center py-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+    <div className="min-h-screen bg-slate-50 dark:bg-[#070C18] flex flex-col justify-center py-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden transition-colors">
       {/* Cyber grid background */}
       <div className="absolute inset-0 cyber-grid opacity-30 pointer-events-none" />
 
@@ -52,36 +52,36 @@ export const LoginPage: React.FC = () => {
           <div className="w-16 h-16 rounded-2xl bg-gradient-to-tr from-cyan-500 via-blue-600 to-indigo-600 flex items-center justify-center mx-auto shadow-2xl shadow-cyan-500/30 border border-cyan-400/40">
             <Cpu className="w-8 h-8 text-white animate-pulse" />
           </div>
-          <span className="absolute -top-1 -right-1 w-3.5 h-3.5 rounded-full bg-emerald-400 border-2 border-[#070C18] animate-ping" />
+          <span className="absolute -top-1 -right-1 w-3.5 h-3.5 rounded-full bg-emerald-400 border-2 border-white dark:border-[#070C18] animate-ping" />
         </div>
 
-        <h2 className="mt-4 text-3xl font-extrabold text-white tracking-tight">
+        <h2 className="mt-4 text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
           NetEvidence AI
         </h2>
-        <p className="mt-1 text-xs text-slate-400 font-medium">
+        <p className="mt-1 text-xs text-slate-500 dark:text-slate-400 font-medium">
           Evidence-Based IP Network-Type Classification Platform
         </p>
-        <div className="mt-2.5 inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900/90 border border-slate-800 text-[11px] text-cyan-400 font-mono">
+        <div className="mt-2.5 inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 text-[11px] text-cyan-600 dark:text-cyan-400 font-mono shadow-xs">
           <span>AIORI Hackathon 3</span> • <span>PS-010</span> • <span>Team Evolve</span>
         </div>
       </div>
 
       <div className="mt-7 sm:mx-auto sm:w-full sm:max-w-md relative z-10">
-        <div className="cyber-card p-6 sm:p-9 shadow-2xl border-slate-800/80">
+        <div className="cyber-card p-6 sm:p-9 shadow-2xl border-slate-200 dark:border-slate-800/80">
           {/* 1-Click Evaluator Demo Login Box */}
-          <div className="mb-6 p-4 rounded-2xl bg-gradient-to-r from-cyan-950/40 to-blue-950/40 border border-cyan-500/30 text-xs flex items-center justify-between shadow-inner">
+          <div className="mb-6 p-4 rounded-2xl bg-blue-50/80 dark:bg-gradient-to-r dark:from-cyan-950/40 dark:to-blue-950/40 border border-blue-200 dark:border-cyan-500/30 text-xs flex items-center justify-between shadow-xs">
             <div>
-              <span className="font-extrabold text-cyan-400 block font-mono text-[11px] uppercase tracking-wider">
+              <span className="font-extrabold text-blue-700 dark:text-cyan-400 block font-mono text-[11px] uppercase tracking-wider">
                 Evaluator Pre-Seeded Account:
               </span>
-              <span className="text-[11px] text-slate-300 font-mono block mt-0.5">
+              <span className="text-[11px] text-slate-600 dark:text-slate-300 font-mono block mt-0.5">
                 demo@netevidence.ai • Password123!
               </span>
             </div>
             <button
               type="button"
               onClick={handleQuickDemoFill}
-              className="px-3.5 py-1.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs transition-all shadow-md shadow-cyan-500/25 flex items-center gap-1 shrink-0"
+              className="px-3.5 py-1.5 rounded-xl bg-blue-600 hover:bg-blue-500 dark:bg-cyan-500 dark:hover:bg-cyan-400 text-white dark:text-slate-950 font-bold text-xs transition-all shadow-md shadow-blue-500/20 dark:shadow-cyan-500/25 flex items-center gap-1 shrink-0"
             >
               <Zap className="w-3.5 h-3.5 fill-current" />
               <span>Auto-Fill</span>
@@ -90,47 +90,47 @@ export const LoginPage: React.FC = () => {
 
           <form onSubmit={handleSubmit} className="space-y-4">
             {error && (
-              <div className="p-3.5 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-400 text-xs animate-in fade-in flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-rose-400 shrink-0" />
+              <div className="p-3.5 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-600 dark:text-rose-400 text-xs animate-in fade-in flex items-center gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-rose-500 shrink-0" />
                 <span>{error}</span>
               </div>
             )}
 
             <div>
-              <label className="block text-xs font-bold text-slate-300 mb-1.5 font-mono uppercase tracking-wider">
+              <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5 font-mono uppercase tracking-wider">
                 Analyst Email
               </label>
               <div className="relative">
-                <Mail className="w-4 h-4 text-slate-500 absolute left-3.5 top-1/2 -translate-y-1/2" />
+                <Mail className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
                 <input
                   type="email"
                   required
                   placeholder="analyst@domain.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full pl-10 pr-3 py-3 rounded-xl border border-slate-700/80 bg-slate-900/90 text-white text-xs font-mono placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition-all shadow-inner"
+                  className="w-full pl-10 pr-3 py-3 rounded-xl border border-slate-300 dark:border-slate-700/80 bg-slate-50 dark:bg-slate-900/90 text-slate-900 dark:text-white text-xs font-mono placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition-all shadow-sm dark:shadow-inner"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-slate-300 mb-1.5 font-mono uppercase tracking-wider">
+              <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5 font-mono uppercase tracking-wider">
                 Password
               </label>
               <div className="relative">
-                <Lock className="w-4 h-4 text-slate-500 absolute left-3.5 top-1/2 -translate-y-1/2" />
+                <Lock className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
                 <input
                   type={showPassword ? 'text' : 'password'}
                   required
                   placeholder="••••••••"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full pl-10 pr-10 py-3 rounded-xl border border-slate-700/80 bg-slate-900/90 text-white text-xs font-mono placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition-all shadow-inner"
+                  className="w-full pl-10 pr-10 py-3 rounded-xl border border-slate-300 dark:border-slate-700/80 bg-slate-50 dark:bg-slate-900/90 text-slate-900 dark:text-white text-xs font-mono placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition-all shadow-sm dark:shadow-inner"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-300"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300"
                 >
                   {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                 </button>
@@ -138,16 +138,16 @@ export const LoginPage: React.FC = () => {
             </div>
 
             <div className="flex items-center justify-between text-xs pt-1">
-              <label className="flex items-center gap-2 cursor-pointer select-none text-slate-400">
+              <label className="flex items-center gap-2 cursor-pointer select-none text-slate-600 dark:text-slate-400">
                 <input
                   type="checkbox"
                   checked={rememberMe}
                   onChange={(e) => setRememberMe(e.target.checked)}
-                  className="rounded border-slate-700 bg-slate-800 text-cyan-600 focus:ring-cyan-500"
+                  className="rounded border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-cyan-600 focus:ring-cyan-500"
                 />
                 <span>Remember session</span>
               </label>
-              <span className="text-slate-500 text-[11px] font-mono">BCrypt Protected</span>
+              <span className="text-slate-400 dark:text-slate-500 text-[11px] font-mono">BCrypt Protected</span>
             </div>
 
             <button

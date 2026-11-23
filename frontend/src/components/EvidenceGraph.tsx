@@ -158,7 +158,7 @@ export const EvidenceGraph: React.FC<EvidenceGraphProps> = ({ graphData, ipAddre
   return (
     <div
       className={`cyber-card p-6 sm:p-7 transition-all ${
-        isFullscreen ? 'fixed inset-4 z-50 overflow-auto bg-[#070D1E] p-8 shadow-2xl border-cyan-500/40' : ''
+        isFullscreen ? 'fixed inset-4 z-50 overflow-auto bg-white dark:bg-[#070D1E] p-8 shadow-2xl border border-slate-200 dark:border-cyan-500/40' : ''
       }`}
     >
       {/* Header bar */}
@@ -429,10 +429,10 @@ export const EvidenceGraph: React.FC<EvidenceGraphProps> = ({ graphData, ipAddre
         </svg>
 
         {/* Legend Toolbar */}
-        <div className="flex flex-wrap items-center justify-between gap-3 px-5 py-3 bg-[#070D1A] border-t border-slate-800 text-xs text-slate-300">
+        <div className="flex flex-wrap items-center justify-between gap-3 px-5 py-3 bg-slate-50 dark:bg-[#070D1A] border-t border-slate-200 dark:border-slate-800 text-xs text-slate-700 dark:text-slate-300">
           <div className="flex flex-wrap items-center gap-4">
-            <span className="font-bold text-white flex items-center gap-1.5">
-              <Eye className="w-4 h-4 text-blue-400" />
+            <span className="font-bold text-slate-900 dark:text-white flex items-center gap-1.5">
+              <Eye className="w-4 h-4 text-blue-500" />
               Node Legend:
             </span>
             <span className="flex items-center gap-1.5 font-medium">
