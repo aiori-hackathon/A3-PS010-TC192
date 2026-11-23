@@ -120,6 +120,12 @@ def api_info():
 # Serve frontend React SPA from static assets
 static_dir = Path(__file__).resolve().parent / "static"
 
+NO_CACHE_HEADERS = {
+    "Cache-Control": "no-cache, no-store, must-revalidate",
+    "Pragma": "no-cache",
+    "Expires": "0"
+}
+
 if static_dir.exists() and (static_dir / "index.html").exists():
     assets_dir = static_dir / "assets"
     if assets_dir.exists():
@@ -144,7 +150,7 @@ if static_dir.exists() and (static_dir / "index.html").exists():
         accept = request.headers.get("accept", "")
         # Browsers navigating to root send 'text/html' in Accept header -> serve React SPA
         if "text/html" in accept:
-            return FileResponse(static_dir / "index.html")
+            return FileResponse(static_dir / "index.html", headers=NO_CACHE_HEADERS)
         # API clients, tests, or monitors -> return JSON project metadata
         return {
             "project": settings.PROJECT_NAME,
@@ -165,7 +171,7 @@ if static_dir.exists() and (static_dir / "index.html").exists():
         target = static_dir / full_path
         if full_path and target.is_file():
             return FileResponse(target)
-        return FileResponse(static_dir / "index.html")
+        return FileResponse(static_dir / "index.html", headers=NO_CACHE_HEADERS)
 else:
     @app.get("/")
     def root():
