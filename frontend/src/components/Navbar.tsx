@@ -26,10 +26,6 @@ export const Navbar: React.FC<NavbarProps> = ({ onToggleSidebar, title }) => {
         </button>
 
         <div className="flex items-center gap-2.5">
-          <div className="hidden sm:flex items-center gap-1.5 px-2 py-0.5 rounded-md backdrop-blur-sm bg-white/60 dark:bg-slate-800/60 border border-slate-200/60 dark:border-white/10 text-[11px] font-mono font-medium text-slate-700 dark:text-slate-300">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-            PS-010
-          </div>
           <div>
             <h1 className="text-sm sm:text-base font-bold text-slate-900 dark:text-white tracking-tight flex items-center gap-2">
               {title || 'NetEvidence AI'}
