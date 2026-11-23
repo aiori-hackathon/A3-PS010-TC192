@@ -144,10 +144,10 @@ export const AnalyzePage: React.FC = () => {
         </div>
 
         {/* Mode Selector Radio Pills */}
-        <div className="flex items-center p-1 rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs font-medium">
+        <div className="flex items-center p-1 rounded-xl backdrop-blur-md bg-white/60 dark:bg-slate-800/60 border border-white/60 dark:border-white/10 text-xs font-medium">
           <button
             onClick={() => setIsDemoMode(false)}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md transition-colors ${
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-colors ${
               !isDemoMode
                 ? 'bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-xs font-semibold'
                 : 'text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
@@ -158,7 +158,7 @@ export const AnalyzePage: React.FC = () => {
           </button>
           <button
             onClick={() => setIsDemoMode(true)}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md transition-colors ${
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-colors ${
               isDemoMode
                 ? 'bg-blue-600 text-white shadow-xs font-semibold'
                 : 'text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
@@ -170,10 +170,10 @@ export const AnalyzePage: React.FC = () => {
         </div>
       </div>
 
-      {/* Main Analysis Console Card */}
-      <div className="bg-white dark:bg-[#111827] border border-slate-200 dark:border-slate-800 rounded-xl p-5 sm:p-7 shadow-sm">
+      {/* Main Analysis Console Card (Glassmorphic) */}
+      <div className="backdrop-blur-xl bg-white/75 dark:bg-[#111827]/75 border border-white/70 dark:border-white/10 rounded-2xl p-5 sm:p-7 shadow-[0_8px_32px_0_rgba(31,38,135,0.06)] dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)]">
         {/* Active Mode Notice Banner */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 mb-5 border-b border-slate-100 dark:border-slate-800 gap-3">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 mb-5 border-b border-white/40 dark:border-white/10 gap-3">
           <div className="flex items-center gap-2.5">
             <span
               className={`w-2 h-2 rounded-full ${
@@ -190,7 +190,7 @@ export const AnalyzePage: React.FC = () => {
             </span>
           </div>
 
-          <span className="font-mono text-[10px] px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700">
+          <span className="font-mono text-[10px] px-2.5 py-0.5 rounded-lg backdrop-blur-md bg-white/60 dark:bg-slate-800/60 text-slate-600 dark:text-slate-300 border border-white/60 dark:border-white/10">
             Engine: PS-010-v1.2
           </span>
         </div>
@@ -213,7 +213,7 @@ export const AnalyzePage: React.FC = () => {
                 disabled={isProcessing}
                 onChange={(e) => handleInputChange(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && !isProcessing && handleAnalyze()}
-                className="w-full pl-4 pr-16 py-2.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-[#0B0F19] text-slate-900 dark:text-white font-mono text-sm placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-colors"
+                className="w-full pl-4 pr-16 py-2.5 rounded-xl border border-slate-200/80 dark:border-white/10 bg-white/60 dark:bg-slate-900/60 backdrop-blur-md text-slate-900 dark:text-white font-mono text-sm placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all shadow-inner"
               />
               {ipInput && (
                 <button
@@ -232,7 +232,7 @@ export const AnalyzePage: React.FC = () => {
             <button
               onClick={() => handleAnalyze()}
               disabled={isProcessing || !ipInput.trim()}
-              className="px-6 py-2.5 rounded-lg font-medium text-xs bg-blue-600 hover:bg-blue-700 text-white shadow-sm disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center justify-center gap-2 shrink-0"
+              className="px-6 py-2.5 rounded-xl font-medium text-xs bg-blue-600 hover:bg-blue-700 text-white shadow-sm disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-2 shrink-0"
             >
               {isProcessing ? (
                 <>
@@ -311,7 +311,7 @@ export const AnalyzePage: React.FC = () => {
 
         {/* 5-Stage Processing Indicator */}
         {isProcessing && (
-          <div className="mt-6 p-5 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm">
+          <div className="mt-6 p-5 rounded-2xl backdrop-blur-md bg-white/60 dark:bg-slate-900/50 border border-white/60 dark:border-white/10 shadow-xs">
             <div className="flex items-center justify-between mb-4">
               <h4 className="font-semibold text-xs text-slate-900 dark:text-white uppercase tracking-wider flex items-center gap-2">
                 <Cpu className="w-4 h-4 text-blue-600" />
@@ -323,7 +323,7 @@ export const AnalyzePage: React.FC = () => {
             </div>
 
             {/* Solid progress bar */}
-            <div className="w-full bg-slate-200 dark:bg-slate-800 h-1.5 rounded-full mb-4 overflow-hidden">
+            <div className="w-full bg-slate-200/80 dark:bg-slate-800/80 h-1.5 rounded-full mb-4 overflow-hidden">
               <div
                 className="bg-blue-600 h-full transition-all duration-300 rounded-full"
                 style={{ width: `${(currentStage / 5) * 100}%` }}
@@ -338,17 +338,17 @@ export const AnalyzePage: React.FC = () => {
                 return (
                   <div
                     key={stage.id}
-                    className={`p-2.5 rounded-lg border transition-colors flex items-center justify-between gap-3 text-xs ${
+                    className={`p-2.5 rounded-xl border transition-all flex items-center justify-between gap-3 text-xs ${
                       isCurrent
-                        ? 'bg-blue-50 dark:bg-blue-950/40 border-blue-200 dark:border-blue-800'
+                        ? 'backdrop-blur-md bg-blue-50/80 dark:bg-blue-950/40 border-blue-200 dark:border-blue-800 shadow-xs'
                         : isCompleted
-                        ? 'bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700'
-                        : 'bg-transparent border-slate-200 dark:border-slate-800/40 opacity-50'
+                        ? 'backdrop-blur-sm bg-white/60 dark:bg-slate-800/60 border-white/60 dark:border-white/10'
+                        : 'bg-transparent border-slate-200/50 dark:border-slate-800/30 opacity-50'
                     }`}
                   >
                     <div className="flex items-center gap-2.5">
                       <div
-                        className={`w-6 h-6 rounded-md flex items-center justify-center font-mono font-semibold text-xs shrink-0 ${
+                        className={`w-6 h-6 rounded-lg flex items-center justify-center font-mono font-semibold text-xs shrink-0 shadow-xs ${
                           isCompleted
                             ? 'bg-emerald-600 text-white'
                             : isCurrent
@@ -390,7 +390,7 @@ export const AnalyzePage: React.FC = () => {
         )}
 
         {/* Preset IP Cards Grid */}
-        <div className="mt-8 pt-5 border-t border-slate-100 dark:border-slate-800">
+        <div className="mt-8 pt-5 border-t border-white/40 dark:border-white/10">
           <div className="flex items-center justify-between mb-3.5">
             <div>
               <h4 className="text-xs font-semibold text-slate-800 dark:text-slate-200 uppercase tracking-wider">
@@ -400,7 +400,7 @@ export const AnalyzePage: React.FC = () => {
                 Click any scenario below to auto-populate and test specific network conditions.
               </p>
             </div>
-            <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-500">
+            <span className="text-[10px] font-mono px-2 py-0.5 rounded-md backdrop-blur-md bg-white/60 dark:bg-slate-800/60 border border-white/60 dark:border-white/10 text-slate-600 dark:text-slate-400">
               8 Verified Cases
             </span>
           </div>
@@ -416,11 +416,11 @@ export const AnalyzePage: React.FC = () => {
                     handleInputChange(preset.ip);
                   }}
                   disabled={isProcessing}
-                  className="p-3 text-left rounded-lg bg-slate-50 dark:bg-slate-900/60 hover:bg-white dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700 transition-colors flex flex-col justify-between"
+                  className="p-3 text-left rounded-xl backdrop-blur-md bg-white/60 hover:bg-white dark:bg-slate-900/50 dark:hover:bg-slate-800/70 border border-white/60 dark:border-white/10 hover:border-white/90 dark:hover:border-white/20 transition-all shadow-xs flex flex-col justify-between"
                 >
                   <div>
                     <div className="flex items-center justify-between mb-1.5">
-                      <span className="text-[10px] font-mono font-medium px-1.5 py-0.2 rounded bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
+                      <span className="text-[10px] font-mono font-medium px-1.5 py-0.2 rounded backdrop-blur-sm bg-white/70 dark:bg-slate-800/70 border border-white/50 dark:border-white/10 text-slate-700 dark:text-slate-300">
                         {preset.badge}
                       </span>
                       <Icon className="w-3.5 h-3.5 text-slate-400" />
@@ -432,7 +432,7 @@ export const AnalyzePage: React.FC = () => {
                       {preset.label}
                     </p>
                   </div>
-                  <div className="mt-2 pt-2 border-t border-slate-200/60 dark:border-slate-800/60 flex items-center justify-between text-[10px] text-slate-400 font-mono">
+                  <div className="mt-2 pt-2 border-t border-white/40 dark:border-white/10 flex items-center justify-between text-[10px] text-slate-400 font-mono">
                     <span>{preset.type}</span>
                     <ArrowRight className="w-3 h-3 text-slate-400" />
                   </div>

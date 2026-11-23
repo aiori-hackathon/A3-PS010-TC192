@@ -4,7 +4,7 @@
 
 @layer base {
   body {
-    @apply antialiased text-slate-900 bg-slate-50 dark:bg-[#0B0F19] dark:text-slate-100 transition-colors duration-150 font-sans;
+    @apply antialiased text-slate-900 bg-slate-100/90 dark:bg-[#0A0E1A] dark:text-slate-100 transition-colors duration-200 font-sans;
   }
 
   code, pre, kbd {
@@ -12,33 +12,54 @@
   }
 }
 
-/* Reusable Enterprise Security Card */
+/* Glassmorphism System */
+.glass-panel {
+  @apply backdrop-blur-xl bg-white/75 dark:bg-slate-900/65 border border-white/70 dark:border-white/10 shadow-[0_8px_32px_0_rgba(31,38,135,0.06)] dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] rounded-2xl;
+}
+
+.glass-card {
+  @apply backdrop-blur-xl bg-white/75 dark:bg-[#111827]/70 border border-white/70 dark:border-white/10 shadow-[0_4px_24px_0_rgba(0,0,0,0.04)] dark:shadow-[0_8px_30px_rgb(0,0,0,0.25)] rounded-2xl transition-all duration-200;
+}
+
+.glass-card-interactive {
+  @apply glass-card hover:bg-white/90 dark:hover:bg-[#111827]/85 hover:border-white dark:hover:border-white/20 hover:shadow-[0_8px_32px_0_rgba(31,38,135,0.1)] cursor-pointer;
+}
+
+.glass-input {
+  @apply backdrop-blur-md bg-white/60 dark:bg-slate-900/60 border border-slate-200/80 dark:border-white/10 rounded-xl text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-colors;
+}
+
+.glass-pill {
+  @apply backdrop-blur-md bg-white/60 dark:bg-slate-800/60 border border-slate-200/70 dark:border-white/10 rounded-lg text-slate-700 dark:text-slate-300;
+}
+
+/* Backward-compatible card aliasing */
 .cyber-card {
-  @apply bg-white dark:bg-[#111827] border border-slate-200 dark:border-slate-800 rounded-xl shadow-sm transition-colors duration-150;
+  @apply glass-card;
 }
 
 .cyber-card-interactive {
-  @apply cyber-card hover:border-slate-300 dark:hover:border-slate-700 hover:shadow cursor-pointer;
+  @apply glass-card-interactive;
 }
 
-/* Enterprise status badge helpers */
+/* Status badge helpers with subtle glass sheen */
 .badge-verified {
-  @apply inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-md text-xs font-medium bg-emerald-50 text-emerald-700 border border-emerald-200 dark:bg-emerald-950/40 dark:text-emerald-400 dark:border-emerald-800/60 font-mono;
+  @apply inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-md text-xs font-medium backdrop-blur-md bg-emerald-50/80 text-emerald-700 border border-emerald-200/80 dark:bg-emerald-950/40 dark:text-emerald-400 dark:border-emerald-800/60 font-mono;
 }
 
 .badge-warning {
-  @apply inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-md text-xs font-medium bg-amber-50 text-amber-700 border border-amber-200 dark:bg-amber-950/40 dark:text-amber-400 dark:border-amber-800/60 font-mono;
+  @apply inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-md text-xs font-medium backdrop-blur-md bg-amber-50/80 text-amber-700 border border-amber-200/80 dark:bg-amber-950/40 dark:text-amber-400 dark:border-amber-800/60 font-mono;
 }
 
 .badge-conflict {
-  @apply inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-md text-xs font-medium bg-rose-50 text-rose-700 border border-rose-200 dark:bg-rose-950/40 dark:text-rose-400 dark:border-rose-800/60 font-mono;
+  @apply inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-md text-xs font-medium backdrop-blur-md bg-rose-50/80 text-rose-700 border border-rose-200/80 dark:bg-rose-950/40 dark:text-rose-400 dark:border-rose-800/60 font-mono;
 }
 
 .badge-neutral {
-  @apply inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-md text-xs font-medium bg-slate-100 text-slate-700 border border-slate-200 dark:bg-slate-800 dark:text-slate-300 dark:border-slate-700 font-mono;
+  @apply inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-md text-xs font-medium backdrop-blur-md bg-slate-100/80 text-slate-700 border border-slate-200/80 dark:bg-slate-800/70 dark:text-slate-300 dark:border-slate-700 font-mono;
 }
 
-/* Custom modern scrollbar */
+/* Custom frosted scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
@@ -49,6 +70,7 @@
 ::-webkit-scrollbar-thumb {
   background: rgba(148, 163, 184, 0.3);
   border-radius: 9999px;
+  backdrop-filter: blur(4px);
 }
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(100, 116, 139, 0.5);

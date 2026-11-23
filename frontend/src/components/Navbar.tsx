@@ -15,18 +15,18 @@ export const Navbar: React.FC<NavbarProps> = ({ onToggleSidebar, title }) => {
   const navigate = useNavigate();
 
   return (
-    <header className="sticky top-0 z-30 h-16 bg-white dark:bg-[#0D1321] border-b border-slate-200 dark:border-slate-800 transition-colors px-4 sm:px-6 flex items-center justify-between">
+    <header className="sticky top-0 z-30 h-16 backdrop-blur-2xl bg-white/70 dark:bg-[#0D1321]/75 border-b border-white/40 dark:border-white/10 transition-colors px-4 sm:px-6 flex items-center justify-between">
       <div className="flex items-center gap-3">
         <button
           onClick={onToggleSidebar}
-          className="lg:hidden p-2 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+          className="lg:hidden p-2 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-white/50 dark:hover:bg-white/10 transition-colors"
           aria-label="Toggle menu"
         >
           <Menu className="w-5 h-5" />
         </button>
 
         <div className="flex items-center gap-2.5">
-          <div className="hidden sm:flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-[11px] font-mono font-medium text-slate-700 dark:text-slate-300">
+          <div className="hidden sm:flex items-center gap-1.5 px-2 py-0.5 rounded-md backdrop-blur-sm bg-white/60 dark:bg-slate-800/60 border border-slate-200/60 dark:border-white/10 text-[11px] font-mono font-medium text-slate-700 dark:text-slate-300">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
             PS-010
           </div>
@@ -58,7 +58,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onToggleSidebar, title }) => {
         <button
           onClick={toggleTheme}
           title={theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
-          className="p-1.5 rounded-lg text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors border border-slate-200 dark:border-slate-800"
+          className="p-1.5 rounded-lg text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-white/50 dark:hover:bg-white/10 transition-colors border border-white/40 dark:border-white/10 backdrop-blur-sm"
         >
           {theme === 'dark' ? (
             <Sun className="w-4 h-4 text-amber-400" />
@@ -68,8 +68,8 @@ export const Navbar: React.FC<NavbarProps> = ({ onToggleSidebar, title }) => {
         </button>
 
         {/* User profile pill */}
-        <div className="flex items-center gap-2 pl-2 border-l border-slate-200 dark:border-slate-800">
-          <div className="w-8 h-8 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 flex items-center justify-center text-xs font-semibold border border-slate-200 dark:border-slate-700">
+        <div className="flex items-center gap-2 pl-2 border-l border-white/40 dark:border-white/10">
+          <div className="w-8 h-8 rounded-lg backdrop-blur-sm bg-white/70 dark:bg-slate-800/70 text-slate-700 dark:text-slate-200 flex items-center justify-center text-xs font-semibold border border-white/50 dark:border-white/10 shadow-xs">
             {user?.full_name ? user.full_name.charAt(0).toUpperCase() : 'A'}
           </div>
           <div className="hidden lg:block text-left">

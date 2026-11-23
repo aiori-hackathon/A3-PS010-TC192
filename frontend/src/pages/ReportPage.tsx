@@ -219,10 +219,10 @@ export const ReportPage: React.FC = () => {
         </div>
       </div>
 
-      {/* Main Dossier Result Card */}
-      <div className="bg-white dark:bg-[#111827] border border-slate-200 dark:border-slate-800 rounded-xl p-6 sm:p-8 shadow-sm print:border-slate-400 print:shadow-none print:break-inside-avoid">
+      {/* Main Dossier Result Card (Glassmorphic) */}
+      <div className="backdrop-blur-xl bg-white/75 dark:bg-[#111827]/75 border border-white/70 dark:border-white/10 rounded-2xl p-6 sm:p-8 shadow-[0_8px_32px_0_rgba(31,38,135,0.06)] dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] print:border-slate-400 print:shadow-none print:break-inside-avoid">
         {/* Header row: IP + Badges */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-100 dark:border-slate-800">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-white/40 dark:border-white/10">
           <div>
             <div className="flex items-center gap-2 mb-1.5">
               <span className="text-[10px] uppercase font-semibold tracking-wider text-slate-400 font-mono">

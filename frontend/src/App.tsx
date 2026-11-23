@@ -50,15 +50,20 @@ const ProtectedLayout: React.FC<{ children: React.ReactNode }> = ({ children }) 
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-[#0B0F19] flex transition-colors relative">
+    <div className="min-h-screen bg-slate-100/80 dark:bg-[#0A0E1A] flex transition-colors relative overflow-hidden">
+      {/* Ambient background light meshes for authentic glassmorphic depth & refraction */}
+      <div className="fixed -top-40 -left-40 w-[32rem] h-[32rem] rounded-full bg-blue-400/20 dark:bg-blue-600/10 blur-[130px] pointer-events-none" />
+      <div className="fixed top-1/3 -right-40 w-[36rem] h-[36rem] rounded-full bg-indigo-300/20 dark:bg-indigo-600/10 blur-[150px] pointer-events-none" />
+      <div className="fixed -bottom-40 left-1/3 w-[30rem] h-[30rem] rounded-full bg-teal-300/15 dark:bg-cyan-600/10 blur-[140px] pointer-events-none" />
+
       <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
       <div className="flex-1 lg:pl-64 flex flex-col min-w-0 relative z-10">
         <Navbar onToggleSidebar={() => setSidebarOpen(!sidebarOpen)} title={getPageTitle(location.pathname)} />
         <main className="flex-1 p-4 sm:p-6 lg:p-8 overflow-y-auto">
           {children}
           
-          {/* Professional Enterprise Footer */}
-          <footer className="mt-12 pt-6 border-t border-slate-200 dark:border-slate-800 text-center text-xs text-slate-500 dark:text-slate-400 flex flex-col sm:flex-row items-center justify-between gap-2">
+          {/* Frosted Glass Footer */}
+          <footer className="mt-12 pt-6 border-t border-white/40 dark:border-white/10 text-center text-xs text-slate-500 dark:text-slate-400 flex flex-col sm:flex-row items-center justify-between gap-2">
             <span>NetEvidence AI — Evidence-Based IP Classification</span>
             <span className="text-[11px] text-slate-500 dark:text-slate-400 font-medium">
               Team Evolve • A3-PS010-TC192 • GNITC
