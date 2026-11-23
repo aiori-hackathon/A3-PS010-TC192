@@ -76,9 +76,6 @@ export const Navbar: React.FC<NavbarProps> = ({ onToggleSidebar, title }) => {
             <span className="block text-xs font-semibold text-slate-800 dark:text-slate-200 leading-tight">
               {user?.full_name?.split(' ')[0] || 'Analyst'}
             </span>
-            <span className="block text-[10px] font-mono text-slate-500 dark:text-slate-400 leading-tight">
-              A3-PS010
-            </span>
           </div>
         </div>
       </div>
