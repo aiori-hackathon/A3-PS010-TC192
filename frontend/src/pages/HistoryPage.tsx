@@ -113,7 +113,7 @@ export const HistoryPage: React.FC = () => {
 
           <button
             type="submit"
-            className="px-5 py-2.5 text-xs font-bold font-mono rounded-xl bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 text-white shadow-md shadow-blue-500/20 transition-all"
+            className="px-4 py-2 text-xs font-medium rounded-lg bg-blue-600 hover:bg-blue-700 text-white shadow-sm transition-colors"
           >
             Search
           </button>

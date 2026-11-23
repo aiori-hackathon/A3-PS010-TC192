@@ -70,28 +70,23 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
 
       {/* Sidebar container */}
       <aside
-        className={`fixed top-0 bottom-0 left-0 z-50 w-72 bg-white dark:bg-[#070D1E] text-slate-800 dark:text-slate-200 border-r border-slate-200 dark:border-slate-800/80 flex flex-col transition-all duration-300 ease-in-out lg:translate-x-0 ${
+        className={`fixed top-0 bottom-0 left-0 z-50 w-64 bg-white dark:bg-[#0D1321] text-slate-800 dark:text-slate-200 border-r border-slate-200 dark:border-slate-800 flex flex-col transition-all duration-200 ease-in-out lg:translate-x-0 ${
           isOpen ? 'translate-x-0' : '-translate-x-full'
-        } shadow-2xl lg:shadow-none`}
+        } shadow-lg lg:shadow-none`}
       >
-        {/* Header / Logo */}
-        <div className="p-5 border-b border-slate-200 dark:border-slate-800/80 flex items-center justify-between bg-slate-50/90 dark:bg-gradient-to-b dark:from-[#0B1530] dark:to-[#070D1E]">
-          <div className="flex items-center gap-3">
-            <div className="relative">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500 via-blue-600 to-indigo-600 flex items-center justify-center shadow-lg shadow-cyan-500/25 border border-cyan-400/30 text-white font-bold">
-                <Cpu className="w-5 h-5 text-white animate-pulse" />
-              </div>
-              <span className="absolute -top-1 -right-1 w-3 h-3 rounded-full bg-emerald-400 border-2 border-white dark:border-[#070D1E] animate-ping opacity-75" />
+        {/* Header / Brand Logo */}
+        <div className="h-16 px-5 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
+          <div className="flex items-center gap-2.5">
+            <div className="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center text-white font-bold shadow-sm">
+              <ShieldCheck className="w-5 h-5 text-white" />
             </div>
             <div>
-              <div className="flex items-center gap-1.5">
-                <span className="font-extrabold text-base tracking-tight text-slate-900 dark:text-white block">NetEvidence AI</span>
-              </div>
-              <div className="flex items-center gap-1.5 mt-0.5">
-                <span className="text-[10px] font-mono text-cyan-600 dark:text-cyan-400 uppercase tracking-wider font-semibold">PS-010</span>
-                <span className="text-slate-300 dark:text-slate-600">•</span>
-                <span className="text-[10px] text-slate-500 dark:text-slate-400 font-medium truncate">Team Evolve</span>
-              </div>
+              <span className="font-bold text-sm tracking-tight text-slate-900 dark:text-white block leading-tight">
+                NetEvidence AI
+              </span>
+              <span className="text-[11px] text-slate-500 dark:text-slate-400 font-medium block leading-tight">
+                Network Intelligence
+              </span>
             </div>
           </div>
           <button
@@ -102,28 +97,14 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
           </button>
         </div>
 
-        {/* Live System Indicator */}
-        <div className="px-5 py-2.5 bg-slate-100/70 dark:bg-[#091126] border-b border-slate-200 dark:border-slate-800/60 flex items-center justify-between text-xs text-slate-600 dark:text-slate-400">
-          <span className="flex items-center gap-2 text-emerald-600 dark:text-emerald-400 font-semibold text-[11px]">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
-            </span>
-            Engine Online
-          </span>
-          <span className="font-mono text-[10px] px-2 py-0.5 rounded-md bg-white dark:bg-slate-800/80 text-cyan-700 dark:text-cyan-300 border border-slate-200 dark:border-slate-700/60 shadow-xs">
-            Rule-Fusion v1.2
-          </span>
-        </div>
-
         {/* Navigation Groups */}
-        <nav className="flex-1 overflow-y-auto px-3.5 py-4 space-y-5">
+        <nav className="flex-1 overflow-y-auto p-3 space-y-5">
           {navGroups.map((group) => (
-            <div key={group.group} className="space-y-1">
-              <span className="px-3 text-[10px] font-mono font-bold uppercase tracking-widest text-slate-400 dark:text-slate-500 block">
+            <div key={group.group}>
+              <span className="px-3 text-[10px] font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500 block mb-1">
                 {group.group}
               </span>
-              <div className="space-y-1 pt-1">
+              <div className="space-y-0.5">
                 {group.items.map((item) => {
                   const Icon = item.icon;
                   return (
@@ -132,19 +113,19 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
                       to={item.path}
                       onClick={() => onClose()}
                       className={({ isActive }) =>
-                        `group flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-all duration-150 ${
+                        `flex items-center justify-between px-3 py-2 rounded-lg text-xs transition-colors ${
                           isActive
-                            ? 'bg-gradient-to-r from-blue-600 via-indigo-600 to-cyan-600 text-white shadow-lg shadow-blue-600/30 font-bold border border-cyan-400/30'
-                            : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/70 border border-transparent'
+                            ? 'bg-blue-50 text-blue-700 dark:bg-blue-950/60 dark:text-blue-300 font-semibold'
+                            : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800/60 font-medium'
                         }`
                       }
                     >
-                      <div className="flex items-center gap-3">
-                        <Icon className="w-4 h-4 shrink-0 transition-transform group-hover:scale-110" />
+                      <div className="flex items-center gap-2.5">
+                        <Icon className="w-4 h-4 shrink-0 text-slate-400 dark:text-slate-500 group-hover:text-slate-600" />
                         <span>{item.name}</span>
                       </div>
                       {item.badge && (
-                        <span className="text-[10px] font-mono font-semibold px-2 py-0.5 rounded-full bg-cyan-100 dark:bg-cyan-500/15 text-cyan-700 dark:text-cyan-300 border border-cyan-200 dark:border-cyan-500/30">
+                        <span className="text-[10px] font-medium px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">
                           {item.badge}
                         </span>
                       )}
@@ -157,28 +138,28 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
         </nav>
 
         {/* Footer / User Profile & Logout */}
-        <div className="p-4 border-t border-slate-200 dark:border-slate-800/80 bg-slate-50 dark:bg-[#060B1A]">
-          <div className="flex items-center justify-between mb-3">
+        <div className="p-3 border-t border-slate-200 dark:border-slate-800 bg-slate-50/60 dark:bg-[#090E1A]">
+          <div className="flex items-center justify-between">
             <div className="flex items-center gap-2.5 overflow-hidden">
-              <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-cyan-500 to-blue-600 flex items-center justify-center text-xs font-extrabold text-white shrink-0 shadow-md shadow-cyan-500/20">
+              <div className="w-7 h-7 rounded-md bg-slate-200 dark:bg-slate-700 flex items-center justify-center text-xs font-semibold text-slate-700 dark:text-slate-200 shrink-0">
                 {user?.full_name ? user.full_name.charAt(0).toUpperCase() : 'A'}
               </div>
               <div className="overflow-hidden">
-                <p className="text-xs font-bold text-slate-800 dark:text-slate-200 truncate">{user?.full_name || 'Cyber Analyst'}</p>
-                <p className="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate">{user?.email}</p>
+                <p className="text-xs font-semibold text-slate-800 dark:text-slate-200 truncate leading-tight">
+                  {user?.full_name || 'Analyst'}
+                </p>
+                <p className="text-[10px] text-slate-500 dark:text-slate-400 truncate leading-tight">
+                  {user?.email}
+                </p>
               </div>
             </div>
             <button
               onClick={handleLogout}
               title="Sign Out"
-              className="p-2 text-slate-400 hover:text-rose-600 dark:hover:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-500/10 rounded-xl transition-colors border border-transparent hover:border-rose-200 dark:hover:border-rose-500/20"
+              className="p-1.5 text-slate-400 hover:text-rose-600 dark:hover:text-rose-400 hover:bg-slate-200/60 dark:hover:bg-slate-800 rounded-md transition-colors"
             >
               <LogOut className="w-4 h-4" />
             </button>
-          </div>
-          <div className="text-[10px] text-slate-600 dark:text-slate-400 text-center bg-white dark:bg-slate-900/80 py-1.5 px-2 rounded-xl border border-slate-200 dark:border-slate-800/60 font-mono flex items-center justify-center gap-1.5 shadow-xs">
-            <span className="w-1.5 h-1.5 rounded-full bg-cyan-500" />
-            GNITC • TC192 • Hackathon 3
           </div>
         </div>
       </aside>

@@ -211,7 +211,7 @@ export const ReportPage: React.FC = () => {
 
           <button
             onClick={handlePrintPdf}
-            className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-bold bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white shadow-md shadow-cyan-500/20 transition-all transform hover:-translate-y-0.5"
+            className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-medium bg-blue-600 hover:bg-blue-700 text-white shadow-sm transition-colors"
           >
             <Printer className="w-3.5 h-3.5" />
             <span>Print / PDF</span>
@@ -220,24 +220,21 @@ export const ReportPage: React.FC = () => {
       </div>
 
       {/* Main Dossier Result Card */}
-      <div className="cyber-card p-6 sm:p-9 relative overflow-hidden print:border-slate-400 print:shadow-none print:break-inside-avoid">
-        {/* Subtle decorative glow */}
-        <div className="absolute top-0 right-0 w-80 h-80 rounded-full bg-cyan-500/5 blur-3xl pointer-events-none" />
-
+      <div className="bg-white dark:bg-[#111827] border border-slate-200 dark:border-slate-800 rounded-xl p-6 sm:p-8 shadow-sm print:border-slate-400 print:shadow-none print:break-inside-avoid">
         {/* Header row: IP + Badges */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-100 dark:border-slate-800/80">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-100 dark:border-slate-800">
           <div>
             <div className="flex items-center gap-2 mb-1.5">
-              <span className="text-[10px] uppercase font-bold tracking-widest text-slate-400 font-mono">
+              <span className="text-[10px] uppercase font-semibold tracking-wider text-slate-400 font-mono">
                 Target IP Address
               </span>
               {report.is_demo ? (
-                <span className="text-[10px] font-mono font-extrabold px-2.5 py-0.5 rounded-full bg-amber-500/10 text-amber-500 border border-amber-500/30 uppercase tracking-wider">
+                <span className="text-[10px] font-mono font-medium px-2 py-0.5 rounded bg-amber-50 text-amber-700 dark:bg-amber-950/40 dark:text-amber-400 border border-amber-200 dark:border-amber-800">
                   DEMO DATA / SIMULATED
                 </span>
               ) : (
-                <span className="text-[10px] font-mono font-extrabold px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 uppercase tracking-wider flex items-center gap-1">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" /> LIVE SENSOR INTELLIGENCE
+                <span className="text-[10px] font-mono font-medium px-2 py-0.5 rounded bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800 flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" /> LIVE SENSOR INTELLIGENCE
                 </span>
               )}
             </div>
@@ -298,12 +295,12 @@ export const ReportPage: React.FC = () => {
             {/* Progress bar */}
             <div className="w-full bg-slate-200 dark:bg-slate-800 h-2 rounded-full mt-3 overflow-hidden">
               <div
-                className={`h-full rounded-full transition-all duration-500 ${
+                className={`h-full rounded-full transition-all duration-300 ${
                   report.confidence_score >= 70
-                    ? 'bg-gradient-to-r from-emerald-500 to-teal-400'
+                    ? 'bg-emerald-600'
                     : report.confidence_score >= 50
-                    ? 'bg-gradient-to-r from-amber-500 to-orange-400'
-                    : 'bg-gradient-to-r from-rose-500 to-pink-500'
+                    ? 'bg-amber-500'
+                    : 'bg-rose-500'
                 }`}
                 style={{ width: `${report.confidence_score}%` }}
               />
@@ -585,7 +582,7 @@ export const ReportPage: React.FC = () => {
               </button>
               <button
                 onClick={handleSaveReport}
-                className="px-5 py-2 rounded-xl text-xs font-bold bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 text-white shadow-md shadow-blue-500/20"
+                className="px-4 py-2 rounded-lg text-xs font-medium bg-blue-600 hover:bg-blue-700 text-white shadow-sm transition-colors"
               >
                 Save Snapshot
               </button>

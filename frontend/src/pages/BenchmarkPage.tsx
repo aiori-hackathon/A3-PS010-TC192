@@ -98,7 +98,7 @@ export const BenchmarkPage: React.FC = () => {
           <button
             onClick={handleRunReferenceBenchmark}
             disabled={isRunning || isUploading}
-            className="px-4 py-2 rounded-xl font-bold text-xs uppercase tracking-wider bg-gradient-to-r from-blue-600 to-teal-500 hover:from-blue-500 hover:to-teal-400 text-white shadow-md shadow-blue-500/20 disabled:opacity-50 transition-all flex items-center gap-1.5"
+            className="px-4 py-2 rounded-lg font-medium text-xs bg-blue-600 hover:bg-blue-700 text-white shadow-sm disabled:opacity-50 transition-colors flex items-center gap-1.5"
           >
             {isRunning ? (
               <>
@@ -204,7 +204,7 @@ export const BenchmarkPage: React.FC = () => {
           {/* Top Score Comparison Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
             {/* NetEvidence Overall Accuracy */}
-            <div className="bg-gradient-to-br from-blue-600 to-indigo-700 text-white p-5 rounded-2xl shadow-lg border border-blue-500/30">
+            <div className="bg-blue-600 text-white p-5 rounded-xl shadow-sm">
               <span className="text-xs font-semibold text-blue-100 uppercase tracking-wider">
                 Overall Accuracy
               </span>
@@ -436,7 +436,7 @@ export const BenchmarkPage: React.FC = () => {
             <button
               onClick={handleRunReferenceBenchmark}
               disabled={isRunning || isUploading}
-              className="px-5 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider bg-gradient-to-r from-blue-600 to-teal-500 hover:from-blue-500 hover:to-teal-400 text-white shadow-md shadow-blue-500/20"
+              className="px-4 py-2 rounded-lg font-medium text-xs bg-blue-600 hover:bg-blue-700 text-white shadow-sm transition-colors"
             >
               {isRunning ? 'Running Reference Corpus...' : 'Load Reference Evaluation Set (20 Samples)'}
             </button>

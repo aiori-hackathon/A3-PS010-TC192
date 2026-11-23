@@ -358,8 +358,8 @@ export const EvidenceGraph: React.FC<EvidenceGraphProps> = ({ graphData, ipAddre
                     rx="18"
                     fill="none"
                     stroke={pos.stroke}
-                    strokeWidth="3.5"
-                    className="animate-pulse"
+                    strokeWidth="3"
+                    opacity="0.8"
                   />
                 )}
 
