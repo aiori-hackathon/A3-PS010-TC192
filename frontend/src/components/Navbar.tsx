@@ -83,16 +83,6 @@ export const Navbar: React.FC<NavbarProps> = ({ onToggleSidebar, title }) => {
 
       {/* Right Controls */}
       <div className="flex items-center gap-2 sm:gap-3">
-        {/* Methodology Shatter Trigger */}
-        <button
-          onClick={triggerShatter}
-          title="Inspect Explainable Classification Methodology (3D Shatter)"
-          className="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-mono font-medium backdrop-blur-md bg-[#202027]/80 text-[#B9ABFF] border border-[#8C7BFF]/30 hover:bg-[#8C7BFF]/20 hover:border-[#8C7BFF]/60 hover:shadow-[0_0_20px_rgba(140,123,255,0.25)] transition-all"
-        >
-          <Sparkles className="w-3.5 h-3.5 text-[#8C7BFF]" />
-          <span>Methodology</span>
-        </button>
-
         {/* Quick Analyze IP Button */}
         <button
           onClick={() => navigate('/analyze')}

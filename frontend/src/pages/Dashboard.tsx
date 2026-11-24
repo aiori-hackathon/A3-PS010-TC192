@@ -84,13 +84,6 @@ export const Dashboard: React.FC = () => {
         </div>
         <div className="flex items-center gap-2.5">
           <button
-            onClick={triggerShatter}
-            className="px-3.5 py-2 rounded-xl text-xs font-mono font-medium border border-[#8C7BFF]/30 backdrop-blur-md bg-[#202027]/70 text-[#B9ABFF] hover:bg-[#8C7BFF]/20 hover:border-[#8C7BFF]/60 hover:shadow-[0_0_20px_rgba(140,123,255,0.25)] transition-all flex items-center gap-1.5"
-          >
-            <Sparkles className="w-3.5 h-3.5 text-[#8C7BFF]" />
-            <span>3D Methodology</span>
-          </button>
-          <button
             onClick={() => navigate('/benchmark')}
             className="px-3.5 py-2 rounded-xl text-xs font-medium border border-white/[0.10] backdrop-blur-md bg-[#202027]/70 text-[#E5E5EA] hover:bg-[#202027] hover:border-white/[0.20] transition-all shadow-xs"
           >

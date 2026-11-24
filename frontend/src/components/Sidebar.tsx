@@ -96,23 +96,6 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
           </button>
         </div>
 
-        {/* Methodology Quick Button */}
-        <div className="px-4 pt-4">
-          <button
-            onClick={() => {
-              triggerShatter();
-              onClose();
-            }}
-            className="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl backdrop-blur-md bg-[#202027]/70 border border-[#8C7BFF]/30 text-[#B9ABFF] hover:bg-[#8C7BFF]/15 hover:border-[#8C7BFF]/60 hover:shadow-[0_0_20px_rgba(140,123,255,0.2)] text-xs font-mono transition-all"
-          >
-            <div className="flex items-center gap-2">
-              <Sparkles className="w-3.5 h-3.5 text-[#8C7BFF]" />
-              <span>3D Methodology</span>
-            </div>
-            <span className="text-[10px] text-[#A0A0AA]">&rarr;</span>
-          </button>
-        </div>
-
         {/* Navigation Groups */}
         <nav className="flex-1 overflow-y-auto p-4 space-y-6">
           {navGroups.map((group) => (
