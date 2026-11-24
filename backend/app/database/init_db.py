@@ -3,6 +3,7 @@ Database Initialization and Seed Data for NetEvidence AI
 """
 from datetime import datetime, timezone
 import json
+from sqlalchemy import text
 from app.core.database import engine, Base, SessionLocal
 from app.core.security import hash_password
 from app.models.user import User
@@ -14,8 +15,21 @@ from app.services.adapters.demo_adapter import DEMO_CASES
 classifier_instance = NetworkClassifier()
 
 def init_db():
-    # Create all tables in SQLite
+    # Create all tables in SQLite or MySQL
     Base.metadata.create_all(bind=engine)
+
+    # Ensure backwards compatibility for SQLite existing files
+    with engine.begin() as conn:
+        for col, col_type in [
+            ("last_login_at", "DATETIME"),
+            ("last_login_ip", "VARCHAR(64)"),
+            ("login_count", "INTEGER DEFAULT 0")
+        ]:
+            try:
+                conn.execute(text(f"ALTER TABLE users ADD COLUMN {col} {col_type};"))
+            except Exception:
+                pass
+
     db = SessionLocal()
 
     try:

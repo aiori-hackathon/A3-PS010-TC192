@@ -21,6 +21,9 @@ class UserResponse(UserBase):
     is_active: bool
     is_admin: bool
     created_at: datetime
+    last_login_at: Optional[datetime] = None
+    last_login_ip: Optional[str] = None
+    login_count: Optional[int] = 0
 
     model_config = {"from_attributes": True}
 

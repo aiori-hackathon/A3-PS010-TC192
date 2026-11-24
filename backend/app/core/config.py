@@ -3,6 +3,14 @@ NetEvidence AI - Application Configuration
 Evidence-Based IP Network-Type Classification Platform
 """
 import os
+from pathlib import Path
+try:
+    from dotenv import load_dotenv
+    # Load .env from backend/ or project root
+    load_dotenv(Path(__file__).resolve().parents[2] / ".env")
+    load_dotenv(Path(__file__).resolve().parents[3] / ".env")
+except ImportError:
+    pass
 
 class Settings:
     PROJECT_NAME: str = "NetEvidence AI"

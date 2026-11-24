@@ -97,10 +97,11 @@ app.include_router(dashboard.router, prefix=api_v1_prefix)
 
 @app.get("/api/health")
 def health_check():
+    db_type = "MySQL" if "mysql" in settings.DATABASE_URL else ("PostgreSQL" if "postgres" in settings.DATABASE_URL else "SQLite")
     return {
         "status": "healthy",
         "timestamp": time.time(),
-        "database": "SQLite (Connected)",
+        "database": f"{db_type} (Connected)",
         "classifier_version": settings.CLASSIFIER_VERSION
     }
 

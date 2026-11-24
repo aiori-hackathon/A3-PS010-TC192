@@ -16,6 +16,9 @@ class User(Base):
     is_active = Column(Boolean, default=True)
     is_admin = Column(Boolean, default=False)
     created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
+    last_login_at = Column(DateTime, nullable=True)
+    last_login_ip = Column(String(64), nullable=True)
+    login_count = Column(Integer, default=0)
 
     # Relationships
     analyses = relationship("AnalysisRecord", back_populates="user", cascade="all, delete-orphan")
