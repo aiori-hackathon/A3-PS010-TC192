@@ -58,6 +58,7 @@ def register(user_in: UserCreate, request: Request, db: Session = Depends(get_db
     audit = AuditEvent(
         user_id=user.id,
         action="USER_REGISTRATION",
+        ip_address=client_ip,
         status="SUCCESS",
         details_json=json.dumps({
             "email": user.email,
@@ -104,6 +105,7 @@ def login(login_in: UserLogin, request: Request, db: Session = Depends(get_db)):
     audit = AuditEvent(
         user_id=user.id,
         action="USER_LOGIN",
+        ip_address=client_ip,
         status="SUCCESS",
         details_json=json.dumps({
             "email": user.email,
