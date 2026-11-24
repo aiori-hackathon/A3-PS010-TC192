@@ -1,12 +1,9 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { useGlass } from './ShatteredGlassEngine';
-import { Sparkles, Layers, RefreshCw } from 'lucide-react';
+import React, { useState, useRef } from 'react';
 
 interface ShatteredGlassCardProps {
   children: React.ReactNode;
   title: string;
   subtitle?: string;
-  badgeText?: string;
   className?: string;
 }
 
@@ -14,18 +11,15 @@ export const ShatteredGlassCard: React.FC<ShatteredGlassCardProps> = ({
   children,
   title,
   subtitle,
-  badgeText = "3D Smoked Crystal Interface",
   className = "",
 }) => {
   const cardRef = useRef<HTMLDivElement | null>(null);
-  const { triggerShatter, isShattered, webGlSupported } = useGlass();
 
   // 3D Parallax Tilt state
   const [rotX, setRotX] = useState(0);
   const [rotY, setRotY] = useState(0);
   const [glarePos, setGlarePos] = useState({ x: 50, y: 50, opacity: 0 });
   const [isHovered, setIsHovered] = useState(false);
-  const [shatterPulse, setShatterPulse] = useState(false);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!cardRef.current) return;
@@ -58,12 +52,6 @@ export const ShatteredGlassCard: React.FC<ShatteredGlassCardProps> = ({
     setRotX(0);
     setRotY(0);
     setGlarePos(prev => ({ ...prev, opacity: 0 }));
-  };
-
-  const handleShatterClick = () => {
-    setShatterPulse(true);
-    triggerShatter();
-    setTimeout(() => setShatterPulse(false), 900);
   };
 
   return (
@@ -143,9 +131,7 @@ export const ShatteredGlassCard: React.FC<ShatteredGlassCardProps> = ({
         onMouseMove={handleMouseMove}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
-        className={`relative z-10 preserve-3d transition-transform duration-200 ease-out rounded-3xl ${
-          shatterPulse ? 'scale-95 duration-150' : ''
-        }`}
+        className="relative z-10 preserve-3d transition-transform duration-200 ease-out rounded-3xl"
         style={{
           transform: isHovered
             ? `rotateX(${rotX}deg) rotateY(${rotY}deg) translateZ(15px)`
@@ -206,30 +192,8 @@ export const ShatteredGlassCard: React.FC<ShatteredGlassCardProps> = ({
             />
           </svg>
 
-          {/* Card Header Shard Ribbon */}
+          {/* Card Body */}
           <div className="p-6 sm:p-8 relative z-30">
-            {/* Top Interactive Glass Control Bar */}
-            <div className="flex items-center justify-between mb-5 pb-4 border-b border-white/[0.08]">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.06] border border-white/[0.12] text-[11px] font-mono text-[#B9ABFF]">
-                <Layers className="w-3.5 h-3.5 text-[#8C7BFF]" />
-                <span>{badgeText}</span>
-              </div>
-
-              {/* Interactive 3D Shatter Trigger */}
-              <button
-                type="button"
-                onClick={handleShatterClick}
-                title="Trigger 3D Shatter Physics"
-                className="group inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#8C7BFF]/15 hover:bg-[#8C7BFF]/30 border border-[#8C7BFF]/40 text-[11px] font-mono text-[#E5E5EA] transition-all hover:scale-105 active:scale-95 shadow-[0_0_15px_rgba(140,123,255,0.25)]"
-              >
-                <Sparkles className="w-3 h-3 text-[#70D7FF] group-hover:rotate-45 transition-transform duration-300" />
-                <span className="text-[10px] uppercase tracking-wider font-semibold">
-                  {isShattered ? 'Assemble Glass' : 'Shatter 3D'}
-                </span>
-                <RefreshCw className={`w-2.5 h-2.5 text-[#A0A0AA] ${shatterPulse ? 'animate-spin' : ''}`} />
-              </button>
-            </div>
-
             {/* Title & Subtitle */}
             <div className="mb-6">
               <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight flex items-center gap-2">

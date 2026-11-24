@@ -89,7 +89,6 @@ export const RegisterPage: React.FC = () => {
         <ShatteredGlassCard
           title="Create Account"
           subtitle="Join the NetEvidence AI Security Intelligence Platform."
-          badgeText="Shattered Glass 3D • New Registration"
         >
           <form onSubmit={handleSubmit} className="space-y-4">
             {error && (

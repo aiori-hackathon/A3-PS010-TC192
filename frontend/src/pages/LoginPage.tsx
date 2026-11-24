@@ -64,7 +64,6 @@ export const LoginPage: React.FC = () => {
         <ShatteredGlassCard
           title="Sign In"
           subtitle="Enter your credentials to access the forensic intelligence console."
-          badgeText="Shattered Glass 3D • Forensic Access"
         >
           {/* Quick Demo Fill Pill */}
           <div className="mb-6 p-3.5 rounded-2xl backdrop-blur-md bg-[#202027]/75 border border-white/[0.12] text-xs flex items-center justify-between shadow-xs">
