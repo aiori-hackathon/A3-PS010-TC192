@@ -83,3 +83,88 @@
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(140, 123, 255, 0.45);
 }
+
+/* 3D Shattered Glass System */
+.perspective-1200 {
+  perspective: 1200px;
+}
+
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+}
+
+@keyframes float-shard-1 {
+  0%, 100% {
+    transform: translate3d(0, 0, 30px) rotate(0deg) rotateX(0deg);
+  }
+  50% {
+    transform: translate3d(-8px, -18px, 45px) rotate(4deg) rotateX(12deg);
+  }
+}
+
+@keyframes float-shard-2 {
+  0%, 100% {
+    transform: translate3d(0, 0, 20px) rotate(0deg) rotateY(0deg);
+  }
+  50% {
+    transform: translate3d(12px, -14px, 50px) rotate(-6deg) rotateY(15deg);
+  }
+}
+
+@keyframes float-shard-3 {
+  0%, 100% {
+    transform: translate3d(0, 0, 40px) rotate(0deg);
+  }
+  50% {
+    transform: translate3d(-10px, 16px, 60px) rotate(8deg);
+  }
+}
+
+@keyframes glass-gleam {
+  0% {
+    transform: translateX(-150%) skewX(-25deg);
+  }
+  50%, 100% {
+    transform: translateX(250%) skewX(-25deg);
+  }
+}
+
+.animate-float-shard-1 {
+  animation: float-shard-1 7s ease-in-out infinite;
+}
+
+.animate-float-shard-2 {
+  animation: float-shard-2 9s ease-in-out infinite;
+}
+
+.animate-float-shard-3 {
+  animation: float-shard-3 8s ease-in-out infinite;
+}
+
+.animate-glass-gleam {
+  animation: glass-gleam 6s ease-in-out infinite;
+}
+
+/* Prismatic crystal facet */
+.prismatic-shard {
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(140, 123, 255, 0.08) 50%, rgba(112, 215, 255, 0.04) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  box-shadow: 
+    0 16px 32px 0 rgba(0, 0, 0, 0.6),
+    inset 0 1px 2px 0 rgba(255, 255, 255, 0.35),
+    inset 0 -1px 2px 0 rgba(140, 123, 255, 0.2);
+}
+
+.prismatic-shard:hover {
+  border-color: rgba(140, 123, 255, 0.6);
+  box-shadow: 
+    0 24px 48px 0 rgba(0, 0, 0, 0.75),
+    0 0 25px rgba(140, 123, 255, 0.35),
+    inset 0 1px 3px 0 rgba(255, 255, 255, 0.5);
+}
