@@ -68,13 +68,6 @@ export const Dashboard: React.FC = () => {
       {/* Executive Page Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-1">
         <div>
-          <div className="flex items-center gap-2 mb-1">
-            <span className="text-[10px] uppercase font-mono font-semibold tracking-widest text-[#8C7BFF]">
-              3D Glass Laboratory
-            </span>
-            <span className="w-1.5 h-1.5 rounded-full bg-[#36D67E]" />
-            <span className="text-[10px] font-mono text-[#36D67E]">Sensors Online</span>
-          </div>
           <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-white">
             Network Intelligence Console
           </h1>
