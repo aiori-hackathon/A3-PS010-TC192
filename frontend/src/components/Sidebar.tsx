@@ -51,7 +51,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
     {
       group: 'SYSTEM',
       items: [
-        { name: 'Glossary & RFCs', path: '/glossary', icon: BookOpen, badge: null },
+        { name: 'Help and Plan', path: '/glossary', icon: BookOpen, badge: null },
         { name: 'Settings', path: '/settings', icon: Settings, badge: null },
       ],
     },

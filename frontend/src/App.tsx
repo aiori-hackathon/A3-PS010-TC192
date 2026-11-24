@@ -45,7 +45,7 @@ const ProtectedLayout: React.FC<{ children: React.ReactNode }> = ({ children }) 
     if (path.startsWith('/explorer')) return 'Evidence Explorer';
     if (path.startsWith('/benchmark')) return 'Model Evaluation Benchmarks';
     if (path.startsWith('/audit')) return 'Immutable Audit Trail';
-    if (path.startsWith('/glossary')) return 'Help and Glossary';
+    if (path.startsWith('/glossary')) return 'Help and Plan';
     if (path.startsWith('/settings')) return 'Settings and Preferences';
     return 'NetEvidence AI';
   };

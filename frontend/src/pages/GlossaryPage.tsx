@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BookOpen, Search, Lightbulb } from 'lucide-react';
+import { BookOpen, Search, Lightbulb, Compass, ShieldCheck, Terminal, Layers } from 'lucide-react';
 
 interface GlossaryItem {
   term: string;
@@ -11,6 +11,33 @@ interface GlossaryItem {
 
 export const GlossaryPage: React.FC = () => {
   const [search, setSearch] = useState('');
+
+  const architecturePlan = [
+    {
+      step: '01',
+      title: 'Target Validation & RFC Guardrails',
+      desc: 'Validates IPv4 / IPv6 addresses deterministically. RFC 1918 (private), loopback, link-local, and Carrier-Grade NAT (CGNAT RFC 6598) addresses are immediately isolated and evaluated locally with zero public DNS leaks.',
+      color: '#8C7BFF',
+    },
+    {
+      step: '02',
+      title: 'Multi-Source Telemetry Ingestion',
+      desc: 'Asynchronously queries live RIPEstat routing data, BGP subnet announcements, Autonomous System Numbers (ASN), authoritative WHOIS org handles, and reverse DNS (PTR) hostnames within a 3.0s timeout safeguard.',
+      color: '#70D7FF',
+    },
+    {
+      step: '03',
+      title: 'Cross-Signal Contradiction Resolution',
+      desc: 'Detects semantic discrepancies (e.g. residential PTR hostnames hosted inside Amazon AWS / DigitalOcean datacenters) to identify VPN/proxy exits and dynamically penalizes certainty.',
+      color: '#F0B45C',
+    },
+    {
+      step: '04',
+      title: 'Explainable Dossier & SHA-256 Ledger',
+      desc: 'Renders calibrated 0–100 confidence scores, interactive entity topology graphs, 10th-standard plain-English "Why?" explanations, and commits an immutable cryptographic audit record.',
+      color: '#36D67E',
+    },
+  ];
 
   const terms: GlossaryItem[] = [
     {
@@ -91,15 +118,54 @@ export const GlossaryPage: React.FC = () => {
       <div>
         <div className="flex items-center gap-2 mb-1">
           <div className="w-8 h-8 rounded-xl bg-[#8C7BFF]/15 border border-[#8C7BFF]/30 flex items-center justify-center text-[#8C7BFF]">
-            <BookOpen className="w-4 h-4" />
+            <Compass className="w-4 h-4" />
           </div>
           <h2 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
-            Help & Plain-English Glossary
+            Help and Plan
           </h2>
         </div>
         <p className="text-xs sm:text-sm text-[#A0A0AA] font-mono">
-          Forensic reference guide: every technical network classification concept explained with plain-English clarity.
+          Forensic operational guide: system architecture execution plan and plain-English terminology reference.
         </p>
+      </div>
+
+      {/* Architecture Execution Plan */}
+      <div className="glass-shard p-6 space-y-4">
+        <div className="flex items-center justify-between pb-3 border-b border-white/[0.08]">
+          <div className="flex items-center gap-2">
+            <Layers className="w-4 h-4 text-[#8C7BFF]" />
+            <h3 className="font-bold text-white text-sm font-mono">
+              Operational Classification Plan (4-Stage Pipeline)
+            </h3>
+          </div>
+          <span className="text-[10px] font-mono uppercase px-2.5 py-0.5 rounded-md bg-[#36D67E]/10 text-[#36D67E] border border-[#36D67E]/30 font-semibold">
+            Execution Flow
+          </span>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+          {architecturePlan.map((step) => (
+            <div
+              key={step.step}
+              className="p-4 rounded-xl bg-[#202027]/70 border border-white/[0.08] hover:border-white/[0.15] transition-all space-y-1.5"
+            >
+              <div className="flex items-center gap-2">
+                <span
+                  className="w-6 h-6 rounded-lg flex items-center justify-center text-[10px] font-mono font-bold"
+                  style={{ backgroundColor: `${step.color}20`, color: step.color, border: `1px solid ${step.color}40` }}
+                >
+                  {step.step}
+                </span>
+                <h4 className="text-xs font-bold text-white font-mono">
+                  {step.title}
+                </h4>
+              </div>
+              <p className="text-[11px] text-[#A0A0AA] leading-relaxed">
+                {step.desc}
+              </p>
+            </div>
+          ))}
+        </div>
       </div>
 
       {/* Search Bar */}
