@@ -39,6 +39,20 @@ export default {
           200: '#E2E8F0',
           100: '#F1F5F9',
           50: '#F8FAFC',
+        },
+        smoked: {
+          bg: '#050507',
+          surface: '#17171B',
+          surfaceLight: '#202027',
+          accent: '#8C7BFF',
+          accentLight: '#B9ABFF',
+          cyan: '#70D7FF',
+          green: '#36D67E',
+          amber: '#F0B45C',
+          rose: '#FF626E',
+          text: '#E5E5EA',
+          muted: '#A0A0AA',
+          subtle: '#777782'
         }
       },
       boxShadow: {

@@ -43,77 +43,77 @@ export const EvidenceTable: React.FC<EvidenceTableProps> = ({ evidence }) => {
   const missingCount = evidence.filter((i) => i.status === 'missing' || i.status === 'error').length;
 
   return (
-    <div className="cyber-card p-6 sm:p-7">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-slate-100 dark:border-slate-800/80">
+    <div className="glass-shard p-5 sm:p-7">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-white/[0.08]">
         <div>
           <div className="flex items-center gap-2">
-            <Database className="w-5 h-5 text-blue-600 dark:text-blue-400" />
-            <h3 className="font-extrabold text-slate-900 dark:text-slate-100 text-base sm:text-lg">
+            <Database className="w-5 h-5 text-[#8C7BFF]" />
+            <h3 className="font-extrabold text-white text-base sm:text-lg">
               Auditable Evidence Ledger ({evidence.length} observations)
             </h3>
           </div>
-          <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+          <p className="text-xs text-[#A0A0AA] mt-0.5">
             Individual sensor readings, source provenance, direct observations, system inferences, and rule weights.
           </p>
         </div>
 
         {/* Status filter tabs */}
-        <div className="flex flex-wrap items-center gap-1 bg-slate-100 dark:bg-slate-800 p-1 rounded-xl text-xs">
+        <div className="flex flex-wrap items-center gap-1 bg-[#202027]/70 p-1 rounded-xl text-xs border border-white/[0.08]">
           <button
             onClick={() => setFilterStatus('all')}
-            className={`px-2.5 py-1 rounded-lg font-medium transition-colors ${
+            className={`px-2.5 py-1 rounded-lg font-mono text-xs transition-colors ${
               filterStatus === 'all'
-                ? 'bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 shadow-sm'
-                : 'text-slate-500 hover:text-slate-800 dark:hover:text-slate-200'
+                ? 'bg-[#17171B] text-white border border-white/[0.12] shadow-xs'
+                : 'text-[#A0A0AA] hover:text-white'
             }`}
           >
             All ({evidence.length})
           </button>
           <button
             onClick={() => setFilterStatus('supporting')}
-            className={`px-2.5 py-1 rounded-lg font-medium transition-colors flex items-center gap-1 ${
+            className={`px-2.5 py-1 rounded-lg font-mono text-xs transition-colors flex items-center gap-1 ${
               filterStatus === 'supporting'
-                ? 'bg-white dark:bg-slate-700 text-emerald-600 dark:text-emerald-400 shadow-sm'
-                : 'text-slate-500 hover:text-slate-800 dark:hover:text-slate-200'
+                ? 'bg-[#36D67E]/20 text-[#36D67E] border border-[#36D67E]/30 shadow-xs'
+                : 'text-[#A0A0AA] hover:text-white'
             }`}
           >
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+            <span className="w-1.5 h-1.5 rounded-full bg-[#36D67E]" />
             Supporting ({supportingCount})
           </button>
           {contradictingCount > 0 && (
             <button
               onClick={() => setFilterStatus('contradicting')}
-              className={`px-2.5 py-1 rounded-lg font-medium transition-colors flex items-center gap-1 ${
+              className={`px-2.5 py-1 rounded-lg font-mono text-xs transition-colors flex items-center gap-1 ${
                 filterStatus === 'contradicting'
-                  ? 'bg-white dark:bg-slate-700 text-rose-600 dark:text-rose-400 shadow-sm'
-                  : 'text-slate-500 hover:text-slate-800 dark:hover:text-slate-200'
+                  ? 'bg-[#FF626E]/20 text-[#FF626E] border border-[#FF626E]/30 shadow-xs'
+                  : 'text-[#A0A0AA] hover:text-white'
               }`}
             >
-              <span className="w-1.5 h-1.5 rounded-full bg-rose-500" />
+              <span className="w-1.5 h-1.5 rounded-full bg-[#FF626E]" />
               Contradicting ({contradictingCount})
             </button>
           )}
           <button
             onClick={() => setFilterStatus('neutral')}
-            className={`px-2.5 py-1 rounded-lg font-medium transition-colors flex items-center gap-1 ${
+            className={`px-2.5 py-1 rounded-lg font-mono text-xs transition-colors flex items-center gap-1 ${
               filterStatus === 'neutral'
-                ? 'bg-white dark:bg-slate-700 text-slate-700 dark:text-slate-300 shadow-sm'
-                : 'text-slate-500 hover:text-slate-800 dark:hover:text-slate-200'
+                ? 'bg-[#17171B] text-[#A0A0AA] border border-white/[0.12] shadow-xs'
+                : 'text-[#777782] hover:text-white'
             }`}
           >
-            <span className="w-1.5 h-1.5 rounded-full bg-slate-400" />
+            <span className="w-1.5 h-1.5 rounded-full bg-[#777782]" />
             Neutral ({neutralCount})
           </button>
           {missingCount > 0 && (
             <button
               onClick={() => setFilterStatus('missing')}
-              className={`px-2.5 py-1 rounded-lg font-medium transition-colors flex items-center gap-1 ${
+              className={`px-2.5 py-1 rounded-lg font-mono text-xs transition-colors flex items-center gap-1 ${
                 filterStatus === 'missing'
-                  ? 'bg-white dark:bg-slate-700 text-amber-600 dark:text-amber-400 shadow-sm'
-                  : 'text-slate-500 hover:text-slate-800 dark:hover:text-slate-200'
+                  ? 'bg-[#F0B45C]/20 text-[#F0B45C] border border-[#F0B45C]/30 shadow-xs'
+                  : 'text-[#A0A0AA] hover:text-white'
               }`}
             >
-              <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
+              <span className="w-1.5 h-1.5 rounded-full bg-[#F0B45C]" />
               Missing / Error ({missingCount})
             </button>
           )}

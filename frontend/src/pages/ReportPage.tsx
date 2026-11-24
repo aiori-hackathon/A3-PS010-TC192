@@ -107,26 +107,26 @@ export const ReportPage: React.FC = () => {
   if (isLoading) {
     return (
       <div className="py-24 text-center">
-        <div className="w-12 h-12 border-4 border-cyan-500/30 border-t-cyan-500 rounded-full animate-spin mx-auto mb-4" />
-        <p className="text-sm font-bold text-slate-800 dark:text-slate-200 font-mono">
+        <div className="w-12 h-12 border-4 border-[#8C7BFF]/30 border-t-[#8C7BFF] rounded-full animate-spin mx-auto mb-4" />
+        <p className="text-sm font-bold text-white font-mono">
           Synthesizing multi-source evidence dossier...
         </p>
-        <span className="text-xs text-slate-400 font-mono mt-1 block">PS-010 Rule Fusion</span>
+        <span className="text-xs text-[#A0A0AA] font-mono mt-1 block">Multi-Source Rule Fusion Engine</span>
       </div>
     );
   }
 
   if (error || !report) {
     return (
-      <div className="p-8 max-w-xl mx-auto text-center space-y-4 cyber-card my-12">
-        <AlertTriangle className="w-12 h-12 text-rose-500 mx-auto" />
-        <h3 className="text-lg font-bold text-slate-900 dark:text-white">
+      <div className="p-8 max-w-xl mx-auto text-center space-y-4 glass-shard my-12">
+        <AlertTriangle className="w-12 h-12 text-[#FF626E] mx-auto" />
+        <h3 className="text-lg font-bold text-white font-mono">
           Report Not Found
         </h3>
-        <p className="text-xs text-slate-500 dark:text-slate-400">{error || 'Could not retrieve this analysis record.'}</p>
+        <p className="text-xs text-[#A0A0AA] font-mono">{error || 'Could not retrieve this analysis record.'}</p>
         <button
           onClick={() => navigate('/history')}
-          className="px-5 py-2.5 rounded-xl text-xs font-bold bg-blue-600 text-white shadow-md hover:bg-blue-500 transition-colors"
+          className="px-5 py-2.5 rounded-xl text-xs font-bold bg-[#8C7BFF] hover:bg-[#7b68ff] text-white shadow-md transition-colors"
         >
           Back to History Ledger
         </button>
@@ -135,28 +135,28 @@ export const ReportPage: React.FC = () => {
   }
 
   // Visual category badge styling
-  let catBadgeColor = 'bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-500/30 shadow-glow-blue';
+  let catBadgeColor = 'bg-[#70D7FF]/15 text-[#70D7FF] border-[#70D7FF]/40 shadow-[0_0_16px_rgba(112,215,255,0.25)]';
   if (report.network_type === 'Hosting / Datacenter') {
-    catBadgeColor = 'bg-purple-500/10 text-purple-600 dark:text-purple-400 border-purple-500/30 shadow-glow-purple';
+    catBadgeColor = 'bg-[#8C7BFF]/15 text-[#B9ABFF] border-[#8C7BFF]/40 shadow-[0_0_16px_rgba(140,123,255,0.25)]';
   } else if (report.network_type === 'Mobile') {
-    catBadgeColor = 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/30 shadow-glow-emerald';
+    catBadgeColor = 'bg-[#36D67E]/15 text-[#36D67E] border-[#36D67E]/40 shadow-[0_0_16px_rgba(54,214,126,0.25)]';
   } else if (report.network_type === 'Enterprise / Campus') {
-    catBadgeColor = 'bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border-indigo-500/30 shadow-glow-indigo';
+    catBadgeColor = 'bg-[#70D7FF]/15 text-[#70D7FF] border-[#70D7FF]/40 shadow-[0_0_16px_rgba(112,215,255,0.25)]';
   } else if (report.network_type.includes('Unknown') || report.network_type.includes('Insufficient')) {
-    catBadgeColor = 'bg-slate-500/10 text-slate-600 dark:text-slate-400 border-slate-500/30';
+    catBadgeColor = 'bg-white/[0.08] text-[#A0A0AA] border-white/[0.15]';
   }
 
   return (
-    <div className="space-y-7 pb-12 animate-in fade-in duration-300 max-w-5xl mx-auto print:max-w-none print:m-0 print:p-0">
+    <div className="space-y-7 pb-12 animate-in fade-in duration-300 max-w-5xl mx-auto print:max-w-none print:m-0 print:p-0 font-sans">
       {/* Printable Header */}
-      <div className="hidden print:block pb-4 mb-4 border-b-2 border-slate-900">
+      <div className="hidden print:block pb-4 mb-4 border-b-2 border-white/40">
         <div className="flex justify-between items-center">
           <div>
-            <h1 className="text-2xl font-black tracking-tight text-slate-900">NetEvidence AI</h1>
-            <p className="text-xs text-slate-600">Evidence-Based IP Network-Type Classification Audit Dossier</p>
+            <h1 className="text-2xl font-black tracking-tight text-white">NetEvidence AI</h1>
+            <p className="text-xs text-[#A0A0AA]">Evidence-Based IP Network-Type Classification Audit Dossier</p>
           </div>
-          <div className="text-right text-xs text-slate-600 font-mono">
-            <div>Target: <strong>{report.ip_address}</strong></div>
+          <div className="text-right text-xs text-[#A0A0AA] font-mono">
+            <div>Target: <strong className="text-white">{report.ip_address}</strong></div>
             <div>Audited: {new Date(report.created_at).toLocaleString()}</div>
           </div>
         </div>
@@ -166,27 +166,27 @@ export const ReportPage: React.FC = () => {
       <div className="flex flex-wrap items-center justify-between gap-3 print:hidden">
         <button
           onClick={() => navigate('/analyze')}
-          className="flex items-center gap-1.5 text-xs font-bold text-slate-600 dark:text-slate-300 hover:text-cyan-500 transition-colors group"
+          className="flex items-center gap-1.5 text-xs font-bold font-mono text-[#A0A0AA] hover:text-[#8C7BFF] transition-colors group"
         >
           <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
           <span>Analyze Another Target</span>
         </button>
 
-        <div className="flex flex-wrap items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2 font-mono">
           <button
             onClick={handleCopySummary}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all shadow-sm"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold backdrop-blur-md bg-[#202027]/80 border border-white/[0.10] text-[#E5E5EA] hover:bg-white/[0.08] transition-all"
           >
-            {isCopied ? <Check className="w-3.5 h-3.5 text-emerald-500" /> : <Copy className="w-3.5 h-3.5" />}
+            {isCopied ? <Check className="w-3.5 h-3.5 text-[#36D67E]" /> : <Copy className="w-3.5 h-3.5 text-[#A0A0AA]" />}
             <span>{isCopied ? 'Summary Copied' : 'Copy Summary'}</span>
           </button>
 
           <button
             onClick={() => setShowSaveModal(true)}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold border transition-all shadow-sm ${
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold border transition-all ${
               isSaved
-                ? 'bg-emerald-500/10 text-emerald-500 border-emerald-500/30'
-                : 'bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800'
+                ? 'bg-[#36D67E]/15 text-[#36D67E] border-[#36D67E]/40'
+                : 'backdrop-blur-md bg-[#202027]/80 border-white/[0.10] text-[#E5E5EA] hover:bg-white/[0.08]'
             }`}
           >
             <Bookmark className="w-3.5 h-3.5" />
@@ -195,15 +195,15 @@ export const ReportPage: React.FC = () => {
 
           <button
             onClick={() => setIsCompareOpen(true)}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all shadow-sm"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold backdrop-blur-md bg-[#202027]/80 border border-white/[0.10] text-[#70D7FF] hover:bg-white/[0.08] transition-all"
           >
-            <GitCompare className="w-3.5 h-3.5 text-cyan-500" />
+            <GitCompare className="w-3.5 h-3.5 text-[#70D7FF]" />
             <span>Compare Diff</span>
           </button>
 
           <button
             onClick={handleExportJson}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all shadow-sm"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold backdrop-blur-md bg-[#202027]/80 border border-white/[0.10] text-[#E5E5EA] hover:bg-white/[0.08] transition-all"
           >
             <Download className="w-3.5 h-3.5" />
             <span>JSON</span>
@@ -211,7 +211,7 @@ export const ReportPage: React.FC = () => {
 
           <button
             onClick={handlePrintPdf}
-            className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-medium bg-blue-600 hover:bg-blue-700 text-white shadow-sm transition-colors"
+            className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-[#8C7BFF] hover:bg-[#7b68ff] text-white shadow-[0_4px_16px_rgba(140,123,255,0.35)] transition-colors"
           >
             <Printer className="w-3.5 h-3.5" />
             <span>Print / PDF</span>
@@ -219,46 +219,46 @@ export const ReportPage: React.FC = () => {
         </div>
       </div>
 
-      {/* Main Dossier Result Card (Glassmorphic) */}
-      <div className="backdrop-blur-xl bg-white/75 dark:bg-[#111827]/75 border border-white/70 dark:border-white/10 rounded-2xl p-6 sm:p-8 shadow-[0_8px_32px_0_rgba(31,38,135,0.06)] dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] print:border-slate-400 print:shadow-none print:break-inside-avoid">
+      {/* Main Dossier Result Card (Smoked Glass Shard) */}
+      <div className="glass-shard p-6 sm:p-8 print:border-white/40 print:shadow-none print:break-inside-avoid">
         {/* Header row: IP + Badges */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-white/40 dark:border-white/10">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-white/[0.08]">
           <div>
             <div className="flex items-center gap-2 mb-1.5">
-              <span className="text-[10px] uppercase font-semibold tracking-wider text-slate-400 font-mono">
+              <span className="text-[10px] uppercase font-semibold tracking-wider text-[#A0A0AA] font-mono">
                 Target IP Address
               </span>
               {report.is_demo ? (
-                <span className="text-[10px] font-mono font-medium px-2 py-0.5 rounded bg-amber-50 text-amber-700 dark:bg-amber-950/40 dark:text-amber-400 border border-amber-200 dark:border-amber-800">
+                <span className="text-[10px] font-mono font-medium px-2 py-0.5 rounded-md bg-[#F0B45C]/15 text-[#F0B45C] border border-[#F0B45C]/30">
                   DEMO DATA / SIMULATED
                 </span>
               ) : (
-                <span className="text-[10px] font-mono font-medium px-2 py-0.5 rounded bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800 flex items-center gap-1.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" /> LIVE SENSOR INTELLIGENCE
+                <span className="text-[10px] font-mono font-medium px-2 py-0.5 rounded-md bg-[#36D67E]/15 text-[#36D67E] border border-[#36D67E]/30 flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#36D67E] animate-pulse" /> LIVE SENSOR INTELLIGENCE
                 </span>
               )}
             </div>
-            <h2 className="text-2xl sm:text-4xl font-extrabold font-mono text-slate-900 dark:text-white tracking-tight">
+            <h2 className="text-2xl sm:text-4xl font-bold font-mono text-white tracking-tight">
               {report.ip_address}
             </h2>
-            <div className="flex flex-wrap items-center gap-2 mt-2 text-xs font-mono text-slate-500 dark:text-slate-400">
-              <span className="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-bold">
+            <div className="flex flex-wrap items-center gap-2 mt-2 text-xs font-mono text-[#A0A0AA]">
+              <span className="px-2 py-0.5 rounded-md bg-[#202027] border border-white/[0.08] text-white font-bold">
                 IPv{report.ip_version}
               </span>
               <span>•</span>
               <span>{report.is_public ? 'Public Routable Address' : 'Non-Public Address'}</span>
               <span>•</span>
               <span className="flex items-center gap-1">
-                <Clock className="w-3 h-3 text-cyan-500" />
+                <Clock className="w-3 h-3 text-[#70D7FF]" />
                 {report.processing_time_ms} ms pipeline duration
               </span>
             </div>
           </div>
 
           <div className="flex flex-col sm:items-end gap-1.5">
-            <span className="text-xs text-slate-400 font-mono font-semibold uppercase tracking-wider">Predicted Network Type</span>
+            <span className="text-xs text-[#A0A0AA] font-mono font-semibold uppercase tracking-wider">Predicted Network Type</span>
             <div
-              className={`px-4 py-2 rounded-2xl text-sm font-extrabold border shadow-sm ${catBadgeColor}`}
+              className={`px-4 py-2 rounded-xl text-sm font-extrabold font-mono border ${catBadgeColor}`}
             >
               {report.network_type}
             </div>
@@ -268,73 +268,73 @@ export const ReportPage: React.FC = () => {
         {/* 3 Core Metric Highlights */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 my-6">
           {/* Classifier Confidence Score */}
-          <div className="p-4 rounded-2xl bg-slate-50/80 dark:bg-slate-900/60 border border-slate-200/80 dark:border-slate-800/80 print:bg-slate-50 relative overflow-hidden">
+          <div className="p-4 rounded-xl bg-[#202027]/70 border border-white/[0.08] relative overflow-hidden">
             <div className="flex items-center justify-between mb-1.5">
-              <span className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 font-mono">
+              <span className="text-xs font-bold uppercase tracking-wider text-[#A0A0AA] font-mono">
                 Classifier Confidence
               </span>
               <Tooltip content="Heuristic rule-fusion score (0-100) reflecting multi-source consensus and conflict penalties. Not a statistical probability." />
             </div>
             <div className="flex items-baseline gap-2">
-              <span className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white font-mono">
+              <span className="text-3xl sm:text-4xl font-extrabold text-white font-mono">
                 {report.confidence_score}
               </span>
-              <span className="text-xs font-bold text-slate-400 font-mono">/ 100</span>
+              <span className="text-xs font-bold text-[#777782] font-mono">/ 100</span>
               <span
                 className={`text-[10px] font-mono font-bold uppercase tracking-wider ml-auto px-2.5 py-0.5 rounded-full ${
                   report.confidence_score >= 70
-                    ? 'bg-emerald-500/10 text-emerald-500 border border-emerald-500/30'
+                    ? 'bg-[#36D67E]/15 text-[#36D67E] border border-[#36D67E]/30'
                     : report.confidence_score >= 50
-                    ? 'bg-amber-500/10 text-amber-500 border border-amber-500/30'
-                    : 'bg-rose-500/10 text-rose-500 border border-rose-500/30'
+                    ? 'bg-[#F0B45C]/15 text-[#F0B45C] border border-[#F0B45C]/30'
+                    : 'bg-[#FF626E]/15 text-[#FF626E] border border-[#FF626E]/30'
                 }`}
               >
                 {report.confidence_level}
               </span>
             </div>
             {/* Progress bar */}
-            <div className="w-full bg-slate-200 dark:bg-slate-800 h-2 rounded-full mt-3 overflow-hidden">
+            <div className="w-full bg-[#17171B] h-2 rounded-full mt-3 overflow-hidden border border-white/[0.05]">
               <div
                 className={`h-full rounded-full transition-all duration-300 ${
                   report.confidence_score >= 70
-                    ? 'bg-emerald-600'
+                    ? 'bg-[#36D67E]'
                     : report.confidence_score >= 50
-                    ? 'bg-amber-500'
-                    : 'bg-rose-500'
+                    ? 'bg-[#F0B45C]'
+                    : 'bg-[#FF626E]'
                 }`}
                 style={{ width: `${report.confidence_score}%` }}
               />
             </div>
-            <p className="text-[10px] text-slate-400 dark:text-slate-500 mt-2 font-mono leading-tight">
-              Rule-fusion score; not a calibrated probability.
+            <p className="text-[10px] text-[#777782] mt-2 font-mono leading-tight">
+              Rule-fusion score; calibrated consensus model.
             </p>
           </div>
 
           {/* Evidence Quality */}
-          <div className="p-4 rounded-2xl bg-slate-50/80 dark:bg-slate-900/60 border border-slate-200/80 dark:border-slate-800/80 print:bg-slate-50">
+          <div className="p-4 rounded-xl bg-[#202027]/70 border border-white/[0.08]">
             <div className="flex items-center justify-between mb-1.5">
-              <span className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 font-mono">
+              <span className="text-xs font-bold uppercase tracking-wider text-[#A0A0AA] font-mono">
                 Evidence Quality
               </span>
-              <Tooltip content="Independent of confidence score. Assesses evidence breadth across distinct source families, freshness, and absence of sensor errors. Strong evidence can produce high or low confidence depending on signal agreement." />
+              <Tooltip content="Independent of confidence score. Assesses evidence breadth across distinct source families, freshness, and absence of sensor errors." />
             </div>
             <div className="flex items-baseline gap-2">
-              <span className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white font-mono">
+              <span className="text-2xl sm:text-3xl font-extrabold text-white font-mono">
                 {report.evidence_quality}
               </span>
-              <span className="text-[10px] font-mono font-bold uppercase text-slate-400 ml-auto px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800">
+              <span className="text-[10px] font-mono font-bold uppercase text-[#8C7BFF] ml-auto px-2 py-0.5 rounded bg-[#8C7BFF]/10 border border-[#8C7BFF]/25">
                 {report.evidence.filter((e) => e.status !== 'error').length} signals
               </span>
             </div>
-            <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-2 font-mono">
+            <p className="text-[11px] text-[#A0A0AA] mt-2 font-mono">
               Spans {new Set(report.evidence.map((e) => e.source)).size} sensor sources ({report.evidence.filter((e) => e.status === 'error').length} errors)
             </p>
           </div>
 
           {/* Conflict Count */}
-          <div className="p-4 rounded-2xl bg-slate-50/80 dark:bg-slate-900/60 border border-slate-200/80 dark:border-slate-800/80 print:bg-slate-50">
+          <div className="p-4 rounded-xl bg-[#202027]/70 border border-white/[0.08]">
             <div className="flex items-center justify-between mb-1.5">
-              <span className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 font-mono">
+              <span className="text-xs font-bold uppercase tracking-wider text-[#A0A0AA] font-mono">
                 Signal Contradictions
               </span>
               <Tooltip content="Disagreements between reverse DNS, ASN registration, or BGP announcements." />
@@ -342,14 +342,14 @@ export const ReportPage: React.FC = () => {
             <div className="flex items-baseline gap-2">
               <span
                 className={`text-2xl sm:text-3xl font-extrabold font-mono ${
-                  report.conflicts.length > 0 ? 'text-amber-500' : 'text-emerald-500'
+                  report.conflicts.length > 0 ? 'text-[#F0B45C]' : 'text-[#36D67E]'
                 }`}
               >
                 {report.conflicts.length}
               </span>
-              <span className="text-xs text-slate-400 font-mono">conflicts detected</span>
+              <span className="text-xs text-[#777782] font-mono">conflicts detected</span>
             </div>
-            <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-2 font-mono">
+            <p className="text-[11px] text-[#A0A0AA] mt-2 font-mono">
               {report.conflicts.length === 0
                 ? 'Complete cross-source agreement'
                 : 'Audited and calibrated into scoring'}
@@ -358,28 +358,28 @@ export const ReportPage: React.FC = () => {
         </div>
 
         {/* Quick Entity Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 py-4 border-t border-b border-slate-100 dark:border-slate-800/80 text-xs">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 py-4 border-t border-b border-white/[0.08] text-xs font-mono">
           <div>
-            <span className="text-slate-400 font-mono text-[11px]">Origin ASN:</span>
-            <p className="font-mono font-bold text-slate-900 dark:text-white mt-0.5">
+            <span className="text-[#777782] text-[11px]">Origin ASN:</span>
+            <p className="font-bold text-white mt-0.5">
               {report.asn || 'None / Unannounced'}
             </p>
           </div>
           <div>
-            <span className="text-slate-400 font-mono text-[11px]">Network Operator:</span>
-            <p className="font-semibold text-slate-900 dark:text-white mt-0.5 truncate">
+            <span className="text-[#777782] text-[11px]">Network Operator:</span>
+            <p className="font-semibold text-white mt-0.5 truncate">
               {report.org_name || 'Unregistered Org'}
             </p>
           </div>
           <div>
-            <span className="text-slate-400 font-mono text-[11px]">BGP Subnet Prefix:</span>
-            <p className="font-mono font-bold text-slate-900 dark:text-white mt-0.5">
+            <span className="text-[#777782] text-[11px]">BGP Subnet Prefix:</span>
+            <p className="font-bold text-white mt-0.5">
               {report.prefix || 'None / Not Advertised'}
             </p>
           </div>
           <div>
-            <span className="text-slate-400 font-mono text-[11px]">Reverse DNS Hostname:</span>
-            <p className="font-mono text-slate-900 dark:text-white mt-0.5 truncate" title={report.hostname}>
+            <span className="text-[#777782] text-[11px]">Reverse DNS Hostname:</span>
+            <p className="text-white mt-0.5 truncate" title={report.hostname}>
               {report.hostname || 'None (No PTR)'}
             </p>
           </div>
@@ -387,62 +387,62 @@ export const ReportPage: React.FC = () => {
       </div>
 
       {/* "Why did we get this result?" Plain-English Narrative */}
-      <div className="cyber-card p-6 sm:p-8 relative print:break-inside-avoid">
+      <div className="glass-shard p-6 sm:p-8 relative print:break-inside-avoid">
         <div className="flex items-center gap-2 mb-5">
-          <span className="p-2 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-600 dark:text-cyan-400">
+          <span className="p-2 rounded-xl bg-[#8C7BFF]/15 border border-[#8C7BFF]/30 text-[#8C7BFF]">
             <Cpu className="w-5 h-5" />
           </span>
           <div>
-            <h3 className="font-extrabold text-slate-900 dark:text-white text-base sm:text-lg">
+            <h3 className="font-bold text-white text-base sm:text-lg">
               Why did we get this result?
             </h3>
-            <p className="text-xs text-slate-500 dark:text-slate-400">
-              Plain-English step-by-step reasoning breakdown for 10th-standard comprehension.
+            <p className="text-xs text-[#A0A0AA] font-mono">
+              Plain-English step-by-step reasoning breakdown for transparent forensic auditing.
             </p>
           </div>
         </div>
 
         {/* Executive Summary Callout */}
-        <div className="p-4 rounded-2xl bg-cyan-500/10 border border-cyan-500/30 mb-6">
-          <div className="flex items-center gap-2 text-xs font-mono font-bold text-cyan-600 dark:text-cyan-300 uppercase tracking-wider mb-1">
-            <FileText className="w-3.5 h-3.5" /> Executive Summary
+        <div className="p-4 rounded-xl bg-[#8C7BFF]/10 border border-[#8C7BFF]/30 mb-6">
+          <div className="flex items-center gap-2 text-xs font-mono font-bold text-[#B9ABFF] uppercase tracking-wider mb-1">
+            <FileText className="w-3.5 h-3.5 text-[#8C7BFF]" /> Executive Summary
           </div>
-          <p className="text-xs sm:text-sm text-slate-800 dark:text-cyan-100 font-medium leading-relaxed">
+          <p className="text-xs sm:text-sm text-[#E5E5EA] font-medium leading-relaxed">
             {report.summary}
           </p>
         </div>
 
         {/* Formatted Markdown Explanation */}
-        <div className="markdown-prose text-xs sm:text-sm text-slate-700 dark:text-slate-300 space-y-3 leading-relaxed">
+        <div className="text-xs sm:text-sm text-[#E5E5EA] space-y-3 leading-relaxed font-sans">
           <Markdown
             components={{
               h3: ({ node, ...props }) => (
-                <h3 className="text-base font-bold text-slate-900 dark:text-white mt-5 mb-2 first:mt-0 font-mono" {...props} />
+                <h3 className="text-base font-bold text-white mt-5 mb-2 first:mt-0 font-mono" {...props} />
               ),
               h4: ({ node, ...props }) => (
-                <h4 className="text-sm font-semibold text-slate-800 dark:text-slate-200 mt-4 mb-1" {...props} />
+                <h4 className="text-sm font-semibold text-white mt-4 mb-1" {...props} />
               ),
               p: ({ node, ...props }) => (
-                <p className="text-slate-700 dark:text-slate-300 leading-relaxed my-1.5" {...props} />
+                <p className="text-[#E5E5EA] leading-relaxed my-1.5" {...props} />
               ),
               ul: ({ node, ...props }) => (
-                <ul className="list-disc pl-5 space-y-1.5 my-2" {...props} />
+                <ul className="list-disc pl-5 space-y-1.5 my-2 text-[#A0A0AA]" {...props} />
               ),
               li: ({ node, ...props }) => (
-                <li className="text-slate-700 dark:text-slate-300" {...props} />
+                <li className="text-[#E5E5EA]" {...props} />
               ),
               blockquote: ({ node, ...props }) => (
                 <blockquote
-                  className="p-3.5 my-3 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border-l-4 border-cyan-500 text-xs text-slate-600 dark:text-slate-300 italic"
+                  className="p-3.5 my-3 rounded-xl bg-[#202027]/70 border-l-4 border-[#8C7BFF] text-xs text-[#A0A0AA] italic"
                   {...props}
                 />
               ),
               strong: ({ node, ...props }) => (
-                <strong className="font-bold text-slate-900 dark:text-white" {...props} />
+                <strong className="font-bold text-white" {...props} />
               ),
               code: ({ node, ...props }) => (
                 <code
-                  className="px-1.5 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 font-mono text-xs text-cyan-600 dark:text-cyan-400"
+                  className="px-1.5 py-0.5 rounded-md bg-[#202027] font-mono text-xs text-[#70D7FF] border border-white/[0.08]"
                   {...props}
                 />
               ),
@@ -454,68 +454,68 @@ export const ReportPage: React.FC = () => {
       </div>
 
       {/* Methodology Scope & Operational Limitations */}
-      <div className="cyber-card p-6 sm:p-7 relative print:break-inside-avoid border-slate-200 dark:border-slate-800">
+      <div className="glass-shard p-6 sm:p-7 relative print:break-inside-avoid">
         <div className="flex items-center gap-2 mb-4">
-          <span className="p-2 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-600 dark:text-amber-400">
+          <span className="p-2 rounded-xl bg-[#F0B45C]/15 border border-[#F0B45C]/30 text-[#F0B45C]">
             <ShieldAlert className="w-5 h-5" />
           </span>
           <div>
-            <h3 className="font-extrabold text-slate-900 dark:text-white text-base">
+            <h3 className="font-bold text-white text-base">
               Methodology Scope & Operational Limitations
             </h3>
-            <p className="text-xs text-slate-500 dark:text-slate-400">
+            <p className="text-xs text-[#A0A0AA] font-mono">
               Heuristic bounds, dynamic address reallocation, and recommended forensic verification steps.
             </p>
           </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 text-xs">
-          <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200/70 dark:border-slate-700/60 space-y-1">
-            <span className="font-bold text-slate-800 dark:text-slate-200 flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 text-xs font-mono">
+          <div className="p-3.5 rounded-xl bg-[#202027]/70 border border-white/[0.08] space-y-1">
+            <span className="font-bold text-white flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#F0B45C]" />
               Dynamic IP Reassignment (DHCP)
             </span>
-            <p className="text-slate-600 dark:text-slate-400 leading-relaxed text-[11px]">
+            <p className="text-[#A0A0AA] leading-relaxed text-[11px] font-sans">
               Residential and mobile subscriber addresses rotate over variable DHCP lease periods. This classification reflects multi-source routing telemetry captured at query time.
             </p>
           </div>
 
-          <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200/70 dark:border-slate-700/60 space-y-1">
-            <span className="font-bold text-slate-800 dark:text-slate-200 flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
+          <div className="p-3.5 rounded-xl bg-[#202027]/70 border border-white/[0.08] space-y-1">
+            <span className="font-bold text-white flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#F0B45C]" />
               Stale or Unconfigured Reverse DNS (PTR)
             </span>
-            <p className="text-slate-600 dark:text-slate-400 leading-relaxed text-[11px]">
+            <p className="text-[#A0A0AA] leading-relaxed text-[11px] font-sans">
               Reverse DNS depends on network operator record maintenance. Missing PTR entries lower evidence completeness scores but do not falsify authoritative BGP announcements.
             </p>
           </div>
 
-          <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200/70 dark:border-slate-700/60 space-y-1">
-            <span className="font-bold text-slate-800 dark:text-slate-200 flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
+          <div className="p-3.5 rounded-xl bg-[#202027]/70 border border-white/[0.08] space-y-1">
+            <span className="font-bold text-white flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#F0B45C]" />
               Shared CDNs & Anycast Clouds
             </span>
-            <p className="text-slate-600 dark:text-slate-400 leading-relaxed text-[11px]">
+            <p className="text-[#A0A0AA] leading-relaxed text-[11px] font-sans">
               Datacenter-hosted edge proxies (e.g. Cloudflare, Fastly, AWS CloudFront) terminate client requests globally, presenting datacenter infrastructure for content delivery.
             </p>
           </div>
 
-          <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200/70 dark:border-slate-700/60 space-y-1">
-            <span className="font-bold text-slate-800 dark:text-slate-200 flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
+          <div className="p-3.5 rounded-xl bg-[#202027]/70 border border-white/[0.08] space-y-1">
+            <span className="font-bold text-white flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#F0B45C]" />
               Carrier-Grade NAT (CGNAT) Aggregation
             </span>
-            <p className="text-slate-600 dark:text-slate-400 leading-relaxed text-[11px]">
+            <p className="text-[#A0A0AA] leading-relaxed text-[11px] font-sans">
               Cellular and rural broadband carriers route thousands of subscribers through shared IPv4 NAT gateways (RFC 6598), aggregating multiple mobile handsets behind single addresses.
             </p>
           </div>
         </div>
 
         {/* Verification guidance */}
-        <div className="mt-4 p-3 rounded-xl bg-blue-50/70 dark:bg-blue-950/20 border border-blue-200/60 dark:border-blue-800/40 text-[11px] text-blue-900 dark:text-blue-300 flex items-start gap-2.5">
-          <Info className="w-4 h-4 text-blue-600 dark:text-blue-400 shrink-0 mt-0.5" />
-          <p className="leading-relaxed">
-            <strong className="font-semibold">Recommended Forensic Verification:</strong> For high-stakes incident response, corroborate this classification using active traceroute TTL hops, historical WHOIS registration changes, and internal network telemetry logs.
+        <div className="mt-4 p-3 rounded-xl bg-[#8C7BFF]/10 border border-[#8C7BFF]/25 text-[11px] text-[#B9ABFF] flex items-start gap-2.5">
+          <Info className="w-4 h-4 text-[#8C7BFF] shrink-0 mt-0.5" />
+          <p className="leading-relaxed font-sans">
+            <strong className="font-semibold text-white">Recommended Forensic Verification:</strong> For high-stakes incident response, corroborate this classification using active traceroute TTL hops, historical WHOIS registration changes, and internal network telemetry logs.
           </p>
         </div>
       </div>
@@ -537,38 +537,38 @@ export const ReportPage: React.FC = () => {
 
       {/* Save Modal */}
       {showSaveModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-md animate-in fade-in">
-          <div className="cyber-card w-full max-w-md p-6 sm:p-7 shadow-2xl border-cyan-500/30">
-            <h3 className="text-base font-extrabold text-slate-900 dark:text-white mb-1">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#050507]/80 backdrop-blur-md animate-in fade-in">
+          <div className="glass-shard w-full max-w-md p-6 sm:p-7 shadow-2xl border-[#8C7BFF]/30">
+            <h3 className="text-base font-bold text-white mb-1 font-mono">
               Save Analysis Snapshot
             </h3>
-            <p className="text-xs text-slate-500 dark:text-slate-400 mb-4">
+            <p className="text-xs text-[#A0A0AA] mb-4 font-mono">
               Bookmark this report in your local database for future comparisons and auditing.
             </p>
 
-            <div className="space-y-3.5 text-xs">
+            <div className="space-y-3.5 text-xs font-mono">
               <div>
-                <label className="block font-bold text-slate-700 dark:text-slate-300 mb-1">
+                <label className="block font-bold text-white mb-1">
                   Report Title
                 </label>
                 <input
                   type="text"
                   value={saveTitle}
                   onChange={(e) => setSaveTitle(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-800 dark:text-slate-200 font-mono text-xs focus:outline-none focus:ring-2 focus:ring-cyan-500"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-white/[0.10] bg-[#202027] text-white font-mono text-xs focus:outline-none focus:ring-2 focus:ring-[#8C7BFF]"
                 />
               </div>
 
               <div>
-                <label className="block font-bold text-slate-700 dark:text-slate-300 mb-1">
+                <label className="block font-bold text-white mb-1">
                   Investigation Notes (Optional)
                 </label>
                 <textarea
                   rows={3}
                   value={saveNotes}
-                  placeholder="e.g. Verified residential subscriber IP during cybersecurity incident response investigation."
+                  placeholder="e.g. Verified residential subscriber IP during incident response."
                   onChange={(e) => setSaveNotes(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-800 dark:text-slate-200 text-xs focus:outline-none focus:ring-2 focus:ring-cyan-500"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-white/[0.10] bg-[#202027] text-white text-xs focus:outline-none focus:ring-2 focus:ring-[#8C7BFF]"
                 />
               </div>
             </div>
@@ -576,13 +576,13 @@ export const ReportPage: React.FC = () => {
             <div className="mt-6 flex items-center justify-end gap-2.5">
               <button
                 onClick={() => setShowSaveModal(false)}
-                className="px-4 py-2 rounded-xl text-xs font-semibold text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 transition-colors"
+                className="px-4 py-2 rounded-xl text-xs font-semibold text-[#A0A0AA] hover:text-white transition-colors"
               >
                 Cancel
               </button>
               <button
                 onClick={handleSaveReport}
-                className="px-4 py-2 rounded-lg text-xs font-medium bg-blue-600 hover:bg-blue-700 text-white shadow-sm transition-colors"
+                className="px-4 py-2 rounded-xl text-xs font-semibold bg-[#8C7BFF] hover:bg-[#7b68ff] text-white shadow-sm transition-colors"
               >
                 Save Snapshot
               </button>

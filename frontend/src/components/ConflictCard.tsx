@@ -9,13 +9,13 @@ interface ConflictCardProps {
 export const ConflictCard: React.FC<ConflictCardProps> = ({ conflicts }) => {
   if (!conflicts || conflicts.length === 0) {
     return (
-      <div className="bg-emerald-500/5 dark:bg-emerald-500/10 border border-emerald-500/20 rounded-2xl p-4 flex items-center gap-3">
-        <CheckCircle2 className="w-5 h-5 text-emerald-500 shrink-0" />
+      <div className="glass-card p-4 flex items-center gap-3 border-[#36D67E]/30 bg-[#36D67E]/05">
+        <CheckCircle2 className="w-5 h-5 text-[#36D67E] shrink-0" />
         <div>
-          <h4 className="text-sm font-semibold text-emerald-800 dark:text-emerald-300">
-            No Contradictory Evidence Detected
+          <h4 className="text-xs font-semibold text-white font-mono">
+            Zero Contradictory Evidence Detected
           </h4>
-          <p className="text-xs text-emerald-700/80 dark:text-emerald-400 mt-0.5">
+          <p className="text-xs text-[#A0A0AA] mt-0.5">
             All queried sources (Autonomous System, BGP Routing, and Reverse DNS) consistently corroborate the classification.
           </p>
         </div>
@@ -26,12 +26,12 @@ export const ConflictCard: React.FC<ConflictCardProps> = ({ conflicts }) => {
   return (
     <div className="space-y-3">
       <div className="flex items-center gap-2">
-        <ShieldAlert className="w-5 h-5 text-amber-500" />
-        <h3 className="font-bold text-slate-900 dark:text-slate-100 text-base">
+        <ShieldAlert className="w-5 h-5 text-[#F0B45C]" />
+        <h3 className="font-bold text-white text-sm font-mono">
           Detected Evidence Conflicts ({conflicts.length})
         </h3>
       </div>
-      <p className="text-xs text-slate-500 dark:text-slate-400">
+      <p className="text-xs text-[#A0A0AA]">
         Transparent disagreement audit: NetEvidence AI does not discard conflicting signals. Contradictions are documented below and used to calibrate the uncertainty penalty.
       </p>
 
@@ -41,71 +41,48 @@ export const ConflictCard: React.FC<ConflictCardProps> = ({ conflicts }) => {
           return (
             <div
               key={conflict.id || idx}
-              className={`rounded-xl border p-4 transition-colors ${
+              className={`rounded-2xl border p-4.5 backdrop-blur-xl transition-all ${
                 isHigh
-                  ? 'bg-amber-500/5 dark:bg-amber-950/20 border-amber-300 dark:border-amber-800/60'
-                  : 'bg-slate-50 dark:bg-slate-800/40 border-slate-200 dark:border-slate-700'
+                  ? 'bg-[#17171B]/90 border-[#F0B45C]/40 shadow-[0_8px_24px_rgba(240,180,92,0.12)]'
+                  : 'bg-[#17171B]/80 border-white/[0.08]'
               }`}
             >
               <div className="flex items-start justify-between gap-3">
                 <div className="flex items-center gap-2">
-                  <AlertTriangle
-                    className={`w-4 h-4 shrink-0 ${isHigh ? 'text-amber-600 dark:text-amber-400' : 'text-slate-500'}`}
-                  />
-                  <h4 className="text-sm font-bold text-slate-900 dark:text-slate-100">
-                    {conflict.title}
-                  </h4>
-                </div>
-                <span
-                  className={`text-[11px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full ${
-                    isHigh
-                      ? 'bg-amber-100 dark:bg-amber-900/40 text-amber-800 dark:text-amber-300'
-                      : 'bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300'
-                  }`}
-                >
-                  {conflict.severity} Severity
-                </span>
-              </div>
-
-              {/* Side-by-side values */}
-              <div className="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
-                <div className="p-2.5 rounded-lg bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800">
-                  <span className="font-semibold text-slate-500 dark:text-slate-400 block mb-1">
-                    Source A: {conflict.source_a}
+                  <span
+                    className={`text-[10px] font-mono px-2 py-0.5 rounded-md font-semibold border ${
+                      isHigh
+                        ? 'bg-[#F0B45C]/15 text-[#F0B45C] border-[#F0B45C]/30'
+                        : 'bg-[#70D7FF]/15 text-[#70D7FF] border-[#70D7FF]/30'
+                    }`}
+                  >
+                    {conflict.severity || 'Moderate'} Conflict
                   </span>
-                  <code className="text-slate-800 dark:text-slate-200 font-mono text-[11px] break-all">
-                    {conflict.value_a}
-                  </code>
-                </div>
-
-                <div className="p-2.5 rounded-lg bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800">
-                  <span className="font-semibold text-slate-500 dark:text-slate-400 block mb-1">
-                    Source B: {conflict.source_b}
+                  <span className="text-xs font-bold text-white font-mono">
+                    {conflict.title || (conflict as any).conflict_type || 'Signal Contradiction'}
                   </span>
-                  <code className="text-slate-800 dark:text-slate-200 font-mono text-[11px] break-all">
-                    {conflict.value_b}
-                  </code>
                 </div>
+                {(conflict as any).uncertainty_penalty && (
+                  <span className="text-[11px] font-mono font-medium text-[#FF626E] bg-[#FF626E]/10 px-2 py-0.5 rounded border border-[#FF626E]/30">
+                    -{(conflict as any).uncertainty_penalty}% Penalty
+                  </span>
+                )}
               </div>
 
-              {/* Explanation of Why It Matters */}
-              <div className="mt-3 text-xs space-y-1.5">
-                <p className="text-slate-700 dark:text-slate-300">
-                  <span className="font-semibold text-slate-900 dark:text-slate-100">Why this conflict matters: </span>
-                  {conflict.why_it_matters}
-                </p>
-                <p className="text-slate-600 dark:text-slate-400">
-                  <span className="font-semibold text-slate-800 dark:text-slate-200">System Resolution: </span>
-                  {conflict.resolution_strategy}
-                </p>
-              </div>
+              <p className="text-xs text-[#E5E5EA] mt-2 leading-relaxed">
+                {conflict.why_it_matters || (conflict as any).description}
+              </p>
 
-              <div className="mt-2.5 pt-2 border-t border-slate-200/60 dark:border-slate-800 flex items-center justify-between text-[11px] text-slate-500">
-                <span>
-                  Impact: {conflict.affected_outcome ? 'Lowered confidence score (-25 pts)' : 'Informational notice only'}
-                </span>
-                <span className="font-mono text-[10px]">ID: {conflict.id}</span>
-              </div>
+              {(conflict.resolution_strategy || (conflict as any).resolution) && (
+                <div className="mt-3 pt-2.5 border-t border-white/[0.08] flex items-start gap-2">
+                  <span className="text-[10px] font-mono text-[#8C7BFF] uppercase font-semibold shrink-0">
+                    Resolution:
+                  </span>
+                  <span className="text-xs text-[#A0A0AA]">
+                    {conflict.resolution_strategy || (conflict as any).resolution}
+                  </span>
+                </div>
+              )}
             </div>
           );
         })}

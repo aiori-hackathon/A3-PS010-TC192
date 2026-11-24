@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { api } from '../services/api';
-import { X, GitCompare, ArrowRight, ShieldCheck, AlertCircle } from 'lucide-react';
+import { X, GitCompare, ShieldCheck } from 'lucide-react';
 
 interface CompareModalProps {
   analysisIdA: number;
@@ -47,33 +47,35 @@ export const CompareModal: React.FC<CompareModalProps> = ({ analysisIdA, isOpen,
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/60 backdrop-blur-sm animate-in fade-in">
-      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl w-full max-w-3xl max-h-[90vh] overflow-y-auto shadow-2xl p-6">
-        <div className="flex items-center justify-between pb-4 border-b border-slate-100 dark:border-slate-800">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#050507]/80 backdrop-blur-md animate-in fade-in font-sans">
+      <div className="glass-shard w-full max-w-3xl max-h-[90vh] overflow-y-auto shadow-2xl p-6 border-[#8C7BFF]/30">
+        <div className="flex items-center justify-between pb-4 border-b border-white/[0.08]">
           <div className="flex items-center gap-2">
-            <GitCompare className="w-5 h-5 text-blue-600 dark:text-blue-400" />
-            <h3 className="text-base font-bold text-slate-900 dark:text-slate-100">
+            <div className="w-8 h-8 rounded-xl bg-[#8C7BFF]/15 border border-[#8C7BFF]/30 flex items-center justify-center text-[#8C7BFF]">
+              <GitCompare className="w-4 h-4" />
+            </div>
+            <h3 className="text-base font-bold text-white font-mono">
               Historical Analysis Comparison
             </h3>
           </div>
           <button
             onClick={onClose}
-            className="p-1 rounded-lg text-slate-400 hover:text-slate-600 dark:hover:text-slate-200"
+            className="p-1 rounded-lg text-[#777782] hover:text-white hover:bg-white/[0.06] transition-colors"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {/* Selection bar */}
-        <div className="mt-4 p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/80 flex flex-col sm:flex-row items-center justify-between gap-3">
+        <div className="mt-4 p-4 rounded-xl bg-[#202027]/70 border border-white/[0.08] flex flex-col sm:flex-row items-center justify-between gap-3 font-mono">
           <div className="w-full sm:w-auto">
-            <label className="block text-xs font-semibold text-slate-500 mb-1">
+            <label className="block text-xs font-semibold text-[#A0A0AA] mb-1">
               Select snapshot to compare against:
             </label>
             <select
               value={selectedIdB || ''}
               onChange={(e) => setSelectedIdB(Number(e.target.value))}
-              className="w-full sm:w-72 px-3 py-1.5 text-xs rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-200"
+              className="w-full sm:w-72 px-3 py-1.5 text-xs rounded-xl border border-white/[0.10] bg-[#17171B] text-white"
             >
               {historyList.map((item) => (
                 <option key={item.id} value={item.id}>
@@ -86,83 +88,83 @@ export const CompareModal: React.FC<CompareModalProps> = ({ analysisIdA, isOpen,
           <button
             onClick={handleRunCompare}
             disabled={!selectedIdB || isLoading}
-            className="w-full sm:w-auto px-4 py-2 rounded-xl text-xs font-semibold bg-blue-600 hover:bg-blue-700 text-white disabled:opacity-50 transition-colors"
+            className="w-full sm:w-auto px-4 py-2 rounded-xl text-xs font-semibold bg-[#8C7BFF] hover:bg-[#7b68ff] text-white disabled:opacity-50 transition-colors shadow-sm"
           >
             {isLoading ? 'Comparing...' : 'Compare Snapshots'}
           </button>
         </div>
 
         {error && (
-          <div className="mt-4 p-3 rounded-lg bg-rose-50 dark:bg-rose-950/20 text-rose-600 text-xs border border-rose-200 dark:border-rose-800">
+          <div className="mt-4 p-3 rounded-xl bg-[#FF626E]/15 text-[#FF626E] text-xs border border-[#FF626E]/30 font-mono">
             {error}
           </div>
         )}
 
         {/* Results */}
         {compareResult && (
-          <div className="mt-6 space-y-4">
+          <div className="mt-6 space-y-4 font-mono">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
               {/* Snapshot A */}
-              <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800">
-                <span className="text-[11px] font-bold text-blue-600 dark:text-blue-400 uppercase tracking-wider block mb-1">
+              <div className="p-4 rounded-xl bg-[#202027]/70 border border-white/[0.08]">
+                <span className="text-[11px] font-bold text-[#8C7BFF] uppercase tracking-wider block mb-1">
                   Baseline Analysis #{compareResult.analysis_a.id}
                 </span>
-                <p className="font-mono text-base font-bold text-slate-900 dark:text-slate-100">
+                <p className="text-base font-bold text-white">
                   {compareResult.analysis_a.ip}
                 </p>
-                <div className="mt-3 space-y-1.5 text-slate-600 dark:text-slate-300">
+                <div className="mt-3 space-y-1.5 text-[#A0A0AA]">
                   <div>
-                    <span className="text-slate-400">Network Type:</span>{' '}
-                    <span className="font-semibold text-slate-800 dark:text-slate-100">
+                    <span className="text-[#777782]">Network Type:</span>{' '}
+                    <span className="font-semibold text-white">
                       {compareResult.analysis_a.network_type}
                     </span>
                   </div>
                   <div>
-                    <span className="text-slate-400">Confidence:</span> {compareResult.analysis_a.confidence}%
+                    <span className="text-[#777782]">Confidence:</span> {compareResult.analysis_a.confidence}%
                   </div>
                   <div>
-                    <span className="text-slate-400">ASN:</span> {compareResult.analysis_a.asn || 'None'}
+                    <span className="text-[#777782]">ASN:</span> {compareResult.analysis_a.asn || 'None'}
                   </div>
                   <div>
-                    <span className="text-slate-400">Prefix:</span> {compareResult.analysis_a.prefix || 'None'}
+                    <span className="text-[#777782]">Prefix:</span> {compareResult.analysis_a.prefix || 'None'}
                   </div>
                   <div>
-                    <span className="text-slate-400">Hostname:</span> {compareResult.analysis_a.hostname || 'None'}
+                    <span className="text-[#777782]">Hostname:</span> {compareResult.analysis_a.hostname || 'None'}
                   </div>
-                  <div className="text-[10px] text-slate-400 pt-1">
+                  <div className="text-[10px] text-[#777782] pt-1">
                     Recorded: {new Date(compareResult.analysis_a.timestamp).toLocaleString()}
                   </div>
                 </div>
               </div>
 
               {/* Snapshot B */}
-              <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800">
-                <span className="text-[11px] font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-wider block mb-1">
+              <div className="p-4 rounded-xl bg-[#202027]/70 border border-white/[0.08]">
+                <span className="text-[11px] font-bold text-[#70D7FF] uppercase tracking-wider block mb-1">
                   Comparison Snapshot #{compareResult.analysis_b.id}
                 </span>
-                <p className="font-mono text-base font-bold text-slate-900 dark:text-slate-100">
+                <p className="text-base font-bold text-white">
                   {compareResult.analysis_b.ip}
                 </p>
-                <div className="mt-3 space-y-1.5 text-slate-600 dark:text-slate-300">
+                <div className="mt-3 space-y-1.5 text-[#A0A0AA]">
                   <div>
-                    <span className="text-slate-400">Network Type:</span>{' '}
-                    <span className="font-semibold text-slate-800 dark:text-slate-100">
+                    <span className="text-[#777782]">Network Type:</span>{' '}
+                    <span className="font-semibold text-white">
                       {compareResult.analysis_b.network_type}
                     </span>
                   </div>
                   <div>
-                    <span className="text-slate-400">Confidence:</span> {compareResult.analysis_b.confidence}%
+                    <span className="text-[#777782]">Confidence:</span> {compareResult.analysis_b.confidence}%
                   </div>
                   <div>
-                    <span className="text-slate-400">ASN:</span> {compareResult.analysis_b.asn || 'None'}
+                    <span className="text-[#777782]">ASN:</span> {compareResult.analysis_b.asn || 'None'}
                   </div>
                   <div>
-                    <span className="text-slate-400">Prefix:</span> {compareResult.analysis_b.prefix || 'None'}
+                    <span className="text-[#777782]">Prefix:</span> {compareResult.analysis_b.prefix || 'None'}
                   </div>
                   <div>
-                    <span className="text-slate-400">Hostname:</span> {compareResult.analysis_b.hostname || 'None'}
+                    <span className="text-[#777782]">Hostname:</span> {compareResult.analysis_b.hostname || 'None'}
                   </div>
-                  <div className="text-[10px] text-slate-400 pt-1">
+                  <div className="text-[10px] text-[#777782] pt-1">
                     Recorded: {new Date(compareResult.analysis_b.timestamp).toLocaleString()}
                   </div>
                 </div>
@@ -170,17 +172,17 @@ export const CompareModal: React.FC<CompareModalProps> = ({ analysisIdA, isOpen,
             </div>
 
             {/* Changes detected */}
-            <div className="p-4 rounded-xl bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 text-xs">
-              <h4 className="font-bold text-slate-900 dark:text-slate-100 mb-2 flex items-center gap-1.5">
-                <ShieldCheck className="w-4 h-4 text-blue-600" />
+            <div className="p-4 rounded-xl bg-[#8C7BFF]/10 border border-[#8C7BFF]/25 text-xs">
+              <h4 className="font-bold text-white mb-2 flex items-center gap-1.5 font-mono">
+                <ShieldCheck className="w-4 h-4 text-[#8C7BFF]" />
                 Detected Differences ({compareResult.detected_changes.length})
               </h4>
               {compareResult.detected_changes.length === 0 ? (
-                <p className="text-slate-600 dark:text-slate-300">
+                <p className="text-[#A0A0AA] font-sans">
                   No structural differences detected. Both snapshots observe identical network categories, ASNs, prefixes, and hostnames.
                 </p>
               ) : (
-                <ul className="list-disc list-inside space-y-1 text-slate-700 dark:text-slate-300">
+                <ul className="list-disc list-inside space-y-1 text-[#E5E5EA]">
                   {compareResult.detected_changes.map((ch: string, i: number) => (
                     <li key={i}>{ch}</li>
                   ))}

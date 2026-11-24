@@ -6,13 +6,9 @@ import {
   Filter,
   Trash2,
   ExternalLink,
-  Calendar,
   ChevronLeft,
   ChevronRight,
-  ShieldAlert,
   Bookmark,
-  GitCompare,
-  ArrowUpDown
 } from 'lucide-react';
 import { api } from '../services/api';
 
@@ -73,24 +69,26 @@ export const HistoryPage: React.FC = () => {
   };
 
   return (
-    <div className="space-y-6 animate-in fade-in max-w-6xl mx-auto">
+    <div className="space-y-6 animate-in fade-in max-w-6xl mx-auto pb-12 font-sans">
       {/* Title */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2 mb-1">
-            <HistoryIcon className="w-5 h-5 text-blue-600 dark:text-blue-400" />
-            <h2 className="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-slate-100 tracking-tight">
+            <div className="w-8 h-8 rounded-xl bg-[#8C7BFF]/15 border border-[#8C7BFF]/30 flex items-center justify-center text-[#8C7BFF]">
+              <HistoryIcon className="w-4 h-4" />
+            </div>
+            <h2 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
               Analysis History & Archive
             </h2>
           </div>
-          <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400">
+          <p className="text-xs sm:text-sm text-[#A0A0AA] font-mono">
             Search, filter, and audit all past network-type investigations stored in your database.
           </p>
         </div>
 
         <button
           onClick={() => navigate('/analyze')}
-          className="px-4 py-2 rounded-xl text-xs font-semibold bg-blue-600 hover:bg-blue-700 text-white shadow-sm flex items-center gap-1.5 self-start sm:self-auto"
+          className="px-4 py-2 rounded-xl text-xs font-semibold font-mono bg-[#8C7BFF] hover:bg-[#7b68ff] text-white shadow-[0_4px_16px_rgba(140,123,255,0.35)] flex items-center gap-1.5 self-start sm:self-auto transition-all"
         >
           <Search className="w-3.5 h-3.5" />
           Analyze New IP
@@ -98,31 +96,31 @@ export const HistoryPage: React.FC = () => {
       </div>
 
       {/* Filter / Search Bar */}
-      <div className="cyber-card p-5 space-y-3.5">
+      <div className="glass-shard p-5 space-y-3.5">
         <form onSubmit={handleSearchSubmit} className="flex flex-col sm:flex-row gap-2.5">
           <div className="relative flex-1">
-            <Search className="w-4 h-4 text-cyan-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+            <Search className="w-4 h-4 text-[#8C7BFF] absolute left-3.5 top-1/2 -translate-y-1/2" />
             <input
               type="text"
               placeholder="Search by IP, ASN (AS7922), or Organization name..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="w-full pl-10 pr-3 py-2.5 text-xs font-mono rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-cyan-500"
+              className="w-full pl-10 pr-3 py-2.5 text-xs font-mono rounded-xl border border-white/[0.10] bg-[#202027] text-white focus:outline-none focus:ring-2 focus:ring-[#8C7BFF]"
             />
           </div>
 
           <button
             type="submit"
-            className="px-4 py-2 text-xs font-medium rounded-lg bg-blue-600 hover:bg-blue-700 text-white shadow-sm transition-colors"
+            className="px-4 py-2 text-xs font-medium font-mono rounded-xl bg-[#8C7BFF] hover:bg-[#7b68ff] text-white shadow-sm transition-colors"
           >
             Search
           </button>
         </form>
 
         {/* Filter controls */}
-        <div className="flex flex-wrap items-center gap-2.5 pt-2 border-t border-slate-100 dark:border-slate-800 text-xs">
-          <div className="flex items-center gap-1.5 text-slate-500">
-            <Filter className="w-3.5 h-3.5" />
+        <div className="flex flex-wrap items-center gap-2.5 pt-2 border-t border-white/[0.08] text-xs font-mono">
+          <div className="flex items-center gap-1.5 text-[#A0A0AA]">
+            <Filter className="w-3.5 h-3.5 text-[#8C7BFF]" />
             <span>Category:</span>
           </div>
           <select
@@ -131,7 +129,7 @@ export const HistoryPage: React.FC = () => {
               setCategory(e.target.value);
               setPage(1);
             }}
-            className="px-2.5 py-1 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-800 dark:text-slate-200"
+            className="px-2.5 py-1 rounded-lg border border-white/[0.10] bg-[#202027] text-[#E5E5EA]"
           >
             <option value="All">All Categories</option>
             <option value="Residential">Residential</option>
@@ -141,16 +139,16 @@ export const HistoryPage: React.FC = () => {
             <option value="Unknown / Insufficient Evidence">Unknown / Insufficient</option>
           </select>
 
-          <span className="text-slate-300 dark:text-slate-700">|</span>
+          <span className="text-[#777782]">|</span>
 
-          <span className="text-slate-500">Quality:</span>
+          <span className="text-[#A0A0AA]">Quality:</span>
           <select
             value={quality}
             onChange={(e) => {
               setQuality(e.target.value);
               setPage(1);
             }}
-            className="px-2.5 py-1 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-800 dark:text-slate-200"
+            className="px-2.5 py-1 rounded-lg border border-white/[0.10] bg-[#202027] text-[#E5E5EA]"
           >
             <option value="All">All Qualities</option>
             <option value="Strong">Strong Evidence</option>
@@ -158,13 +156,13 @@ export const HistoryPage: React.FC = () => {
             <option value="Limited">Limited Evidence</option>
           </select>
 
-          <span className="text-slate-300 dark:text-slate-700">|</span>
+          <span className="text-[#777782]">|</span>
 
-          <span className="text-slate-500">Sort:</span>
+          <span className="text-[#A0A0AA]">Sort:</span>
           <select
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value)}
-            className="px-2.5 py-1 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-800 dark:text-slate-200"
+            className="px-2.5 py-1 rounded-lg border border-white/[0.10] bg-[#202027] text-[#E5E5EA]"
           >
             <option value="recent">Most Recent</option>
             <option value="oldest">Oldest First</option>
@@ -177,21 +175,21 @@ export const HistoryPage: React.FC = () => {
               type="checkbox"
               checked={isSavedOnly}
               onChange={(e) => setIsSavedOnly(e.target.checked)}
-              className="rounded border-slate-300 text-blue-600 focus:ring-blue-500"
+              className="rounded border-white/20 bg-[#202027] text-[#8C7BFF] focus:ring-[#8C7BFF]"
             />
-            <span className="text-slate-600 dark:text-slate-400 font-medium">Bookmarked Only</span>
+            <span className="text-[#A0A0AA] font-medium">Bookmarked Only</span>
           </label>
         </div>
       </div>
 
       {/* Table / List */}
-      <div className="cyber-card overflow-hidden">
+      <div className="glass-shard overflow-hidden">
         {isLoading ? (
-          <div className="py-20 text-center text-xs text-slate-400">Loading history ledger...</div>
+          <div className="py-20 text-center text-xs text-[#A0A0AA] font-mono">Loading history ledger...</div>
         ) : items.length > 0 ? (
           <div className="overflow-x-auto">
-            <table className="w-full text-left text-xs">
-              <thead className="bg-slate-50 dark:bg-slate-800/60 border-b border-slate-200 dark:border-slate-800 text-[10px] uppercase font-bold text-slate-400 tracking-wider">
+            <table className="w-full text-left text-xs font-mono">
+              <thead className="bg-[#202027]/70 border-b border-white/[0.08] text-[10px] uppercase font-bold text-[#A0A0AA] tracking-wider">
                 <tr>
                   <th className="py-3 px-4">Target IP</th>
                   <th className="py-3 px-4">Network Category</th>
@@ -202,24 +200,24 @@ export const HistoryPage: React.FC = () => {
                   <th className="py-3 px-4 text-right">Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-100 dark:divide-slate-800/60 font-sans">
+              <tbody className="divide-y divide-white/[0.06]">
                 {items.map((item) => (
                   <tr
                     key={item.id}
-                    className="hover:bg-slate-50/80 dark:hover:bg-slate-800/40 transition-colors"
+                    className="hover:bg-white/[0.03] transition-colors"
                   >
                     <td className="py-3.5 px-4 whitespace-nowrap">
                       <div className="flex items-center gap-2">
-                        <span className="font-mono font-bold text-slate-900 dark:text-slate-100">
+                        <span className="font-bold text-white">
                           {item.ip_address}
                         </span>
                         {item.is_saved && (
                           <span title="Bookmarked">
-                            <Bookmark className="w-3.5 h-3.5 text-amber-500 fill-amber-500" />
+                            <Bookmark className="w-3.5 h-3.5 text-[#F0B45C] fill-[#F0B45C]" />
                           </span>
                         )}
                         {item.is_demo && (
-                          <span className="text-[9px] font-bold px-1.5 rounded bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20">
+                          <span className="text-[9px] font-bold px-1.5 rounded bg-[#F0B45C]/15 text-[#F0B45C] border border-[#F0B45C]/30">
                             DEMO
                           </span>
                         )}
@@ -227,37 +225,37 @@ export const HistoryPage: React.FC = () => {
                     </td>
 
                     <td className="py-3.5 px-4 whitespace-nowrap">
-                      <span className="px-2.5 py-0.5 rounded-full font-semibold text-[11px] bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 border border-blue-500/20">
+                      <span className="px-2.5 py-0.5 rounded-lg font-semibold text-[11px] bg-[#8C7BFF]/15 text-[#B9ABFF] border border-[#8C7BFF]/30">
                         {item.network_type}
                       </span>
                     </td>
 
                     <td className="py-3.5 px-4 whitespace-nowrap">
-                      <span className="font-bold text-slate-800 dark:text-slate-200">
+                      <span className="font-bold text-white">
                         {item.confidence_score}%
                       </span>
-                      <span className="text-[10px] text-slate-400 ml-1">({item.confidence_level})</span>
+                      <span className="text-[10px] text-[#777782] ml-1">({item.confidence_level})</span>
                     </td>
 
                     <td className="py-3.5 px-4 whitespace-nowrap">
                       <span
                         className={`text-[11px] font-medium ${
                           item.evidence_quality === 'Strong'
-                            ? 'text-emerald-600 dark:text-emerald-400'
+                            ? 'text-[#36D67E]'
                             : item.evidence_quality === 'Moderate'
-                            ? 'text-amber-600 dark:text-amber-400'
-                            : 'text-slate-500'
+                            ? 'text-[#F0B45C]'
+                            : 'text-[#A0A0AA]'
                         }`}
                       >
                         {item.evidence_quality}
                       </span>
                     </td>
 
-                    <td className="py-3.5 px-4 max-w-xs truncate text-slate-600 dark:text-slate-300">
+                    <td className="py-3.5 px-4 max-w-xs truncate text-[#A0A0AA] font-sans">
                       {item.org_name || item.asn || 'Unspecified'}
                     </td>
 
-                    <td className="py-3.5 px-4 whitespace-nowrap text-slate-400 text-[11px]">
+                    <td className="py-3.5 px-4 whitespace-nowrap text-[#777782] text-[11px]">
                       {new Date(item.created_at).toLocaleString()}
                     </td>
 
@@ -265,7 +263,7 @@ export const HistoryPage: React.FC = () => {
                       <div className="flex items-center justify-end gap-2">
                         <button
                           onClick={() => navigate(`/report/${item.id}`)}
-                          className="px-2.5 py-1 rounded-lg bg-blue-50 dark:bg-blue-950/40 hover:bg-blue-100 text-blue-600 dark:text-blue-400 font-semibold text-[11px] flex items-center gap-1 transition-colors"
+                          className="px-2.5 py-1 rounded-lg bg-[#8C7BFF]/15 hover:bg-[#8C7BFF]/30 text-[#B9ABFF] font-semibold text-[11px] flex items-center gap-1 transition-colors border border-[#8C7BFF]/30"
                         >
                           View <ExternalLink className="w-3 h-3" />
                         </button>
@@ -273,7 +271,7 @@ export const HistoryPage: React.FC = () => {
                         <button
                           onClick={() => handleDelete(item.id, item.ip_address)}
                           title="Delete snapshot"
-                          className="p-1 rounded-lg text-slate-400 hover:text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-950/20 transition-colors"
+                          className="p-1 rounded-lg text-[#777782] hover:text-[#FF626E] hover:bg-white/[0.05] transition-colors"
                         >
                           <Trash2 className="w-3.5 h-3.5" />
                         </button>
@@ -285,12 +283,12 @@ export const HistoryPage: React.FC = () => {
             </table>
           </div>
         ) : (
-          <div className="py-16 text-center">
-            <Search className="w-8 h-8 text-slate-300 dark:text-slate-600 mx-auto mb-2" />
-            <h4 className="text-sm font-semibold text-slate-700 dark:text-slate-300">
+          <div className="py-16 text-center font-mono">
+            <Search className="w-8 h-8 text-[#777782] mx-auto mb-2" />
+            <h4 className="text-sm font-semibold text-white">
               No matching analyses found
             </h4>
-            <p className="text-xs text-slate-400 mt-1">
+            <p className="text-xs text-[#A0A0AA] mt-1">
               Try adjusting your search terms or filters, or analyze a new IP address.
             </p>
           </div>
@@ -298,7 +296,7 @@ export const HistoryPage: React.FC = () => {
 
         {/* Pagination Bar */}
         {totalPages > 1 && (
-          <div className="px-4 py-3 bg-slate-50 dark:bg-slate-800/60 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between text-xs text-slate-500">
+          <div className="px-4 py-3 bg-[#202027]/70 border-t border-white/[0.08] flex items-center justify-between text-xs font-mono text-[#A0A0AA]">
             <span>
               Showing page {page} of {totalPages} ({total} total analyses)
             </span>
@@ -306,15 +304,15 @@ export const HistoryPage: React.FC = () => {
               <button
                 onClick={() => setPage((p) => Math.max(1, p - 1))}
                 disabled={page === 1}
-                className="p-1.5 rounded-lg border border-slate-200 dark:border-slate-700 disabled:opacity-40"
+                className="p-1.5 rounded-lg border border-white/[0.10] bg-[#202027] text-white disabled:opacity-40"
               >
                 <ChevronLeft className="w-4 h-4" />
               </button>
-              <span className="px-2 font-semibold text-slate-800 dark:text-slate-200">{page}</span>
+              <span className="px-2 font-semibold text-white">{page}</span>
               <button
                 onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
                 disabled={page === totalPages}
-                className="p-1.5 rounded-lg border border-slate-200 dark:border-slate-700 disabled:opacity-40"
+                className="p-1.5 rounded-lg border border-white/[0.10] bg-[#202027] text-white disabled:opacity-40"
               >
                 <ChevronRight className="w-4 h-4" />
               </button>

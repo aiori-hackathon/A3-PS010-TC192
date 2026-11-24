@@ -172,14 +172,6 @@ if static_dir.exists() and (static_dir / "index.html").exists():
         if full_path and target.is_file():
             return FileResponse(target)
         
-        # If route is for the main Facet landing or facet path
-        if full_path in ["facet", "facet.html"]:
-            return FileResponse(static_dir / "index.html", headers=NO_CACHE_HEADERS)
-
-        # For application routes (/login, /analyze, /history, /dashboard, etc.)
-        app_html = static_dir / "app.html"
-        if app_html.exists():
-            return FileResponse(app_html, headers=NO_CACHE_HEADERS)
         return FileResponse(static_dir / "index.html", headers=NO_CACHE_HEADERS)
 else:
     @app.get("/")

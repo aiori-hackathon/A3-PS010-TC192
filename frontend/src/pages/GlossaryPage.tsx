@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BookOpen, Search, HelpCircle, Lightbulb, Compass } from 'lucide-react';
+import { BookOpen, Search, Lightbulb } from 'lucide-react';
 
 interface GlossaryItem {
   term: string;
@@ -86,29 +86,31 @@ export const GlossaryPage: React.FC = () => {
   );
 
   return (
-    <div className="space-y-6 animate-in fade-in max-w-5xl mx-auto">
+    <div className="space-y-6 animate-in fade-in max-w-5xl mx-auto pb-12 font-sans">
       {/* Title */}
       <div>
         <div className="flex items-center gap-2 mb-1">
-          <BookOpen className="w-5 h-5 text-blue-600 dark:text-blue-400" />
-          <h2 className="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-slate-100 tracking-tight">
+          <div className="w-8 h-8 rounded-xl bg-[#8C7BFF]/15 border border-[#8C7BFF]/30 flex items-center justify-center text-[#8C7BFF]">
+            <BookOpen className="w-4 h-4" />
+          </div>
+          <h2 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
             Help & Plain-English Glossary
           </h2>
         </div>
-        <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400">
-          Written for everyday students and analysts: every technical concept explained simply without confusing jargon.
+        <p className="text-xs sm:text-sm text-[#A0A0AA] font-mono">
+          Forensic reference guide: every technical network classification concept explained with plain-English clarity.
         </p>
       </div>
 
       {/* Search Bar */}
-      <div className="relative">
-        <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+      <div className="relative font-mono">
+        <Search className="w-4 h-4 text-[#8C7BFF] absolute left-3.5 top-1/2 -translate-y-1/2" />
         <input
           type="text"
           placeholder="Search technical terms (e.g. ASN, BGP, Reverse DNS, Prefix)..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="w-full pl-10 pr-4 py-3 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 text-xs sm:text-sm shadow-sm"
+          className="w-full pl-10 pr-4 py-3 rounded-xl border border-white/[0.10] bg-[#202027] text-white text-xs sm:text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-[#8C7BFF]"
         />
       </div>
 
@@ -117,43 +119,43 @@ export const GlossaryPage: React.FC = () => {
         {filtered.map((item) => (
           <div
             key={item.term}
-            className="p-5 rounded-2xl cyber-card space-y-3 hover:border-cyan-500/40 hover:shadow-glow-cyan"
+            className="p-5 rounded-2xl glass-shard space-y-3"
           >
             <div className="flex items-center justify-between">
-              <h3 className="font-extrabold text-slate-900 dark:text-slate-100 text-base">
+              <h3 className="font-bold text-white text-base font-mono">
                 {item.term}
               </h3>
-              <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400">
+              <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-md bg-[#8C7BFF]/15 text-[#B9ABFF] border border-[#8C7BFF]/30 font-mono">
                 Concept
               </span>
             </div>
 
             <div>
-              <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider block mb-0.5">
+              <span className="text-[11px] font-bold text-[#A0A0AA] uppercase tracking-wider block mb-0.5 font-mono">
                 Simple Definition
               </span>
-              <p className="text-xs text-slate-700 dark:text-slate-300 leading-relaxed">
+              <p className="text-xs text-[#E5E5EA] leading-relaxed">
                 {item.simpleDefinition}
               </p>
             </div>
 
-            <div className="p-3 rounded-xl bg-amber-500/5 dark:bg-amber-950/20 border border-amber-500/20 text-xs">
-              <span className="font-bold text-amber-800 dark:text-amber-300 flex items-center gap-1 mb-0.5">
-                <Lightbulb className="w-3.5 h-3.5 text-amber-500" />
+            <div className="p-3 rounded-xl bg-[#F0B45C]/10 border border-[#F0B45C]/25 text-xs">
+              <span className="font-bold text-[#F0B45C] flex items-center gap-1 mb-0.5 font-mono">
+                <Lightbulb className="w-3.5 h-3.5 text-[#F0B45C]" />
                 Real-World Metaphor:
               </span>
-              <p className="text-slate-700 dark:text-slate-300 text-[11px] leading-relaxed">
+              <p className="text-[#E5E5EA] text-[11px] leading-relaxed">
                 {item.realWorldMetaphor}
               </p>
             </div>
 
-            <div className="text-xs pt-1 border-t border-slate-100 dark:border-slate-800 space-y-1">
-              <p className="text-slate-600 dark:text-slate-400 text-[11px]">
-                <strong className="text-slate-800 dark:text-slate-200">Why NetEvidence uses it: </strong>
+            <div className="text-xs pt-1 border-t border-white/[0.08] space-y-1 font-mono">
+              <p className="text-[#A0A0AA] text-[11px] font-sans">
+                <strong className="text-white">Why NetEvidence uses it: </strong>
                 {item.whyItMatters}
               </p>
-              <p className="text-slate-500 font-mono text-[11px]">
-                Example: <span className="text-blue-600 dark:text-blue-400">{item.example}</span>
+              <p className="text-[#777782] text-[11px]">
+                Example: <span className="text-[#70D7FF]">{item.example}</span>
               </p>
             </div>
           </div>

@@ -8,10 +8,7 @@ import {
   AuditEvent
 } from '../types';
 
-const isSameOrigin = typeof window !== 'undefined' && !window.location.hostname.includes('a3-ps-010-tc-192.vercel.app');
-const API_BASE =
-  import.meta.env.VITE_API_URL ||
-  (isSameOrigin ? '/api/v1' : 'https://a3-ps-010-tc-192-4fs1.vercel.app/api/v1');
+const API_BASE = import.meta.env.VITE_API_URL || '/api/v1';
 
 function getAuthHeaders(): HeadersInit {
   const token = localStorage.getItem('netevidence_token');
