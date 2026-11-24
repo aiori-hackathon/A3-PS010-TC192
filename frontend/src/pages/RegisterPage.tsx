@@ -75,7 +75,7 @@ export const RegisterPage: React.FC = () => {
         </div>
 
         <h1 className="text-3xl font-extrabold text-white tracking-tight">
-          Create Analyst Account
+          Create New Account
         </h1>
         <p className="mt-1.5 text-xs text-[#A0A0AA] font-mono">
           Join the NetEvidence AI Security Intelligence Platform

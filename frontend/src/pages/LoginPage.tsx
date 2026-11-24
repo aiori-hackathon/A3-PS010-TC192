@@ -147,7 +147,7 @@ export const LoginPage: React.FC = () => {
           <div className="mt-6 text-center text-xs text-[#A0A0AA] border-t border-white/[0.08] pt-4">
             Don&apos;t have an account?{' '}
             <Link to="/register" className="font-semibold text-[#8C7BFF] hover:text-[#B9ABFF] underline">
-              Create Analyst Account
+              Create New Account
             </Link>
           </div>
         </div>
