@@ -21,7 +21,6 @@ export const Navbar: React.FC<NavbarProps> = ({ onToggleSidebar, title }) => {
   };
 
   const navLinks = [
-    { name: 'Dashboard', path: '/' },
     { name: 'Analyze IP', path: '/analyze' },
     { name: 'History', path: '/history' },
     { name: 'Explorer', path: '/explorer' },
@@ -47,7 +46,13 @@ export const Navbar: React.FC<NavbarProps> = ({ onToggleSidebar, title }) => {
           </div>
           <div className="hidden sm:block">
             <h1 className="text-sm font-bold text-white tracking-tight flex items-center gap-2">
-              <span>{title || 'NetEvidence AI'}</span>
+              <span>NetEvidence AI</span>
+              {title && title !== 'Dashboard' && title !== 'NetEvidence AI' && (
+                <>
+                  <span className="text-[#777782] text-xs font-normal">/</span>
+                  <span className="text-xs font-mono font-medium text-[#8C7BFF]">{title}</span>
+                </>
+              )}
             </h1>
             <p className="text-[10.5px] text-[#A0A0AA] font-normal leading-tight">
               Evidence-Based Network Intelligence

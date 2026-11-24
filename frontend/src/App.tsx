@@ -38,7 +38,7 @@ const ProtectedLayout: React.FC<{ children: React.ReactNode }> = ({ children }) 
   }
 
   const getPageTitle = (path: string) => {
-    if (path === '/') return 'Dashboard';
+    if (path === '/') return '';
     if (path.startsWith('/analyze')) return 'IP Analysis';
     if (path.startsWith('/report')) return 'Explainable Classification Report';
     if (path.startsWith('/history')) return 'Analysis History';
