@@ -139,7 +139,7 @@ export const LoginPage: React.FC = () => {
               disabled={isLoading}
               className="w-full py-3 px-4 rounded-xl font-medium text-xs bg-gradient-to-r from-[#8C7BFF] to-[#70D7FF] hover:opacity-95 text-white shadow-[0_4px_24px_rgba(140,123,255,0.35)] disabled:opacity-50 transition-all flex items-center justify-center gap-2 mt-2 font-mono tracking-wide"
             >
-              <span>{isLoading ? 'Authenticating...' : 'Sign In to Laboratory'}</span>
+              <span>{isLoading ? 'Authenticating...' : 'Sign In'}</span>
               <ArrowRight className="w-4 h-4" />
             </button>
           </form>
