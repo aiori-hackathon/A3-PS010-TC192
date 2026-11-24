@@ -2,19 +2,32 @@
 NetEvidence AI - Cloud Database Viewer
 Connects to your Render PostgreSQL database and displays all registered users & login activity.
 """
+import os
 import sys
 from pathlib import Path
+from dotenv import load_dotenv
 
 # Add backend to sys.path
 backend_dir = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(backend_dir))
 
+# Load .env if present
+load_dotenv(backend_dir / ".env")
+load_dotenv(backend_dir.parent / ".env")
+
 from sqlalchemy import create_engine, text
 
-def view_cloud_data(db_url: str):
-    if not db_url or "..." in db_url:
-        print("[!] Please provide the full External Database URL from your Render dashboard.")
+DEFAULT_RENDER_URL = os.getenv(
+    "RENDER_DATABASE_URL",
+    os.getenv("DATABASE_URL", "")
+)
+
+def view_cloud_data(db_url: str = None, custom_query: str = None):
+    target_url = db_url or DEFAULT_RENDER_URL
+    if not target_url or "..." in target_url:
+        print("[!] Please provide the External Database URL from your Render dashboard.")
         print("    Example: python backend/scripts/view_cloud_db.py \"postgresql://user:pass@host:5432/dbname\"")
+        print("    Or set RENDER_DATABASE_URL in backend/.env")
         return
 
     # Normalize url
@@ -27,6 +40,22 @@ def view_cloud_data(db_url: str):
     try:
         engine = create_engine(db_url, pool_pre_ping=True)
         with engine.connect() as conn:
+            if custom_query:
+                print(f"\n[*] Executing Custom SQL: {custom_query}\n")
+                res = conn.execute(text(custom_query))
+                if res.returns_rows:
+                    cols = list(res.keys())
+                    print(" | ".join(cols))
+                    print("-" * 75)
+                    rows = res.fetchall()
+                    for r in rows:
+                        print(" | ".join(str(val) for val in r))
+                    print(f"\n({len(rows)} row(s) returned)")
+                else:
+                    conn.commit()
+                    print("[✓] Query executed successfully.")
+                return
+
             print("\n" + "=" * 75)
             print("                 REGISTERED USERS IN CLOUD DATABASE")
             print("=" * 75)
@@ -66,9 +95,15 @@ def view_cloud_data(db_url: str):
         print(f"\n[!] Connection Error: {e}")
 
 if __name__ == "__main__":
-    if len(sys.argv) > 1:
-        target_url = sys.argv[1].strip()
-    else:
-        target_url = input("Paste your Render External Database URL: ").strip()
+    import argparse
+    parser = argparse.ArgumentParser(description="Render Cloud PostgreSQL Database Viewer & Query Runner")
+    parser.add_argument("--url", default=DEFAULT_RENDER_URL, help="Render External Database URL")
+    parser.add_argument("--query", "-q", default=None, help="Custom SQL query to run")
+    args, unknown = parser.parse_known_args()
 
-    view_cloud_data(target_url)
+    # If first positional arg is a postgres url
+    url = args.url
+    if unknown and unknown[0].startswith("postgres"):
+        url = unknown[0]
+
+    view_cloud_data(url, custom_query=args.query)
