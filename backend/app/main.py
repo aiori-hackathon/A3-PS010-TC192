@@ -17,8 +17,11 @@ from contextlib import asynccontextmanager
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # Startup: ensure SQLite tables exist and default seed data is ready
-    init_db()
+    # Startup: ensure database tables exist and default seed data is ready
+    try:
+        init_db()
+    except Exception as e:
+        print(f"[!] Warning: Database init error during startup: {e}")
     yield
 
 app = FastAPI(

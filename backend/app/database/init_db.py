@@ -15,20 +15,21 @@ from app.services.adapters.demo_adapter import DEMO_CASES
 classifier_instance = NetworkClassifier()
 
 def init_db():
-    # Create all tables in SQLite or MySQL
+    # Create all tables in SQLite, PostgreSQL, or MySQL
     Base.metadata.create_all(bind=engine)
 
-    # Ensure backwards compatibility for SQLite existing files
-    with engine.begin() as conn:
-        for col, col_type in [
-            ("last_login_at", "DATETIME"),
-            ("last_login_ip", "VARCHAR(64)"),
-            ("login_count", "INTEGER DEFAULT 0")
-        ]:
-            try:
-                conn.execute(text(f"ALTER TABLE users ADD COLUMN {col} {col_type};"))
-            except Exception:
-                pass
+    # Ensure backwards compatibility for existing SQLite database files only
+    if "sqlite" in str(engine.url).lower():
+        with engine.begin() as conn:
+            for col, col_type in [
+                ("last_login_at", "DATETIME"),
+                ("last_login_ip", "VARCHAR(64)"),
+                ("login_count", "INTEGER DEFAULT 0")
+            ]:
+                try:
+                    conn.execute(text(f"ALTER TABLE users ADD COLUMN {col} {col_type};"))
+                except Exception:
+                    pass
 
     db = SessionLocal()
 
