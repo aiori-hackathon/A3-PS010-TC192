@@ -68,6 +68,11 @@ export const api = {
 
   getMe: () => request<User>('/auth/me'),
 
+  deleteAccount: () =>
+    request<{ status: string; message: string }>('/auth/me', {
+      method: 'DELETE',
+    }),
+
   // Dashboard
   getDashboardStats: () => request<DashboardStats>('/dashboard/stats'),
 

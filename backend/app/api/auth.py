@@ -128,3 +128,18 @@ def login(login_in: UserLogin, request: Request, db: Session = Depends(get_db)):
 def get_me(current_user: User = Depends(get_current_user)):
     """Returns profile information for the authenticated user."""
     return UserResponse.model_validate(current_user)
+
+@router.delete("/me")
+def delete_account(current_user: User = Depends(get_current_user), db: Session = Depends(get_db)):
+    """Permanently deletes the authenticated user's account and all associated records from MySQL."""
+    user_email = current_user.email
+    user_id = current_user.id
+    
+    # Delete the user (cascading deletes analyses and audit records)
+    db.delete(current_user)
+    db.commit()
+    
+    return {
+        "status": "success",
+        "message": f"Account for {user_email} (ID: {user_id}) has been permanently deleted from the database."
+    }

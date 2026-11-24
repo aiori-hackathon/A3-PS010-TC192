@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import {
   LayoutDashboard,
@@ -12,6 +12,8 @@ import {
   LogOut,
   X,
   Sparkles,
+  Trash2,
+  AlertTriangle,
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { useGlass } from './ShatteredGlassEngine';
@@ -22,13 +24,29 @@ interface SidebarProps {
 }
 
 export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
-  const { user, logout } = useAuth();
+  const { user, logout, deleteAccount } = useAuth();
   const navigate = useNavigate();
   const { triggerShatter } = useGlass();
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [deleteError, setDeleteError] = useState<string | null>(null);
 
   const handleLogout = () => {
     logout();
     navigate('/login');
+  };
+
+  const handleDeleteAccount = async () => {
+    setIsDeleting(true);
+    setDeleteError(null);
+    try {
+      await deleteAccount();
+      setShowDeleteModal(false);
+      navigate('/login');
+    } catch (err: any) {
+      setDeleteError(err.message || 'Failed to delete account. Please try again.');
+      setIsDeleting(false);
+    }
   };
 
   const navGroups = [
@@ -152,16 +170,88 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
                 </p>
               </div>
             </div>
-            <button
-              onClick={handleLogout}
-              title="Sign Out"
-              className="p-1.5 text-[#777782] hover:text-[#FF626E] hover:bg-white/[0.06] rounded-lg transition-colors"
-            >
-              <LogOut className="w-4 h-4" />
-            </button>
+            <div className="flex items-center gap-1 shrink-0">
+              <button
+                onClick={() => setShowDeleteModal(true)}
+                title="Delete My Account"
+                className="p-1.5 text-[#777782] hover:text-[#FF626E] hover:bg-[#FF626E]/10 rounded-lg transition-colors"
+              >
+                <Trash2 className="w-4 h-4" />
+              </button>
+              <button
+                onClick={handleLogout}
+                title="Sign Out"
+                className="p-1.5 text-[#777782] hover:text-white hover:bg-white/[0.06] rounded-lg transition-colors"
+              >
+                <LogOut className="w-4 h-4" />
+              </button>
+            </div>
           </div>
         </div>
       </aside>
+
+      {/* Delete Account Confirmation Modal */}
+      {showDeleteModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-in fade-in duration-200">
+          <div className="w-full max-w-md rounded-2xl glass-card border border-[#FF626E]/30 bg-[#17171B]/95 p-6 shadow-[0_20px_60px_rgba(0,0,0,0.8),0_0_30px_rgba(255,98,110,0.15)] relative">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-10 h-10 rounded-xl bg-[#FF626E]/15 border border-[#FF626E]/30 flex items-center justify-center text-[#FF626E] shrink-0">
+                <AlertTriangle className="w-5 h-5" />
+              </div>
+              <div>
+                <h3 className="text-base font-bold text-white tracking-tight">Delete Account?</h3>
+                <p className="text-xs text-[#A0A0AA] font-mono">Permanent database removal</p>
+              </div>
+            </div>
+
+            <div className="space-y-3 text-xs text-[#A0A0AA] leading-relaxed mb-6">
+              <p>
+                Are you sure you want to permanently delete your account (<strong className="text-white font-mono">{user?.email}</strong>)?
+              </p>
+              <div className="p-3 rounded-xl bg-[#202027]/70 border border-white/[0.08] text-[11px] font-mono space-y-1 text-[#FF626E]">
+                <p>• All saved IP investigation history will be wiped.</p>
+                <p>• Your analyst profile will be deleted from MySQL.</p>
+                <p>• This action is immediate and cannot be undone.</p>
+              </div>
+            </div>
+
+            {deleteError && (
+              <div className="mb-4 p-3 rounded-xl bg-[#FF626E]/10 border border-[#FF626E]/30 text-xs text-[#FF626E] font-mono">
+                {deleteError}
+              </div>
+            )}
+
+            <div className="flex items-center justify-end gap-3 font-mono text-xs">
+              <button
+                type="button"
+                onClick={() => {
+                  setShowDeleteModal(false);
+                  setDeleteError(null);
+                }}
+                disabled={isDeleting}
+                className="px-4 py-2 rounded-xl border border-white/[0.12] text-[#E5E5EA] hover:bg-white/[0.06] transition-colors"
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                onClick={handleDeleteAccount}
+                disabled={isDeleting}
+                className="px-4 py-2 rounded-xl bg-[#FF626E] hover:bg-[#e0505c] text-white font-semibold transition-all shadow-[0_4px_16px_rgba(255,98,110,0.35)] disabled:opacity-50 flex items-center gap-1.5"
+              >
+                {isDeleting ? (
+                  <span>Deleting...</span>
+                ) : (
+                  <>
+                    <Trash2 className="w-3.5 h-3.5" />
+                    <span>Yes, Delete Account</span>
+                  </>
+                )}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 };
