@@ -116,7 +116,7 @@ export const RegisterPage: React.FC = () => {
 
             <div>
               <label className="block text-xs font-semibold text-[#E5E5EA] mb-1.5">
-                Work Email Address
+                Enter your Mail ID
               </label>
               <div className="relative">
                 <Mail className="w-4 h-4 text-[#777782] absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
