@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Eye, EyeOff, Lock, Mail, ShieldCheck, Sparkles, ArrowRight } from 'lucide-react';
+import { Eye, EyeOff, Lock, Mail, ShieldCheck, ArrowRight } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { ShatteredGlassCard } from '../components/ShatteredGlassCard';
 
@@ -33,11 +33,6 @@ export const LoginPage: React.FC = () => {
     }
   };
 
-  const handleQuickDemoFill = () => {
-    setEmail('demo@netevidence.ai');
-    setPassword('Password123!');
-  };
-
   return (
     <div className="min-h-screen bg-[#050507]/60 text-[#E5E5EA] flex flex-col justify-center py-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden backdrop-blur-xs">
       {/* Ambient optical refraction meshes */}
@@ -65,26 +60,6 @@ export const LoginPage: React.FC = () => {
           title="Sign In"
           subtitle="Enter your credentials to access the forensic intelligence console."
         >
-          {/* Quick Demo Fill Pill */}
-          <div className="mb-6 p-3.5 rounded-2xl backdrop-blur-md bg-[#202027]/75 border border-white/[0.12] text-xs flex items-center justify-between shadow-xs">
-            <div>
-              <span className="font-semibold text-white block text-[11px] flex items-center gap-1.5">
-                <Sparkles className="w-3.5 h-3.5 text-[#8C7BFF]" />
-                Demo Evaluator Access
-              </span>
-              <span className="text-[10px] text-[#A0A0AA] font-mono block mt-0.5">
-                demo@netevidence.ai • Password123!
-              </span>
-            </div>
-            <button
-              type="button"
-              onClick={handleQuickDemoFill}
-              className="px-3 py-1.5 rounded-xl bg-[#8C7BFF]/25 hover:bg-[#8C7BFF]/40 text-[#B9ABFF] border border-[#8C7BFF]/50 font-mono text-xs transition-all shadow-xs active:scale-95 cursor-pointer"
-            >
-              Auto-Fill
-            </button>
-          </div>
-
           <form onSubmit={handleSubmit} className="space-y-4">
             {error && (
               <div className="p-3.5 rounded-xl bg-[#FF626E]/15 border border-[#FF626E]/40 text-[#FF626E] text-xs font-mono shadow-xs">
